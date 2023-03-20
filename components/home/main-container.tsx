@@ -13,7 +13,7 @@ export function MainContainer({
   return (
     <main
       className={cn(
-        `flex min-h-screen bg-blue-500 w-full max-w-xl flex-col border-x-0
+        `flex min-h-screen bg-blue-200 w-full max-w-xl flex-col border-x-0
            border-light-border pb-96 dark:border-dark-border xs:border-x`,
         className
       )}

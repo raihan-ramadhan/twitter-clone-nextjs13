@@ -1,8 +1,7 @@
-import "./styles/globals.css";
-import { MainLayout } from "@/components/layouts/main-layout";
-import { HomeLayout } from "@/components/layouts/common-layout";
+import "../styles/globals.css";
+import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Home / Twitter",
   description: "Twitter Clone NextJS-13",
 };
@@ -14,11 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <MainLayout>
-          <HomeLayout>{children}</HomeLayout>
-        </MainLayout>
-      </body>
+      <body className="px-4">{children}</body>
     </html>
   );
 }
