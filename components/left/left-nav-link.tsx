@@ -17,10 +17,9 @@ const LeftNavLink = (props: SidebarLinkProps): JSX.Element => {
   );
 
   return disabled ? (
-    <a className={theClassName} href="javascript://This-is-Disabled-Link;">
-      {/*use javascript:; in href link to disabled event bubble and disabled the link*/}
+    <span className={theClassName}>
       <ContentLink {...{ ...props }} />
-    </a>
+    </span>
   ) : (
     <Link href={href} className={theClassName}>
       <ContentLink {...{ ...props }} />
@@ -39,7 +38,7 @@ const ContentLink = ({
   canBeHidden,
 }: SidebarLinkProps): JSX.Element => {
   return (
-    <div className="w-full flex justify-center xl:justify-start ">
+    <div className="w-full flex justify-center xl:justify-start">
       <div className="flex items-center gap-5 hover-animation group-hover:bg-black/10 rounded-full p-3">
         <HeroIcon className={"h-7 w-7"} iconName={iconName} />
         <span className="hidden xl:inline text-xl">{linkName}</span>

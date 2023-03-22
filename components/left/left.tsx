@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CustomIcon } from "../ui/custom-icons";
 import type { IconName } from "../ui/hero-icon";
+import { LeftMore } from "./left-more";
 import LeftNavLink from "./left-nav-link";
 
 export type NavLink = {
@@ -76,6 +77,7 @@ const Left = (): JSX.Element => {
               canBeHidden={true}
               disabled={true}
             />
+            <LeftMore />
           </nav>
         </div>
       </div>
