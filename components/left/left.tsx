@@ -3,6 +3,7 @@ import { CustomIcon } from "../ui/custom-icons";
 import type { IconName } from "../ui/hero-icon";
 import { LeftMore } from "./left-more";
 import LeftNavLink from "./left-nav-link";
+import cn from "clsx";
 
 export type NavLink = {
   href: string;
@@ -53,9 +54,15 @@ const navLinks: Readonly<NavLink[]> = [
 ];
 
 const Left = (): JSX.Element => {
+  const widthCN = "xs:w-20 md:w-24 xl:w-full xl:max-w-[275px]";
   return (
-    <header className="flex shrink-0 w-0 xs:w-20 md:w-24 lg:max-w-none xl:w-full xl:max-w-xs">
-      <div className="fixed xs:top-0 xs:bottom-0 left-0 xs:left-[unset] right-0 xs:right-[unset] bottom-0  xs:w-20 md:w-24 xl:w-full xl:max-w-xs px-2">
+    <header className={cn("flex shrink-0 w-0", widthCN)}>
+      <div
+        className={cn(
+          "fixed bg-white xs:top-0 xs:bottom-0 left-0 xs:left-[unset] right-0 xs:right-[unset] bottom-0 px-2",
+          widthCN
+        )}
+      >
         <div className="flex flex-col items-center xl:items-start">
           <h1 className="hidden xs:flex pt-[2px]">
             <Link

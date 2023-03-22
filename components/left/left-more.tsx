@@ -23,17 +23,23 @@ export function LeftMore() {
 
   return (
     <>
-      <Menu className="relative" as="div">
+      <Menu className="relative hidden xs:block w-full" as="div">
         {({ open }): JSX.Element => (
           <>
-            <Overlay myOverlay={myOverlay} setMyOverlay={setMyOverlay} />
+            <div
+              onClick={() => setMyOverlay(false)}
+              className={cn(
+                "fixed z-0 inset-0 bg-transparent",
+                myOverlay ? "block" : "hidden"
+              )}
+            />
             <Menu.Button
               onClick={() => setMyOverlay(!myOverlay)}
               className="group relative flex outline-none z-10 w-full py-1 justify-center xl:justify-start"
             >
               <div
                 className={cn(
-                  `flex gap-4 text-xl rounded-full p-3 hover-animation group-hover:bg-black/10`
+                  `flex gap-5 text-xl rounded-full p-3 hover-animation group-hover:bg-black/10`
                 )}
               >
                 <HeroIcon
@@ -47,7 +53,7 @@ export function LeftMore() {
             <AnimatePresence>
               {open && (
                 <Menu.Items
-                  className="absolute bottom-0 font-medium xl:w-11/12 bg-white z-10"
+                  className="text-xl w-80 absolute bottom-0 font-medium  bg-white z-10 rounded-md drop-shadow-[0_0_5px_rgba(0,0,0,0.15)]"
                   as={motion.div}
                   {...variants}
                   static
@@ -55,60 +61,42 @@ export function LeftMore() {
                   <Menu.Item>
                     {({ active }): JSX.Element => (
                       <MenuLink
-                        className={cn(
-                          "flex w-full cursor-not-allowed gap-3 rounded-t-md p-4 duration-200",
-                          active && "bg-main-sidebar-background"
+                        classLink={cn(
+                          "flex w-full gap-5 p-4 duration-200",
+                          active && "bg-black/5"
                         )}
-                        href="/settings"
+                        href="/raihan/topics"
+                        disabled={true}
                       >
-                        <HeroIcon iconName="Cog8ToothIcon" />
-                        Settings and privacy
+                        <HeroIcon iconName="ChatBubbleOvalLeftEllipsisIcon" />
+                        Topics
                       </MenuLink>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }): JSX.Element => (
                       <MenuLink
-                        className={cn(
-                          "flex w-full cursor-not-allowed gap-3 rounded-t-md p-4 duration-200",
-                          active && "bg-main-sidebar-background"
-                        )}
-                        href="/help-center"
+                        classLink={cn("", active && "bg-black/5")}
+                        href="/raihan/lists"
+                        disabled={true}
                       >
-                        <HeroIcon iconName="QuestionMarkCircleIcon" />
-                        Help center
+                        <HeroIcon iconName="QueueListIcon" />
+                        Lists
                       </MenuLink>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }): JSX.Element => (
                       <MenuLink
-                        className={cn(
-                          "flex w-full cursor-not-allowed gap-3 rounded-t-md p-4 duration-200",
-                          active && "bg-main-sidebar-background"
-                        )}
-                        href="/help-center"
-                        // onClick={preventBubbling()}
+                        classLink={cn(active && "bg-black/5")}
+                        href="/i/circles"
+                        disabled={false}
                       >
-                        <HeroIcon iconName="QuestionMarkCircleIcon" />
-                        Help center
+                        <HeroIcon iconName="UsersIcon" />
+                        Twitter Circle
                       </MenuLink>
                     )}
                   </Menu.Item>
-                  {/* <Menu.Item>
-                    {({ active }): JSX.Element => (
-                      // <Button
-                      //   className={cn(
-                      //     'flex w-full gap-3 rounded-none rounded-b-md p-4 duration-200',
-                      //     active && 'bg-main-sidebar-background'
-                      //   )}
-                      //   onClick={openModal}
-                      // >
-                      //   <HeroIcon iconName='PaintBrushIcon' />
-                      //   Display
-                      // </Button>
-                    )}
-                  </Menu.Item> */}
                 </Menu.Items>
               )}
             </AnimatePresence>
@@ -116,23 +104,5 @@ export function LeftMore() {
         )}
       </Menu>
     </>
-  );
-}
-
-function Overlay({
-  myOverlay,
-  setMyOverlay,
-}: {
-  myOverlay: boolean;
-  setMyOverlay: Function;
-}): JSX.Element {
-  return (
-    <div
-      onClick={() => setMyOverlay(false)}
-      className={cn(
-        "fixed z-0 inset-0 bg-transparent",
-        myOverlay ? "block" : "hidden"
-      )}
-    />
   );
 }
