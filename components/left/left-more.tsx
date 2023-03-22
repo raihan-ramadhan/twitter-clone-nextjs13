@@ -1,12 +1,12 @@
 "use client";
-
-import { Menu } from "@headlessui/react";
-import { motion, AnimatePresence } from "framer-motion";
-import { HeroIcon } from "../ui/hero-icon";
 import cn from "clsx";
-import type { Variants } from "framer-motion";
-import { MenuLink } from "./left-menu-link";
+import { Menu } from "@headlessui/react";
+import { HeroIcon } from "../ui/hero-icon";
 import { useState } from "react";
+import { LeftMenuItems } from "./left-menu-items";
+import { motion, AnimatePresence } from "framer-motion";
+import { LeftMenuDisclosure } from "./left-menu-disclosure";
+import type { Variants } from "framer-motion";
 
 export const variants: Variants = {
   initial: { opacity: 0, y: 50 },
@@ -35,7 +35,7 @@ export function LeftMore() {
             />
             <Menu.Button
               onClick={() => setMyOverlay(!myOverlay)}
-              className="group relative flex outline-none z-10 w-full py-1 justify-center xl:justify-start"
+              className="group flex outline-none z-10 w-full py-1 justify-center xl:justify-start"
             >
               <div
                 className={cn(
@@ -53,50 +53,80 @@ export function LeftMore() {
             <AnimatePresence>
               {open && (
                 <Menu.Items
-                  className="text-xl w-80 absolute bottom-0 font-medium  bg-white z-10 rounded-md drop-shadow-[0_0_5px_rgba(0,0,0,0.15)]"
+                  className="absolute -top-[288px] text-xl w-80 drop-shadow-[0_0_5px_rgba(0,0,0,0.15)]  font-medium bg-white z-10 rounded-t-md "
                   as={motion.div}
                   {...variants}
                   static
                 >
-                  <Menu.Item>
-                    {({ active }): JSX.Element => (
-                      <MenuLink
-                        classLink={cn(
-                          "flex w-full gap-5 p-4 duration-200",
-                          active && "bg-black/5"
-                        )}
-                        href="/raihan/topics"
-                        disabled={true}
-                      >
-                        <HeroIcon iconName="ChatBubbleOvalLeftEllipsisIcon" />
-                        Topics
-                      </MenuLink>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }): JSX.Element => (
-                      <MenuLink
-                        classLink={cn("", active && "bg-black/5")}
-                        href="/raihan/lists"
-                        disabled={true}
-                      >
-                        <HeroIcon iconName="QueueListIcon" />
-                        Lists
-                      </MenuLink>
-                    )}
-                  </Menu.Item>
-                  <Menu.Item>
-                    {({ active }): JSX.Element => (
-                      <MenuLink
-                        classLink={cn(active && "bg-black/5")}
-                        href="/i/circles"
-                        disabled={false}
-                      >
-                        <HeroIcon iconName="UsersIcon" />
-                        Twitter Circle
-                      </MenuLink>
-                    )}
-                  </Menu.Item>
+                  <LeftMenuItems
+                    myOverlay="myOverlay"
+                    setMyOverlay={setMyOverlay}
+                  />
+                  <div className="bg-white rounded-b-md text-base absolute w-full">
+                    <LeftMenuDisclosure
+                      textButton="Creator Studio"
+                      linksPanel={[
+                        {
+                          elem: "a",
+                          text: "Analytics",
+                          href: "https://analytics.twitter.com/",
+                          icon: "ChartBarSquareIcon",
+                        },
+                      ]}
+                    />
+                    <LeftMenuDisclosure
+                      textButton="Professional Tools"
+                      linksPanel={[
+                        {
+                          elem: "button",
+                          text: "Twitter for Professional",
+                          icon: "RocketLaunchIcon",
+                          func: () => {
+                            console.log("TEST");
+                          },
+                        },
+                        {
+                          elem: "a",
+                          text: "Twitter Ads",
+                          href: "https://ads.twitter.com/?ref=gl-tw-tw-twitter-ads-rweb",
+                          icon: "ArrowTopRightOnSquareIcon",
+                        },
+                        {
+                          elem: "link",
+                          text: "Monetization",
+                          href: "/settings/monetization",
+                          icon: "BanknotesIcon",
+                          disabled: true,
+                        },
+                      ]}
+                    />
+                    <LeftMenuDisclosure
+                      textButton="Settings and Support"
+                      linksPanel={[
+                        {
+                          elem: "link",
+                          text: "Settings and privacy",
+                          href: "/settings",
+                          icon: "Cog8ToothIcon",
+                          disabled: true,
+                        },
+                        {
+                          elem: "a",
+                          text: "Help Center",
+                          href: "https://help.twitter.com",
+                          icon: "QuestionMarkCircleIcon",
+                        },
+                        {
+                          elem: "button",
+                          text: "Display",
+                          func: () => {
+                            console.log("TEST");
+                          },
+                          icon: "PaintBrushIcon",
+                        },
+                      ]}
+                    />
+                  </div>
                 </Menu.Items>
               )}
             </AnimatePresence>
