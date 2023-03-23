@@ -1,9 +1,9 @@
+import cn from "clsx";
 import Link from "next/link";
 import { CustomIcon } from "../ui/custom-icons";
-import type { IconName } from "../ui/hero-icon";
 import { LeftMore } from "./left-more";
-import LeftNavLink from "./left-nav-link";
-import cn from "clsx";
+import { LeftNavLink } from "./left-nav-link";
+import type { IconName } from "../ui/hero-icon";
 
 export type NavLink = {
   href: string;

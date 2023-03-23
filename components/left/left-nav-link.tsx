@@ -7,7 +7,7 @@ type SidebarLinkProps = NavLink & {
   username?: string;
 };
 
-const LeftNavLink = (props: SidebarLinkProps): JSX.Element => {
+export const LeftNavLink = (props: SidebarLinkProps): JSX.Element => {
   const { href, disabled, canBeHidden } = props;
 
   const theClassName = cn(
@@ -26,8 +26,6 @@ const LeftNavLink = (props: SidebarLinkProps): JSX.Element => {
     </Link>
   );
 };
-
-export default LeftNavLink;
 
 const ContentLink = ({
   href,

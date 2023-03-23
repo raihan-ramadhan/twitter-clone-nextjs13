@@ -1,16 +1,10 @@
 import { Menu } from "@headlessui/react";
 import { HeroIcon } from "../ui/hero-icon";
-import { MenuLink } from "./left-menu-link";
+import { MenuLink } from "./menu-link";
 
 import cn from "clsx";
 
-export const LeftMenuItems = ({
-  myOverlay,
-  setMyOverlay,
-}: {
-  myOverlay: string;
-  setMyOverlay: Function;
-}): JSX.Element => {
+export const MenuItems = (): JSX.Element => {
   return (
     <>
       <Menu.Item>
