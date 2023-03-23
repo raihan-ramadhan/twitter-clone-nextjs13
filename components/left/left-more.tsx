@@ -18,7 +18,7 @@ export const variants: Variants = {
   exit: { opacity: 0, y: 50, transition: { duration: 0.2 } },
 };
 
-export function LeftMore() {
+export const LeftMore = (): JSX.Element => {
   const [myOverlay, setMyOverlay] = useState(false);
 
   return (
@@ -70,4 +70,4 @@ export function LeftMore() {
       </Menu>
     </>
   );
-}
+};

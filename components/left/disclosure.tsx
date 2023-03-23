@@ -55,7 +55,7 @@ export const DisclosureItem: React.FC<Props> = ({
   linksPanel,
 }): JSX.Element => {
   const panelCN =
-    "p-4 text-start items-center flex w-full gap-5 hover:bg-black/5 duration-200";
+    "px-4 py-[10px] text-start items-center flex w-full gap-5 hover:bg-black/5 duration-200";
 
   return (
     <>
@@ -69,7 +69,7 @@ export const DisclosureItem: React.FC<Props> = ({
                 <HeroIcon
                   className={cn(
                     " w-5 h-5 duration-200 ease-in-out",
-                    open && "-rotate-180 transform text-[#00acee]"
+                    open && "-rotate-180 transform text-[#1D9BF0]"
                   )}
                   iconName="ChevronDownIcon"
                 />

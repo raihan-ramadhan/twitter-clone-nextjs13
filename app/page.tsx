@@ -1,4 +1,4 @@
-import { MainContainer } from "@/components/center/main-container";
+import { MainContainer } from "@/components/main/main-container";
 import { HomeLayout } from "@/components/layouts/common-layout";
 import { MainLayout } from "@/components/layouts/main-layout";
 
