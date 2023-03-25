@@ -1,6 +1,12 @@
 import { DisclosureItem } from "./disclosure";
 
-export const DisclosureItems = () => {
+export const DisclosureItems = ({
+  openModal,
+  closeMenu,
+}: {
+  openModal?: () => void;
+  closeMenu?: () => void;
+}) => {
   return (
     <>
       <DisclosureItem
@@ -60,7 +66,8 @@ export const DisclosureItems = () => {
             elem: "button",
             text: "Display",
             func: () => {
-              console.log("TEST");
+              if (openModal) openModal();
+              if (closeMenu) closeMenu();
             },
             icon: "PaintBrushIcon",
           },

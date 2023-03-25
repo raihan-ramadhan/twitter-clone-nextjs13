@@ -5,8 +5,11 @@ import { HeroIcon } from "../ui/hero-icon";
 import { MenuItems } from "./menu-items";
 import { motion, AnimatePresence } from "framer-motion";
 import { DisclosureItems } from "./disclosure-items";
-import type { Variants } from "framer-motion";
 import { Overlay } from "../ui/overlay";
+import { useModal } from "@/lib/hooks/useModal";
+import { Modal } from "../modal/modal";
+import type { Variants } from "framer-motion";
+import { DisplayModal } from "../modal/display-modal";
 
 export const variants: Variants = {
   initial: { opacity: 0, y: 50 },
@@ -19,10 +22,19 @@ export const variants: Variants = {
 };
 
 export const LeftMore = (): JSX.Element => {
+  const { open, openModal, closeModal } = useModal();
+
   return (
     <>
+      <Modal
+        modalClassName="max-w-xl bg-white w-full p-8 rounded-2xl hover-animation"
+        open={open}
+        closeModal={closeModal}
+      >
+        <DisplayModal closeModal={closeModal} />
+      </Modal>
       <Menu className="relative hidden xs:block w-full" as="div">
-        {({ open }): JSX.Element => (
+        {({ open, close }): JSX.Element => (
           <>
             {open ? <Overlay open={open} zIndex="z-10" /> : <></>}
             <Menu.Button className="group flex outline-none z-10 w-full py-1 justify-center xl:justify-start">
@@ -49,7 +61,7 @@ export const LeftMore = (): JSX.Element => {
                 >
                   <MenuItems />
                   <div className="bg-white rounded-b-md text-base absolute w-full">
-                    <DisclosureItems />
+                    <DisclosureItems openModal={openModal} closeMenu={close} />
                   </div>
                 </Menu.Items>
               )}

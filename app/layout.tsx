@@ -1,6 +1,7 @@
 import "../styles/globals.scss";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+import { ThemeContextProvider } from "@/lib/context/theme-context";
 
 const WindowContextProvider = dynamic(
   () => import("../lib/context/window-context"),
@@ -20,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="px-0 xs:px-4">
-        <WindowContextProvider>{children}</WindowContextProvider>
+        <WindowContextProvider>
+          <ThemeContextProvider>{children}</ThemeContextProvider>
+        </WindowContextProvider>
       </body>
     </html>
   );

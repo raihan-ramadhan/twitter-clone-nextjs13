@@ -7,6 +7,7 @@ import { UserAvatar } from "../user/user-avatar";
 import { UserName } from "../user/user-name";
 import { Overlay } from "../ui/overlay";
 import { Button } from "../ui/button";
+
 import cn from "clsx";
 import type { Variants } from "framer-motion";
 
@@ -19,7 +20,7 @@ export const variants: Variants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-export const LeftProfil = (): JSX.Element => {
+export const LeftProfil = () => {
   return (
     <>
       <Menu

@@ -7,7 +7,6 @@ import { LeftNavLink } from "./left-nav-link";
 import { IconName } from "../ui/hero-icon";
 import { LeftProfil } from "./left-profil";
 import { Button } from "../ui/button";
-import { useWindow } from "@/lib/context/window-context";
 
 export type NavLink = {
   href: string;
@@ -60,8 +59,6 @@ const navLinks: Readonly<NavLink[]> = [
 const Left = (): JSX.Element => {
   const widthCN = "xs:w-20 md:w-24 xl:w-full xl:max-w-[275px]";
 
-  const { isMobile } = useWindow();
-
   return (
     <header
       className={cn("flex flex-col justify-between shrink-0 w-0", widthCN)}
@@ -113,7 +110,7 @@ const Left = (): JSX.Element => {
             </Button>
           </section>
         </div>
-        {!isMobile ? <LeftProfil /> : <></>}
+        <LeftProfil />
       </div>
     </header>
   );
