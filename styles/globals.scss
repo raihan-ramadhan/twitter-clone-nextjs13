@@ -4,22 +4,22 @@
 
 @layer base {
   :root {
-    --main-background: var(--dark-background);
-    --main-search-background: var(--dark-search-background);
-    --main-sidebar-background: var(--dark-sidebar-background);
+    --main-background-1: var(--dark-background-1);
+    --main-background-2: var(--dark-background-2);
+    --main-background-3: var(--dark-background-3);
     --main-accent: var(--accent-blue);
 
-    --dark-background: 0 0 0;
-    --dim-background: 22 33 44;
-    --light-background: 255 255 255;
+    --dark-background-1: 0 0 0;
+    --dim-background-1: 22 33 44;
+    --light-background-1: 255 255 255;
 
-    --dark-search-background: 32 35 39;
-    --dim-search-background: 39 51 64;
-    --light-search-background: 239 243 244;
+    --dark-background-2: 32 35 39;
+    --dim-background-2: 39 51 64;
+    --light-background-2: 239 243 244;
 
-    --dark-sidebar-background: 22 24 28;
-    --dim-sidebar-background: 30 39 50;
-    --light-sidebar-background: 247 249 249;
+    --dark-background-3: 22 24 28;
+    --dim-background-3: 30 39 50;
+    --light-background-3: 247 249 249;
 
     --accent-yellow: 255 213 0;
     --accent-blue: 29 155 240;
@@ -35,6 +35,10 @@
   textarea {
     -webkit-tap-highlight-color: transparent;
   }
+
+  body {
+    @apply hover-animation bg-main-background-1 text-light-primary dark:text-dark-primary;
+  }
 }
 
 @layer components {
@@ -47,7 +51,7 @@
   }
 
   .custom-underline {
-    @apply hover-animation underline decoration-transparent outline-none transition [text-decoration-thickness:1px] 
+    @apply hover-animation underline decoration-transparent outline-none transition decoration-1
            hover:decoration-inherit focus-visible:decoration-inherit;
   }
 
@@ -82,7 +86,7 @@
   }
 
   .menu-container {
-    @apply z-10 rounded-md bg-main-background outline-none 
+    @apply z-10 rounded-md bg-main-background-1 outline-none 
            [box-shadow:#65778633_0px_0px_15px,_#65778626_0px_0px_3px_1px] 
            dark:[box-shadow:#ffffff33_0px_0px_15px,_#ffffff26_0px_0px_3px_1px];
   }

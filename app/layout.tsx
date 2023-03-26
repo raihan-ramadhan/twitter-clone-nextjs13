@@ -20,7 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="px-0 xs:px-4">
+      <body>
         <WindowContextProvider>
           <ThemeContextProvider>{children}</ThemeContextProvider>
         </WindowContextProvider>

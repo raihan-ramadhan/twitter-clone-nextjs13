@@ -65,7 +65,7 @@ const Left = (): JSX.Element => {
     >
       <div
         className={cn(
-          "bg-white fixed flex flex-col justify-between xs:top-0 xs:bottom-0 left-0 xs:left-[unset] right-0 xs:right-[unset] bottom-0 px-2",
+          "fixed flex flex-col justify-between xs:top-0 xs:bottom-0 left-0 xs:left-[unset] right-0 xs:right-[unset] bottom-0 px-2",
           widthCN
         )}
       >

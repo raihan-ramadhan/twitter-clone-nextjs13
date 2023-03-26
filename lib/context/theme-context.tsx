@@ -63,16 +63,19 @@ export function ThemeContextProvider({
       if (targetTheme === "dark") root.classList.add("dark");
       else root.classList.remove("dark");
 
-      root.style.setProperty("--main-background", `var(--${theme}-background)`);
-
       root.style.setProperty(
-        "--main-search-background",
-        `var(--${theme}-search-background)`
+        "--main-background-1",
+        `var(--${theme}-background-1)`
       );
 
       root.style.setProperty(
-        "--main-sidebar-background",
-        `var(--${theme}-sidebar-background)`
+        "--main-background-2",
+        `var(--${theme}-background-2)`
+      );
+
+      root.style.setProperty(
+        "--main-background-3",
+        `var(--${theme}-background-3)`
       );
 
       // if (user) {
