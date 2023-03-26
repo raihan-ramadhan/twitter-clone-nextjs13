@@ -7,6 +7,7 @@ import { LeftNavLink } from "./left-nav-link";
 import { IconName } from "../ui/hero-icon";
 import { LeftProfil } from "./left-profil";
 import { Button } from "../ui/button";
+import { useWindow } from "@/lib/context/window-context";
 
 export type NavLink = {
   href: string;
@@ -59,6 +60,8 @@ const navLinks: Readonly<NavLink[]> = [
 const Left = (): JSX.Element => {
   const widthCN = "xs:w-20 md:w-24 xl:w-full xl:max-w-[275px]";
 
+  const { isMobile } = useWindow();
+
   return (
     <header
       className={cn("flex flex-col justify-between shrink-0 w-0", widthCN)}
@@ -74,12 +77,12 @@ const Left = (): JSX.Element => {
             <h1 className="hidden xs:flex pt-[2px]">
               <Link
                 href={"/home"}
-                className="p-3 hover:bg-[#1D9BF0]/10 text-[#1D9BF0] hover-animation focus-visible:bg-[#1D9BF0]/10 focus-visible:ring focus-visible:!ring-blue-500/80 rounded-full focus:outline-none"
+                className="custom-button text-accent-blue dark:text-twitter-icon transition focus-visible:bg-accent-blue/10 hover:bg-main-accent/10 outline-none focus-visible:ring-2 focus-visible:ring-[#8ecdf8] "
               >
                 <CustomIcon className="w-7 h-7" iconName="TwitterIcon" />
               </Link>
             </h1>
-            <nav className="flex xs:flex-col flex-row w-full">
+            <nav className="flex xs:flex-col my-1 flex-row w-full">
               {navLinks.map(({ ...linkData }) => (
                 <LeftNavLink {...linkData} key={linkData.href} />
               ))}
@@ -91,13 +94,11 @@ const Left = (): JSX.Element => {
                 canBeHidden={true}
                 disabled={true}
               />
-              <LeftMore />
+              {!isMobile && <LeftMore />}
             </nav>
             <Button
               type="button"
-              className="p-4 xs:p-3 mt-4 rounded-full absolute right-4 -translate-y-[88px] bg-[#1D9BF0] text-lg font-bold text-white
-                       outline-none transition hover:bg-[#197fc4]  xs:static xs:translate-y-0
-                       xs:hover:bg-[#197fc4]  xl:w-11/12"
+              className="text-white bg-main-accent xs:hover:bg-main-accent/90 xs:active:bg-main-accent/75 absolute xs:static right-4 -translate-y-[88px] xs:translate-y-0 hover:brightness-95 active:brightness-85 p-4 xs:p-3 mt-4 text-lg font-bold xl:w-11/12 !ring-0 after:absolute after:inset-0 after:[box-shadow:#00000014_0px_8px_28px] after:focus-visible:!ring-2 after:focus-visible:!ring-[#8ecdf8] after:rounded-full after:transition-shadow after:focus-visible:animate-translateY1px"
               onClick={() => {
                 console.log("TEST");
               }}

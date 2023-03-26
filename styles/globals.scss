@@ -4,7 +4,9 @@
 
 @layer base {
   :root {
-    --main-background-1: var(--dark-background-1);
+    --main-background-1: var(
+      --dark-background-1
+    ); /* This is temporary color, we change value in context-theme */
     --main-background-2: var(--dark-background-2);
     --main-background-3: var(--dark-background-3);
     --main-accent: var(--accent-blue);
@@ -91,3 +93,13 @@
            dark:[box-shadow:#ffffff33_0px_0px_15px,_#ffffff26_0px_0px_3px_1px];
   }
 }
+
+.test-boxshadow {
+  box-shadow: rgba(0, 0, 0, 0.08) 0 8px 28px;
+}
+.test-boxshadow:focus {
+  box-shadow: #8ecdf8 0 0 0 2px;
+}
+/* .test-boxshadow:focus {
+  box-shadow: rgba=(142, 205, 248) 0 0 0 2px;
+} */

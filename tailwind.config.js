@@ -3,11 +3,8 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
+  darkMode: "class",
+  content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   theme: {
     screens: {
       xs: "500px",
@@ -37,8 +34,19 @@ module.exports = {
         'light-border': '#EFF3F4',
         'dark-line-reply': '#333639',
         'light-line-reply': '#CFD9DE',
-        'twitter-icon': '#D6D9DB',
+        'twitter-icon': '#FFFFFF',
         'image-preview-hover': '#272C30',
+      },
+      keyframes: {
+        translateY1px: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "25%": { transform: "translateY(1px)" },
+          "50%": { transform: "translateY(-1px)" },
+          "75%": { transform: "translateY(1px)" },
+        },
+      },
+      animation: {
+        translateY1px: "translateY1px .1s ease-out",
       },
     },
   },

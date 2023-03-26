@@ -37,11 +37,11 @@ export const LeftMore = (): JSX.Element => {
         {({ open, close }): JSX.Element => (
           <>
             {open ? <Overlay open={open} zIndex="z-10" /> : <></>}
-            <Menu.Button className="group flex outline-none z-10 w-full py-1 justify-center xl:justify-start">
+            <Menu.Button className="group outline-none flex z-10 w-full py-1 justify-center xl:justify-start">
               <div
-                className={cn(
-                  `flex gap-5 text-xl rounded-full p-3 hover-animation group-hover:bg-black/10`
-                )}
+                className={cn(`flex gap-5 text-xl rounded-full custom-button custom-button xl:pr-6 group-hover:bg-light-primary/10 group-focus-visible:ring-2 
+                group-focus-visible:ring-[#878a8c] dark:group-hover:bg-dark-primary/10 
+                dark:group-focus-visible:ring-white`)}
               >
                 <HeroIcon
                   className="h-7 w-7"
