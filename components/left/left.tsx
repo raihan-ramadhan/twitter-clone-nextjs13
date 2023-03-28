@@ -84,39 +84,36 @@ const Left = (): JSX.Element => {
               </Link>
             </h1>
             <nav className="flex xs:flex-col my-1 flex-row w-full">
-              {user ? (
-                navLinks.map(({ ...linkData }) => (
-                  <LeftNavLink {...linkData} key={linkData.href} />
-                ))
-              ) : (
+              {user && (
                 <>
-                  {!isMobile && (
-                    <>
-                      <LeftNavLink
-                        {...navLinks.find(
-                          (navLinks) => navLinks.href === "/explore"
-                        )!}
-                      />
-                      <LeftNavLink
-                        href={"/settings/account/personalization"}
-                        linkName="Settings"
-                        iconName="Cog8ToothIcon"
-                      />
-                    </>
-                  )}
+                  {navLinks.map(({ ...linkData }) => (
+                    <LeftNavLink {...linkData} key={linkData.href} />
+                  ))}
+                  <LeftNavLink
+                    href={`/user/raihan`}
+                    username="raihan"
+                    linkName="Profile"
+                    iconName="UserIcon"
+                    canBeHidden={true}
+                    disabled={true}
+                  />
                 </>
               )}
-              {user && (
-                <LeftNavLink
-                  href={`/user/raihan`}
-                  username="raihan"
-                  linkName="Profile"
-                  iconName="UserIcon"
-                  canBeHidden={true}
-                  disabled={true}
-                />
+              {user && !isMobile && <LeftMore />}
+              {!user && !isMobile && (
+                <>
+                  <LeftNavLink
+                    {...navLinks.find(
+                      (navLinks) => navLinks.href === "/explore"
+                    )!}
+                  />
+                  <LeftNavLink
+                    href={"/settings/account/personalization"}
+                    linkName="Settings"
+                    iconName="Cog8ToothIcon"
+                  />
+                </>
               )}
-              {!isMobile && user && <LeftMore />}
             </nav>
             {user && (
               <Button
