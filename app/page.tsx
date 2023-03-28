@@ -1,10 +1,12 @@
 import { MainContainer } from "@/components/main/main-container";
 import { HomeLayout } from "@/components/layouts/common-layout";
 import { MainLayout } from "@/components/layouts/main-layout";
+import { BottomLogin } from "@/components/layouts/bottom-login";
 
 export default function RootPage() {
   return (
     <MainLayout>
+      <BottomLogin />
       <HomeLayout>
         <MainContainer>
           <div className="p-4">

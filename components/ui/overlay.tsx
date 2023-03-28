@@ -15,7 +15,7 @@ export const Overlay = ({
     <div
       onClick={close}
       className={cn(
-        "fixed inset-0 ",
+        "fixed inset-0",
         open ? "block" : "hidden",
         backgroundColor ?? "bg-transparent",
         zIndex ?? "z-0"

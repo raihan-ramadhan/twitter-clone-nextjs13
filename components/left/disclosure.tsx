@@ -78,7 +78,7 @@ export const DisclosureItem: React.FC<Props> = ({
                 <HeroIcon
                   className={cn(
                     " w-5 h-5 duration-200 ease-in-out",
-                    open && "-rotate-180 transform text-[#1D9BF0]"
+                    open && "-rotate-180 transform text-main-accent"
                   )}
                   iconName="ChevronDownIcon"
                 />

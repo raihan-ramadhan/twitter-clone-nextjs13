@@ -1,6 +1,7 @@
 import { MainLayout } from "@/components/layouts/main-layout";
 import { HomeLayout } from "@/components/layouts/common-layout";
 import { MainContainer } from "@/components/main/main-container";
+import { BottomLogin } from "@/components/layouts/bottom-login";
 
 export const metadata = {
   title: "Explore / Twitter",
@@ -14,6 +15,7 @@ export default function HomeLayouts({
 }) {
   return (
     <MainLayout>
+      <BottomLogin />
       <HomeLayout>
         <MainContainer>{children}</MainContainer>
       </HomeLayout>

@@ -65,7 +65,7 @@ const Left = (): JSX.Element => {
 
   return (
     <header
-      className={cn("flex flex-col justify-between shrink-0 w-0", widthCN)}
+      className={cn("flex flex-col justify-between shrink-0 w-0 z-50", widthCN)}
     >
       <div
         className={cn(
@@ -89,11 +89,22 @@ const Left = (): JSX.Element => {
                   <LeftNavLink {...linkData} key={linkData.href} />
                 ))
               ) : (
-                <LeftNavLink
-                  {...navLinks.find(
-                    (navLinks) => navLinks.href === "/explore"
-                  )!}
-                />
+                <>
+                  {!isMobile && (
+                    <>
+                      <LeftNavLink
+                        {...navLinks.find(
+                          (navLinks) => navLinks.href === "/explore"
+                        )!}
+                      />
+                      <LeftNavLink
+                        href={"/settings/account/personalization"}
+                        linkName="Settings"
+                        iconName="Cog8ToothIcon"
+                      />
+                    </>
+                  )}
+                </>
               )}
               {user && (
                 <LeftNavLink
