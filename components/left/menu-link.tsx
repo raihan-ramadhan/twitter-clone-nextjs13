@@ -18,9 +18,10 @@ export const MenuLink = forwardRef<HTMLAnchorElement, MenuLinkProps>(
         classLink,
         disabled && "cursor-not-allowed"
       )}
-      {...rest}
-      href={disabled ? "javascript:;" : href}
+      href={href}
       ref={ref}
+      role={"link"}
+      {...rest}
     >
       {children}
     </Link>

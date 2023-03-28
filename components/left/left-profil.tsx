@@ -32,7 +32,7 @@ export const LeftProfil = () => {
             <Overlay open={open} />
             <Menu.Button
               className={cn(
-                `relative xl:flex p-2 z-10 my-4 xl:w-full bg-white rounded-full items-center justify-between hover:bg-light-primary/10 active:bg-light-primary/20
+                `relative xl:flex p-2 z-10 my-4 xl:w-full bg-main-primary-1 rounded-full items-center justify-between hover:bg-light-primary/10 active:bg-light-primary/20
                  dark:hover:bg-dark-primary/10 dark:active:bg-dark-primary/20 hover-animation`
               )}
             >
@@ -51,7 +51,7 @@ export const LeftProfil = () => {
             <AnimatePresence>
               {open && (
                 <Menu.Items
-                  className="py-3 z-30 absolute w-[275px] xl:w-[300px] left-0 xl:left-1/2 xl:-translate-x-1/2 -top-48 bg-white drop-shadow-[0_0_5px_rgba(0,0,0,0.15)] rounded-2xl"
+                  className="py-3 z-30 absolute w-[275px] xl:w-[300px] left-0 xl:left-1/2 xl:-translate-x-1/2 -top-48 menu-container"
                   as={motion.div}
                   {...variants}
                   static
@@ -114,7 +114,7 @@ export const LeftProfil = () => {
                  xl:left-1/2 xl:-translate-x-1/2"
                   >
                     <CustomIcon
-                      className="h-4 w-6 fill-white"
+                      className="h-4 w-6 fill-main-background-1"
                       iconName="TriangleIcon"
                     />
                   </i>

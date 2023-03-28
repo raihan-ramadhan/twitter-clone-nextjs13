@@ -46,6 +46,7 @@ type DisclosureLink = {
 };
 
 interface Props {
+  classDisc?: string;
   textButton: string;
   linksPanel: DisclosureLink[];
 }
@@ -53,18 +54,26 @@ interface Props {
 export const DisclosureItem: React.FC<Props> = ({
   textButton,
   linksPanel,
+  classDisc,
 }): JSX.Element => {
   const panelCN =
-    "px-4 py-[10px] text-start items-center flex w-full gap-5 hover:bg-black/5 duration-200";
+    "px-4 py-[10px] text-start items-center flex w-full gap-5 hover:bg-main-background-3 duration-200";
 
   return (
     <>
       <AnimatePresence>
-        <Disclosure as="div">
+        <Disclosure>
           {({ open }) => (
             /* Use the `open` state to conditionally change the direction of an icon. */
             <>
-              <Disclosure.Button className="w-full flex justify-between p-4 hover:bg-black/5 duration-200">
+              <Disclosure.Button
+                role={"menuitem"}
+                tabIndex={-1}
+                className={cn(
+                  "w-full flex justify-between p-4 duration-200 text-base relative outline-none",
+                  classDisc
+                )}
+              >
                 {textButton}
                 <HeroIcon
                   className={cn(
@@ -77,7 +86,7 @@ export const DisclosureItem: React.FC<Props> = ({
               <AnimatePresence>
                 {open && (
                   <Disclosure.Panel
-                    className="flex flex-col w-full"
+                    className="flex flex-col w-full text-base"
                     as={motion.div}
                     {...variants}
                     static
@@ -90,6 +99,7 @@ export const DisclosureItem: React.FC<Props> = ({
                         if (elem == "button") {
                           return (
                             <button
+                              role={"menuitem"}
                               key={i}
                               className={cn(
                                 panelCN,
@@ -104,6 +114,7 @@ export const DisclosureItem: React.FC<Props> = ({
                         } else if (elem == "a" && href) {
                           return (
                             <a
+                              role={"menuitem"}
                               key={i}
                               target="_blank"
                               className={cn(

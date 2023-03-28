@@ -9,6 +9,8 @@ import { LeftProfil } from "./left-profil";
 import { Button } from "../ui/button";
 import { useWindow } from "@/lib/context/window-context";
 
+const user = null;
+
 export type NavLink = {
   href: string;
   linkName: string;
@@ -27,7 +29,6 @@ const navLinks: Readonly<NavLink[]> = [
     href: "/explore",
     linkName: "Explore",
     iconName: "HashtagIcon",
-    disabled: true,
   },
   {
     href: "/notifications",
@@ -83,35 +84,47 @@ const Left = (): JSX.Element => {
               </Link>
             </h1>
             <nav className="flex xs:flex-col my-1 flex-row w-full">
-              {navLinks.map(({ ...linkData }) => (
-                <LeftNavLink {...linkData} key={linkData.href} />
-              ))}
-              <LeftNavLink
-                href={`/user/raihan`}
-                username="raihan"
-                linkName="Profile"
-                iconName="UserIcon"
-                canBeHidden={true}
-                disabled={true}
-              />
-              {!isMobile && <LeftMore />}
+              {user ? (
+                navLinks.map(({ ...linkData }) => (
+                  <LeftNavLink {...linkData} key={linkData.href} />
+                ))
+              ) : (
+                <LeftNavLink
+                  {...navLinks.find(
+                    (navLinks) => navLinks.href === "/explore"
+                  )!}
+                />
+              )}
+              {user && (
+                <LeftNavLink
+                  href={`/user/raihan`}
+                  username="raihan"
+                  linkName="Profile"
+                  iconName="UserIcon"
+                  canBeHidden={true}
+                  disabled={true}
+                />
+              )}
+              {!isMobile && user && <LeftMore />}
             </nav>
-            <Button
-              type="button"
-              className="text-white bg-main-accent xs:hover:bg-main-accent/90 xs:active:bg-main-accent/75 absolute xs:static right-4 -translate-y-[88px] xs:translate-y-0 hover:brightness-95 active:brightness-85 p-4 xs:p-3 mt-4 text-lg font-bold xl:w-11/12 !ring-0 after:absolute after:inset-0 after:[box-shadow:#00000014_0px_8px_28px] after:focus-visible:!ring-2 after:focus-visible:!ring-[#8ecdf8] after:rounded-full after:transition-shadow after:focus-visible:animate-translateY1px"
-              onClick={() => {
-                console.log("TEST");
-              }}
-            >
-              <CustomIcon
-                className="block h-6 w-6 xl:hidden"
-                iconName="FeatherIcon"
-              />
-              <span className="hidden xl:inline">Tweet</span>
-            </Button>
+            {user && (
+              <Button
+                type="button"
+                className="text-white bg-main-accent xs:hover:bg-main-accent/90 xs:active:bg-main-accent/75 absolute xs:static right-4 -translate-y-[88px] xs:translate-y-0 hover:brightness-95 active:brightness-85 p-4 xs:p-3 mt-4 text-lg font-bold xl:w-11/12 !ring-0 after:absolute after:inset-0 after:[box-shadow:#00000014_0px_8px_28px] after:focus-visible:!ring-2 after:focus-visible:!ring-main-accent after:focus-visible:!contrast-75 after:focus-visible:!brightness-125 after:rounded-full after:transition-shadow after:focus-visible:animate-translateY1px"
+                onClick={() => {
+                  console.log("TEST");
+                }}
+              >
+                <CustomIcon
+                  className="block h-6 w-6 xl:hidden"
+                  iconName="FeatherIcon"
+                />
+                <span className="hidden xl:inline">Tweet</span>
+              </Button>
+            )}
           </section>
         </div>
-        <LeftProfil />
+        {user && <LeftProfil />}
       </div>
     </header>
   );

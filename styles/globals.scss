@@ -88,18 +88,6 @@
   }
 
   .menu-container {
-    @apply z-10 rounded-md bg-main-background-1 outline-none 
-           [box-shadow:#65778633_0px_0px_15px,_#65778626_0px_0px_3px_1px] 
-           dark:[box-shadow:#ffffff33_0px_0px_15px,_#ffffff26_0px_0px_3px_1px];
+    @apply z-10 rounded-xl bg-main-background-1 outline-none drop-shadow-[0_0_5px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_0_5px_rgba(255,255,255,0.15)];
   }
 }
-
-.test-boxshadow {
-  box-shadow: rgba(0, 0, 0, 0.08) 0 8px 28px;
-}
-.test-boxshadow:focus {
-  box-shadow: #8ecdf8 0 0 0 2px;
-}
-/* .test-boxshadow:focus {
-  box-shadow: rgba=(142, 205, 248) 0 0 0 2px;
-} */

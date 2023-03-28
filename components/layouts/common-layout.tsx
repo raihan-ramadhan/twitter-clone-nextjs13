@@ -8,7 +8,7 @@ export function HomeLayout({ children }: LayoutProps): JSX.Element {
   return (
     <>
       {children}
-      <div className="hidden lg:block w-[350px] bg-blue-300 ml-6">
+      <div className="hidden lg:block w-[350px]">
         What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing
         and typesetting industry. Lorem Ipsum has been the industry's standard
         dummy text ever since the 1500s, when an unknown printer took a galley

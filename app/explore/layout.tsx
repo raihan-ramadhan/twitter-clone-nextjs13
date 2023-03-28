@@ -3,7 +3,7 @@ import { HomeLayout } from "@/components/layouts/common-layout";
 import { MainContainer } from "@/components/main/main-container";
 
 export const metadata = {
-  title: "Home / Twitter",
+  title: "Explore / Twitter",
   description: "Twitter Clone NextJS-13",
 };
 

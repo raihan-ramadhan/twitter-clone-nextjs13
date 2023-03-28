@@ -15,7 +15,7 @@ export const LeftNavLink = (props: SidebarLinkProps): JSX.Element => {
   const isActive = href === asPathname;
 
   const theClassName = cn(
-    "group flex-1 py-1 outline-none ",
+    "group flex-1 py-1 outline-none",
     canBeHidden ? "hidden xs:flex" : "flex",
     disabled && "cursor-not-allowed"
   );
