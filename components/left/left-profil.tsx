@@ -7,6 +7,7 @@ import { UserAvatar } from "../user/user-avatar";
 import { UserName } from "../user/user-name";
 import { Overlay } from "../ui/overlay";
 import { Button } from "../ui/button";
+import { useAuth } from "@/lib/context/auth-context";
 
 import cn from "clsx";
 import type { Variants } from "framer-motion";
@@ -21,6 +22,7 @@ export const variants: Variants = {
 };
 
 export const LeftProfil = () => {
+  const { signOut } = useAuth();
   return (
     <>
       <Menu
@@ -98,9 +100,7 @@ export const LeftProfil = () => {
                           "flex w-full gap-3 px-4 py-3 font-semibold",
                           active && "bg-black/5"
                         )}
-                        onClick={() => {
-                          console.log("TEST");
-                        }}
+                        onClick={() => signOut()}
                       >
                         Log out @{"han"}
                       </Button>

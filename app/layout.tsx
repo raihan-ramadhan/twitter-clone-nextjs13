@@ -2,6 +2,7 @@ import "../styles/globals.scss";
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { ThemeContextProvider } from "@/lib/context/theme-context";
+import { AuthContextProvider } from "@/lib/context/auth-context";
 
 const WindowContextProvider = dynamic(
   () => import("../lib/context/window-context"),
@@ -9,7 +10,7 @@ const WindowContextProvider = dynamic(
 );
 
 export const metadata: Metadata = {
-  title: "Home / Twitter",
+  title: "Index / Twitter",
   description: "Twitter Clone NextJS-13",
 };
 
@@ -22,7 +23,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <WindowContextProvider>
-          <ThemeContextProvider>{children}</ThemeContextProvider>
+          <AuthContextProvider>
+            <ThemeContextProvider>{children}</ThemeContextProvider>
+          </AuthContextProvider>
         </WindowContextProvider>
       </body>
     </html>

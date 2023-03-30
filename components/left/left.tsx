@@ -8,8 +8,7 @@ import { IconName } from "../ui/hero-icon";
 import { LeftProfil } from "./left-profil";
 import { Button } from "../ui/button";
 import { useWindow } from "@/lib/context/window-context";
-
-const user = null;
+import { useAuth } from "@/lib/context/auth-context";
 
 export type NavLink = {
   href: string;
@@ -59,9 +58,10 @@ const navLinks: Readonly<NavLink[]> = [
 ];
 
 const Left = (): JSX.Element => {
-  const widthCN = "xs:w-20 md:w-24 xl:w-full xl:max-w-[275px]";
-
   const { isMobile } = useWindow();
+  const { user } = useAuth();
+
+  const widthCN = "xs:w-20 md:w-24 xl:w-full xl:max-w-[275px]";
 
   return (
     <header

@@ -57,12 +57,7 @@ export const LeftMore = (): JSX.Element => {
             <AnimatePresence>
               {open && (
                 <>
-                  <Overlay
-                    open={open}
-                    close={close}
-                    zIndex="z-10"
-                    backgroundColor="bg-red-500/20"
-                  />
+                  <Overlay open={open} close={close} zIndex="z-10" />
                   <Menu.Items
                     className="overflow-hidden absolute -top-[288px] text-xl w-80 font-medium z-20 menu-container"
                     as={motion.div}
