@@ -19,12 +19,16 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // prettier-ignore
+  // we place all context in this root layout
   return (
     <html lang="en">
       <body>
         <WindowContextProvider>
           <AuthContextProvider>
-            <ThemeContextProvider>{children}</ThemeContextProvider>
+            <ThemeContextProvider>
+              {children}
+            </ThemeContextProvider>
           </AuthContextProvider>
         </WindowContextProvider>
       </body>

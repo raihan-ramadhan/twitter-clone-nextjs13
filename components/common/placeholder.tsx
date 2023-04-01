@@ -2,7 +2,10 @@ import { CustomIcon } from "../ui/custom-icons";
 
 export function Placeholder(): JSX.Element {
   return (
-    <main className="flex min-h-screen items-center justify-center">
+    <main
+      id="globalLoader"
+      className="flex min-h-screen items-center justify-center"
+    >
       <i>
         <CustomIcon
           className="h-20 w-20 text-[#1DA1F2]"

@@ -1,15 +1,18 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { HeroIcon } from "../ui/hero-icon";
-import { Menu } from "@headlessui/react";
+import { SignoutModal } from "../modal/signout-modal";
 import { UserUsername } from "../user/user-username";
 import { CustomIcon } from "../ui/custom-icons";
 import { UserAvatar } from "../user/user-avatar";
 import { UserName } from "../user/user-name";
+import { HeroIcon } from "../ui/hero-icon";
+import { useModal } from "@/lib/hooks/useModal";
 import { Overlay } from "../ui/overlay";
-import { Button } from "../ui/button";
 import { useAuth } from "@/lib/context/auth-context";
-
+import { Button } from "../ui/button";
+import { Modal } from "../modal/modal";
+import { Menu } from "@headlessui/react";
 import cn from "clsx";
+
 import type { Variants } from "framer-motion";
 
 export const variants: Variants = {
@@ -23,8 +26,16 @@ export const variants: Variants = {
 
 export const LeftProfil = () => {
   const { signOut } = useAuth();
+  const { open, openModal, closeModal } = useModal();
   return (
     <>
+      <Modal
+        modalClassName="bg-main-background-1 w-full max-w-xs p-8 rounded-2xl hover-animation"
+        open={open}
+        closeModal={closeModal}
+      >
+        <SignoutModal signOut={signOut} closeModal={closeModal} />
+      </Modal>
       <Menu
         className="relative hidden xs:block z-0 ml-[4px] md:ml-[12px] xl:ml-0"
         as="section"
@@ -100,7 +111,7 @@ export const LeftProfil = () => {
                           "flex w-full gap-3 px-4 py-3 font-semibold",
                           active && "bg-black/5"
                         )}
-                        onClick={() => signOut()}
+                        onClick={openModal}
                       >
                         Log out @{"han"}
                       </Button>

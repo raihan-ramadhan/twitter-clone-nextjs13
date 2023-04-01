@@ -58,8 +58,8 @@ const navLinks: Readonly<NavLink[]> = [
 ];
 
 const Left = (): JSX.Element => {
-  const { isMobile } = useWindow();
   const { user } = useAuth();
+  const { isMobile } = useWindow();
 
   const widthCN = "xs:w-20 md:w-24 xl:w-full xl:max-w-[275px]";
 
@@ -77,7 +77,7 @@ const Left = (): JSX.Element => {
           <section className="flex flex-col items-center xl:items-start">
             <h1 className="hidden xs:flex pt-[2px]">
               <Link
-                href={"/home"}
+                href={user ? "/home" : "/"}
                 className="custom-button text-accent-blue dark:text-twitter-icon transition focus-visible:bg-accent-blue/10 hover:bg-main-accent/10 outline-none focus-visible:ring-2 focus-visible:ring-[#8ecdf8] "
               >
                 <CustomIcon className="w-7 h-7" iconName="TwitterIcon" />
