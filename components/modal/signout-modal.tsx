@@ -1,4 +1,4 @@
-import { ButtonHighlight, ButtonSecondary } from "../form-sign/buttons-form";
+import { ButtonHighlight, ButtonSecondary } from "../form/buttons-form";
 import { CustomIcon } from "../ui/custom-icons";
 
 type SignoutProps = {
@@ -20,8 +20,16 @@ export const SignoutModal = ({
         You can always log back in at any time. If you just want to switch
         accounts, you can do that by adding an existing account.
       </p>
-      <ButtonHighlight callback={signOut} text="Log Out" />
-      <ButtonSecondary callback={closeModal} text="Cancel" />
+      <ButtonHighlight
+        callback={signOut}
+        text="Log Out"
+        className="!py-3 !text-lg"
+      />
+      <ButtonSecondary
+        callback={closeModal}
+        text="Cancel"
+        className="!py-3 !text-lg"
+      />
     </div>
   );
 };

@@ -65,7 +65,7 @@ const Left = (): JSX.Element => {
 
   return (
     <header
-      className={cn("flex flex-col justify-between shrink-0 w-0 z-50", widthCN)}
+      className={cn("flex flex-col justify-between shrink-0 w-0 z-40", widthCN)}
     >
       <div
         className={cn(

@@ -1,8 +1,9 @@
-import { ButtonHighlight, ButtonProvider } from "../form-sign/buttons-form";
-import { OrLineForm } from "../form-sign/or-line-form";
-import { SwitchForm } from "../form-sign/switch-form";
-import { TitleForm } from "../form-sign/title-form";
-import { XForm } from "../form-sign/x-form";
+import { useAuth } from "@/lib/context/auth-context";
+import { ButtonHighlight, ButtonProvider } from "../form/buttons-form";
+import { OrLineForm } from "../form/or-line-form";
+import { SwitchForm } from "../form/switch-form";
+import { TitleForm } from "../form/title-form";
+import { XForm } from "../form/x-form";
 import { CustomIcon } from "../ui/custom-icons";
 
 export const SignupModal = ({
@@ -12,6 +13,7 @@ export const SignupModal = ({
   closeModal: () => void;
   switchSign: () => void;
 }): JSX.Element => {
+  const { signInWithGoogle } = useAuth();
   return (
     <>
       <div className="p-5 w-full h-full flex flex-col justify-center items-center relative py-14">
@@ -20,9 +22,13 @@ export const SignupModal = ({
           className="w-8 h-8 text-accent-blue mx-auto absolute top-3 left-1/2 -translate-x-1/2 "
           iconName="TwitterIcon"
         />
-        <form className="w-full max-w-xs mx-auto space-y-6 ">
+        <form className="w-full max-w-xs mx-auto space-y-6">
           <TitleForm title="Join Twitter today" />
-          <ButtonProvider text="Sign up with Google" provider={"google"} />
+          <ButtonProvider
+            callback={signInWithGoogle}
+            text="Sign up with Google"
+            provider={"google"}
+          />
           <ButtonProvider text="Sign up with Apple" provider={"apple"} />
           <OrLineForm />
           <ButtonHighlight text="Create account" />

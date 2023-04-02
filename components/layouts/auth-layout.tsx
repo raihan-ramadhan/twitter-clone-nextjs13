@@ -24,10 +24,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
   const router = useRouter();
 
   useEffect(() => {
-    const checkLogin: () => void = () => {
-      if (user && asPathname === "/") router.push("/home");
-    };
-    void checkLogin();
+    if (user && asPathname === "/") router.push("/home");
   }, [user, asPathname]);
 
   if (loading) return <Placeholder />;

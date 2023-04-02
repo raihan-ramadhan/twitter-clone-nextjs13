@@ -1,14 +1,14 @@
 import { CustomIcon } from "../ui/custom-icons";
-import { XForm } from "../form-sign/x-form";
-import { TitleForm } from "../form-sign/title-form";
+import { XForm } from "../form/x-form";
+import { TitleForm } from "../form/title-form";
 import {
   ButtonHighlight,
   ButtonProvider,
   ButtonSecondary,
-} from "../form-sign/buttons-form";
-import { OrLineForm } from "../form-sign/or-line-form";
-import { InputForm } from "../form-sign/input-form";
-import { SwitchForm } from "../form-sign/switch-form";
+} from "../form/buttons-form";
+import { OrLineForm } from "../form/or-line-form";
+import { InputForm } from "../form/input-form";
+import { SwitchForm } from "../form/switch-form";
 import { useAuth } from "../../lib/context/auth-context";
 
 export const LoginModal = ({
@@ -31,7 +31,7 @@ export const LoginModal = ({
         <form className="w-full max-w-xs mx-auto space-y-6 ">
           <TitleForm title={"Sign in to Twitter"} />
           <ButtonProvider
-            callback={() => signInWithGoogle()}
+            callback={signInWithGoogle}
             text="Sign in with Google"
             provider={"google"}
           />

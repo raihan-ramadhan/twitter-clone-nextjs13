@@ -8,17 +8,21 @@ import {
 } from "firebase/auth";
 import {
   doc,
-  getDoc,
   setDoc,
   onSnapshot,
   serverTimestamp,
+  collection,
+  query,
+  where,
+  getDocs,
+  getDoc,
 } from "firebase/firestore";
 import {
   usersCollection,
   userStatsCollection,
   userBookmarksCollection,
 } from "@/lib/firebase/collections";
-import { auth } from "../firebase/app";
+import { auth, db } from "../firebase/app";
 
 import { getRandomId, getRandomInt } from "@/lib/random";
 
@@ -57,7 +61,6 @@ export function AuthContextProvider({
   useEffect(() => {
     const manageUser = async (authUser: AuthUser): Promise<void> => {
       const { uid, displayName, photoURL } = authUser;
-
       const userSnapshot = await getDoc(doc(usersCollection, uid));
 
       if (!userSnapshot.exists()) {
@@ -67,14 +70,15 @@ export function AuthContextProvider({
         while (!available) {
           const normalizeName = displayName?.replace(/\s/g, "").toLowerCase();
           const randomInt = getRandomInt(1, 10_000);
-
           randomUsername = `${normalizeName as string}${randomInt}`;
 
-          const randomUserSnapshot = await getDoc(
-            doc(usersCollection, randomUsername)
+          const q = query(
+            usersCollection,
+            where("username", "==", randomUsername)
           );
+          const querySnapshot = await getDocs(q);
 
-          if (!randomUserSnapshot.exists()) available = true;
+          if (querySnapshot.empty) available = true;
         }
 
         const userData: WithFieldValue<User> = {
@@ -96,6 +100,12 @@ export function AuthContextProvider({
           totalPhotos: 0,
           pinnedTweet: null,
           coverPhotoURL: null,
+          birthdate: {
+            month: 0,
+            date: 0,
+            year: 0,
+          },
+          customizeExperience: null,
         };
 
         const userStatsData: WithFieldValue<Stats> = {
@@ -117,7 +127,15 @@ export function AuthContextProvider({
         }
       } else {
         const userData = userSnapshot.data();
-        setUser(userData);
+
+        const isBirtdateCorrect = (userData: User): boolean => {
+          const { birthdate } = userData;
+          const { month, date, year } = birthdate;
+          return !(month === 0 || date === 0 || year === 0);
+        };
+
+        const requireBirtdate = isBirtdateCorrect(userData);
+        if (requireBirtdate) setUser(userData);
       }
 
       setLoading(false);
@@ -125,6 +143,7 @@ export function AuthContextProvider({
 
     const handleUserAuth = (authUser: AuthUser | null): void => {
       setLoading(true);
+      console.log(authUser);
 
       if (authUser) void manageUser(authUser);
       else {
@@ -163,6 +182,9 @@ export function AuthContextProvider({
   const signInWithGoogle = async (): Promise<void> => {
     try {
       const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({
+        prompt: "select_account consent",
+      });
       await signInWithPopup(auth, provider);
     } catch (error) {
       setError(error as Error);

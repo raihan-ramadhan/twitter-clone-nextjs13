@@ -1,6 +1,12 @@
 import type { Theme, Accent } from "./theme";
 import type { Timestamp, FirestoreDataConverter } from "firebase/firestore";
 
+export type Birthdate = {
+  month: number;
+  date: number;
+  year: number;
+};
+
 export type User = {
   id: string;
   bio: string | null;
@@ -20,6 +26,8 @@ export type User = {
   totalPhotos: number;
   pinnedTweet: string | null;
   coverPhotoURL: string | null;
+  birthdate: Birthdate;
+  customizeExperience: boolean | null;
 };
 
 export type EditableData = Extract<

@@ -1,7 +1,8 @@
 "use client";
 import { useRequireAuth } from "@/lib/hooks/useRequireAuth";
-import type { ReactNode } from "react";
 import { Placeholder } from "../common/placeholder";
+import type { ReactNode } from "react";
+import type { Birthdate } from "@/lib/types/user";
 
 export type LayoutProps = {
   children: ReactNode;
@@ -10,7 +11,8 @@ export type LayoutProps = {
 export function ProtectedLayout({ children }: LayoutProps): JSX.Element {
   const user = useRequireAuth();
 
-  if (!user) return <Placeholder />;
+  // if (!user) return <Placeholder />;
+  if (false) return <Placeholder />;
 
   return <>{children}</>;
 }
