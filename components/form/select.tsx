@@ -1,20 +1,15 @@
+import cn from "clsx";
 import { HeroIcon } from "../ui/hero-icon";
-import type { ChangeEvent } from "react";
-import type { Month } from "../modal/require-data-modal";
 
-interface PropsSelect {
-  name: string;
-  options: Month[] | number[];
-  value: number;
-  placeholder: string;
-  handler: (e: ChangeEvent<HTMLSelectElement>) => void;
-}
+import type { Month } from "../modal/require-data-modal";
+import type { PropsSelect } from "../../lib/types/requireData";
 
 export const Select: React.FC<PropsSelect> = ({
-  options,
   placeholder,
+  options,
   name,
   value,
+  classSelect,
   handler,
 }) => {
   const restOptions: JSX.Element[] = options.map((option: Month | number) => {
@@ -41,12 +36,15 @@ export const Select: React.FC<PropsSelect> = ({
 
   return (
     <div
-      className="relative w-full text-light-secondary dark:text-light-secondary"
+      className={cn(
+        "relative w-full text-light-secondary dark:text-light-secondary",
+        classSelect
+      )}
       data-te-input-wrapper-init
     >
       <select
         id="formControlSelectMonth"
-        className="cursor-pointer bg-main-background-1 peer outline-none p-2 pt-6 w-full text-base rounded-md border dark:text-light-line-reply text-light-secondary border-light-line-reply dark:border-light-secondary bg-transparent transition-all duration-200 ease-linear motion-reduce:transition-none focus:!border-accent-blue appearance-none overflow-y-auto "
+        className="cursor-pointer bg-main-background-1 peer outline-none p-2 pt-6 w-full text-base rounded-md border dark:text-light-line-reply text-light-secondary border-light-line-reply dark:border-light-secondary bg-transparent transition-all duration-200 ease-linear motion-reduce:transition-none focus:!border-accent-blue appearance-none overflow-y-auto"
         data-te-select-visible-options={"6"}
         data-te-select-init
         onChange={handler}

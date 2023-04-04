@@ -2,39 +2,15 @@
 import { Select } from "../form/select";
 import { Paragraph } from "../form/paragaph";
 import { TitleForm } from "../form/title-form";
-import { CustomIcon } from "../ui/custom-icons";
 import { ButtonHighlight } from "../form/buttons-form";
-import { useEffect, useState } from "react";
+import { useFormBirthdate } from "@/lib/hooks/useFormBirthdate";
+import { useEffect } from "react";
 
 import type { ChangeEvent } from "react";
-import type { Birthdate } from "@/lib/types/user";
-
-export type Month = {
-  name: string;
-  value: number;
-};
-
-const months: Month[] = [
-  { name: "january", value: 1 },
-  { name: "february", value: 2 },
-  { name: "march", value: 3 },
-  { name: "april", value: 4 },
-  { name: "may", value: 5 },
-  { name: "june", value: 6 },
-  { name: "july", value: 7 },
-  { name: "august", value: 8 },
-  { name: "september", value: 9 },
-  { name: "october", value: 10 },
-  { name: "november", value: 11 },
-  { name: "december", value: 12 },
-];
 
 export const RequireDataModal = (): JSX.Element => {
-  const [formData, setFormData] = useState<Birthdate>({
-    month: 0,
-    date: 0,
-    year: 0,
-  });
+  const { months, days, years, formData, setFormData, daysInMonth } =
+    useFormBirthdate();
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -43,30 +19,6 @@ export const RequireDataModal = (): JSX.Element => {
       [name]: parseInt(value, 10),
     }));
   };
-
-  const daysInMonth = (month: number, year: number) => {
-    return new Date(year, month, 0).getDate();
-  };
-
-  const getDaysOptions = () => {
-    const { month, year } = formData;
-    const daysInSelectedMonth = daysInMonth(month, year);
-    const options = [] as number[];
-
-    if (month === 0) return options;
-
-    for (let i = 1; i <= daysInSelectedMonth; i++) {
-      options.push(i);
-    }
-    return options;
-  };
-  const days: number[] = getDaysOptions();
-
-  const years: number[] = [];
-  const currentYear = new Date().getFullYear();
-  for (let i = currentYear - 100; i <= currentYear; i++) {
-    years.unshift(i);
-  }
 
   useEffect(() => {
     // make correction date if date not exist when change month and year
@@ -84,17 +36,13 @@ export const RequireDataModal = (): JSX.Element => {
   }, [formData.month, formData.year]);
 
   return (
-    <div className="py-14 w-full max-w-md mx-auto flex flex-col relative h-full justify-between">
-      <CustomIcon
-        className="w-8 h-8 text-accent-blue mx-auto absolute top-3 left-1/2 -translate-x-1/2 "
-        iconName="TwitterIcon"
-      />
+    <div className="py-14 px-5 w-full max-w-md mx-auto flex flex-col relative h-[650px] xs:h-full top-1/2 -translate-y-1/2 justify-between">
       <div className="w-full space-y-6">
         <div className="flex flex-col">
           <TitleForm title={"What's your birth date"} />
           <Paragraph text={"This wont be public"} />
         </div>
-        <div className="flex w-full gap-5">
+        <div className="grid grid-cols-2 xs:grid-cols-3 gap-5 ">
           <Select
             name="month"
             options={months}
@@ -115,6 +63,7 @@ export const RequireDataModal = (): JSX.Element => {
             placeholder={"Year"}
             value={formData.year}
             handler={handleChange}
+            classSelect="col-span-full xs:col-span-1"
           />
         </div>
       </div>

@@ -6,15 +6,16 @@ import { useAuth } from "@/lib/context/auth-context";
 import { Loading } from "../ui/loading";
 import { useWindow } from "@/lib/context/window-context";
 import { LoginModal } from "../modal/login-modal";
-import { usePathname, useRouter } from "next/navigation";
 import { Placeholder } from "../common/placeholder";
 import { SignupModal } from "../modal/signup-modal";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { RequireDataModal } from "../modal/require-data-modal";
 import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 import type { Variants } from "framer-motion";
 import type { LayoutProps } from "./common-layout";
+import { CustomIcon } from "../ui/custom-icons";
 type OpenState = { signIn: boolean; signUp: boolean };
 
 const initialOpenSign = { signIn: false, signUp: false };
@@ -73,7 +74,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
       {!user && (
         <>
           <Modal
-            modalClassName="bg-main-background-1 w-full xs:max-w-xl xs:rounded-2xl xs:p-3 hover-animation h-full xs:max-h-[650px]"
+            modalClassName="bg-main-background-1 w-full xs:max-w-xl xs:rounded-2xl xs:p-3 hover-animation h-full xs:max-h-[650px] relative"
             className={cn(
               "flex items-center justify-center",
               isMobile && "!p-0"
@@ -82,6 +83,12 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
             closeModal={() => {}}
             modalAnimation={variants}
           >
+            {!loadingRequireData && (
+              <CustomIcon
+                className="w-8 h-8 text-accent-blue mx-auto absolute top-5 left-1/2 -translate-x-1/2 "
+                iconName="TwitterIcon"
+              />
+            )}
             {loadingRequireData && (
               <div className="flex w-full h-full justify-center items-center">
                 <Loading />

@@ -1,10 +1,9 @@
+import { XForm } from "../form/x-form";
 import { useAuth } from "@/lib/context/auth-context";
-import { ButtonHighlight, ButtonProvider } from "../form/buttons-form";
+import { TitleForm } from "../form/title-form";
 import { OrLineForm } from "../form/or-line-form";
 import { SwitchForm } from "../form/switch-form";
-import { TitleForm } from "../form/title-form";
-import { XForm } from "../form/x-form";
-import { CustomIcon } from "../ui/custom-icons";
+import { ButtonHighlight, ButtonProvider } from "../form/buttons-form";
 
 export const SignupModal = ({
   closeModal,
@@ -18,10 +17,6 @@ export const SignupModal = ({
     <>
       <div className="p-5 w-full h-full flex flex-col justify-center items-center relative py-14">
         <XForm closeModal={closeModal} />
-        <CustomIcon
-          className="w-8 h-8 text-accent-blue mx-auto absolute top-3 left-1/2 -translate-x-1/2 "
-          iconName="TwitterIcon"
-        />
         <form className="w-full max-w-xs mx-auto space-y-6">
           <TitleForm title="Join Twitter today" />
           <ButtonProvider
