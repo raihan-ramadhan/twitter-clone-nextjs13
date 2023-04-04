@@ -80,6 +80,7 @@ export const RequireDataModal = (): JSX.Element => {
         date: lastDaysInSelectedMonth,
       }));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.month]);
 
   return (

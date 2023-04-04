@@ -2,15 +2,16 @@
 import cn from "clsx";
 import { Modal } from "../modal/modal";
 import { Button } from "../ui/button";
+import { useAuth } from "@/lib/context/auth-context";
 import { Loading } from "../ui/loading";
-import { useState } from "react";
 import { useWindow } from "@/lib/context/window-context";
 import { LoginModal } from "../modal/login-modal";
+import { usePathname, useRouter } from "next/navigation";
 import { Placeholder } from "../common/placeholder";
 import { SignupModal } from "../modal/signup-modal";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { RequireDataModal } from "../modal/require-data-modal";
-import { useAuthenticated } from "@/lib/hooks/useAuthenticated";
+import { useEffect, useState } from "react";
 
 import type { Variants } from "framer-motion";
 import type { LayoutProps } from "./common-layout";
@@ -20,15 +21,24 @@ const initialOpenSign = { signIn: false, signUp: false };
 
 export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
   const [openSign, setOpenSign] = useState<OpenState>(initialOpenSign);
-  const { user, loading } = useAuthenticated();
+  const { user, loading } = useAuth();
   const { isMobile } = useWindow();
   const {
     loading: loadingRequireData,
     requireData,
     isLogging,
   } = useRequireData();
+  const asPathname = usePathname();
+  const router = useRouter();
 
-  if (loading && !isLogging) return <Placeholder />;
+  useEffect(() => {
+    if (user && asPathname === "/") router.push("/home");
+    setOpenSign(initialOpenSign);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
+  if ((loading && !isLogging) || (user && asPathname === "/"))
+    return <Placeholder />;
 
   const variants: Variants = !isMobile
     ? {

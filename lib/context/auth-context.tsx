@@ -167,6 +167,7 @@ export function AuthContextProvider({
     };
 
     onAuthStateChanged(auth, handleUserAuth);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogging]);
 
   useEffect(() => {
