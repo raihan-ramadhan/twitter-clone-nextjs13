@@ -1,6 +1,6 @@
+import { HeroIcon } from "../ui/hero-icon";
 import type { ChangeEvent } from "react";
 import type { Month } from "../modal/require-data-modal";
-import { HeroIcon } from "../ui/hero-icon";
 
 interface PropsSelect {
   name: string;
@@ -17,20 +17,24 @@ export const Select: React.FC<PropsSelect> = ({
   value,
   handler,
 }) => {
-  const myOptions: JSX.Element[] = options.map((option: any) => {
-    if (option.value && option.name)
+  const restOptions: JSX.Element[] = options.map((option: Month | number) => {
+    if (typeof option === "number")
       return (
         <option
-          key={`${option.name}`}
+          key={`${option}`}
           className="bg-main-background-1"
-          value={option.value}
+          value={option}
         >
-          {option.name.charAt(0).toUpperCase() + option.name.slice(1)}
+          {option}
         </option>
       );
     return (
-      <option key={`${option}`} className="bg-main-background-1" value={option}>
-        {option}
+      <option
+        key={`${option.name}`}
+        className="bg-main-background-1"
+        value={option.value}
+      >
+        {option.name.charAt(0).toUpperCase() + option.name.slice(1)}
       </option>
     );
   });
@@ -51,7 +55,7 @@ export const Select: React.FC<PropsSelect> = ({
         required
       >
         <option disabled className="bg-main-background-1" value={0} />
-        {myOptions}
+        {restOptions}
       </select>
       <HeroIcon
         iconName="ChevronDownIcon"

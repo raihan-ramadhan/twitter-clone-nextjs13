@@ -69,7 +69,7 @@ export const RequireDataModal = (): JSX.Element => {
   }
 
   useEffect(() => {
-    // make correction date if date not exist when change month
+    // make correction date if date not exist when change month and year
     const { date, month, year } = formData;
     const lastDaysInSelectedMonth = daysInMonth(month, year);
     // when initial value we given zero to all value so => daysInMonth(0, 0) === 31
@@ -81,7 +81,7 @@ export const RequireDataModal = (): JSX.Element => {
       }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formData.month]);
+  }, [formData.month, formData.year]);
 
   return (
     <div className="py-14 w-full max-w-md mx-auto flex flex-col relative h-full justify-between">

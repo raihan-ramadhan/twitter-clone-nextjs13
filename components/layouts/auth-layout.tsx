@@ -64,11 +64,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
   };
 
   const switchSign: () => void = () => {
-    setOpenSign((prev) => {
-      return prev.signIn
-        ? { signIn: false, signUp: true }
-        : { signIn: true, signUp: false };
-    });
+    setOpenSign(({ signIn, signUp }) => ({ signIn: !signIn, signUp: !signUp }));
   };
 
   return (
