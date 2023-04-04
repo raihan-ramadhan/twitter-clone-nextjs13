@@ -2,12 +2,14 @@
 import { useState } from "react";
 import type { Month } from "@/lib/types/requireData";
 import type { Birthdate } from "../types/user";
+import type { ChangeEvent } from "react";
 
 type formBirthdate = {
   days: number[];
   years: number[];
   months: Month[];
   formData: Birthdate;
+  handleChange: (e: ChangeEvent<HTMLSelectElement>) => void;
   daysInMonth: (month: number, year: number) => number;
   setFormData: React.Dispatch<React.SetStateAction<Birthdate>>;
 };
@@ -55,12 +57,21 @@ export const useFormBirthdate = (): formBirthdate => {
   const currentYear = new Date().getFullYear();
   for (let i = currentYear - 100; i <= currentYear; i++) years.unshift(i);
 
+  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: parseInt(value, 10),
+    }));
+  };
+
   return {
-    months,
     days,
     years,
+    months,
     formData,
     setFormData,
+    handleChange,
     daysInMonth,
   };
 };

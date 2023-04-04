@@ -1,24 +1,21 @@
 "use client";
 import { Select } from "../form/select";
+import { useEffect } from "react";
 import { Paragraph } from "../form/paragaph";
 import { TitleForm } from "../form/title-form";
 import { ButtonHighlight } from "../form/buttons-form";
 import { useFormBirthdate } from "@/lib/hooks/useFormBirthdate";
-import { useEffect } from "react";
-
-import type { ChangeEvent } from "react";
 
 export const RequireDataModal = (): JSX.Element => {
-  const { months, days, years, formData, setFormData, daysInMonth } =
-    useFormBirthdate();
-
-  const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: parseInt(value, 10),
-    }));
-  };
+  const {
+    months,
+    days,
+    years,
+    formData,
+    setFormData,
+    daysInMonth,
+    handleChange,
+  } = useFormBirthdate();
 
   useEffect(() => {
     // make correction date if date not exist when change month and year
