@@ -22,7 +22,7 @@ export const LoginModal = ({
 
   return (
     <>
-      <div className="p-5 w-full h-full flex flex-col justify-center items-center relative py-14">
+      <div className="w-full h-full flex flex-col justify-center items-center relative p-5 py-14">
         <XForm closeModal={closeModal} />
         <CustomIcon
           className="w-8 h-8 text-accent-blue mx-auto absolute top-3 left-1/2 -translate-x-1/2 "

@@ -7,7 +7,7 @@ import { ButtonHighlight } from "../form/buttons-form";
 import { useEffect, useState } from "react";
 
 import type { ChangeEvent } from "react";
-import type { FormData } from "@/lib/types/user";
+import type { Birthdate } from "@/lib/types/user";
 
 export type Month = {
   name: string;
@@ -29,8 +29,8 @@ const months: Month[] = [
   { name: "december", value: 12 },
 ];
 
-export const RequireFormModal = (): JSX.Element => {
-  const [formData, setFormData] = useState<FormData>({
+export const RequireDataModal = (): JSX.Element => {
+  const [formData, setFormData] = useState<Birthdate>({
     month: 0,
     date: 0,
     year: 0,
@@ -83,7 +83,7 @@ export const RequireFormModal = (): JSX.Element => {
   }, [formData.month]);
 
   return (
-    <form className="p-5 pt-14 w-full max-w-md mx-auto flex flex-col relative h-full justify-between">
+    <div className="py-14 w-full max-w-md mx-auto flex flex-col relative h-full justify-between">
       <CustomIcon
         className="w-8 h-8 text-accent-blue mx-auto absolute top-3 left-1/2 -translate-x-1/2 "
         iconName="TwitterIcon"
@@ -118,6 +118,6 @@ export const RequireFormModal = (): JSX.Element => {
         </div>
       </div>
       <ButtonHighlight text="Next" className="!py-3 !text-lg" />
-    </form>
+    </div>
   );
 };

@@ -28,6 +28,7 @@ export type User = {
   coverPhotoURL: string | null;
   birthdate: Birthdate;
   customizeExperience: boolean | null;
+  newUser: boolean;
 };
 
 export type EditableData = Extract<

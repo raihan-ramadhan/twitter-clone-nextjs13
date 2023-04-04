@@ -1,5 +1,5 @@
 import type { ChangeEvent } from "react";
-import type { Month } from "../modal/require-form-modal";
+import type { Month } from "../modal/require-data-modal";
 import { HeroIcon } from "../ui/hero-icon";
 
 interface PropsSelect {
@@ -20,12 +20,16 @@ export const Select: React.FC<PropsSelect> = ({
   const myOptions: JSX.Element[] = options.map((option: any) => {
     if (option.value && option.name)
       return (
-        <option className="bg-main-background-1" value={option.value}>
+        <option
+          key={`${option.name}`}
+          className="bg-main-background-1"
+          value={option.value}
+        >
           {option.name.charAt(0).toUpperCase() + option.name.slice(1)}
         </option>
       );
     return (
-      <option className="bg-main-background-1" value={option}>
+      <option key={`${option}`} className="bg-main-background-1" value={option}>
         {option}
       </option>
     );
@@ -38,7 +42,7 @@ export const Select: React.FC<PropsSelect> = ({
     >
       <select
         id="formControlSelectMonth"
-        className="bg-main-background-1 peer outline-none p-2 pt-6 w-full text-base rounded-md border dark:text-light-line-reply text-light-secondary border-light-line-reply dark:border-light-secondary bg-transparent transition-all duration-200 ease-linear motion-reduce:transition-none focus:!border-accent-blue appearance-none overflow-y-auto "
+        className="cursor-pointer bg-main-background-1 peer outline-none p-2 pt-6 w-full text-base rounded-md border dark:text-light-line-reply text-light-secondary border-light-line-reply dark:border-light-secondary bg-transparent transition-all duration-200 ease-linear motion-reduce:transition-none focus:!border-accent-blue appearance-none overflow-y-auto "
         data-te-select-visible-options={"6"}
         data-te-select-init
         onChange={handler}

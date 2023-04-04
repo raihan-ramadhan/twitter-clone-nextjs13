@@ -2,32 +2,39 @@
 import cn from "clsx";
 import { Modal } from "../modal/modal";
 import { Button } from "../ui/button";
+import { Loading } from "../ui/loading";
 import { useAuth } from "@/lib/context/auth-context";
 import { useState, useEffect } from "react";
 import { useWindow } from "@/lib/context/window-context";
 import { LoginModal } from "../modal/login-modal";
 import { Placeholder } from "../common/placeholder";
 import { SignupModal } from "../modal/signup-modal";
+import { useRequireData } from "@/lib/context/require-data-context";
+import { RequireDataModal } from "../modal/require-data-modal";
 import { useRouter, usePathname } from "next/navigation";
 
 import type { Variants } from "framer-motion";
 import type { LayoutProps } from "./common-layout";
 type OpenState = { signIn: boolean; signUp: boolean };
+const initialOpenSign = { signIn: false, signUp: false };
 
 export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
-  const initialOpenSign = { signIn: false, signUp: false };
   const [openSign, setOpenSign] = useState<OpenState>(initialOpenSign);
-
   const { user, loading } = useAuth();
   const { isMobile } = useWindow();
   const asPathname = usePathname();
   const router = useRouter();
+  const {
+    loading: loadingRequireData,
+    requireData,
+    isLogging,
+  } = useRequireData();
 
   useEffect(() => {
     if (user && asPathname === "/") router.push("/home");
   }, [user, asPathname]);
 
-  if (loading) return <Placeholder />;
+  if (loading && !isLogging) return <Placeholder />;
 
   const variants: Variants = !isMobile
     ? {
@@ -66,7 +73,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
       {!user && (
         <>
           <Modal
-            modalClassName="bg-main-background-1 w-full xs:max-w-xl xs:rounded-2xl xs:p-3 hover-animation h-full xs:h-[unset]"
+            modalClassName="bg-main-background-1 w-full xs:max-w-xl xs:rounded-2xl xs:p-3 hover-animation h-full xs:max-h-[650px]"
             className={cn(
               "flex items-center justify-center",
               isMobile && "!p-0"
@@ -75,13 +82,22 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
             closeModal={() => {}}
             modalAnimation={variants}
           >
-            {openSign.signIn ? (
+            {loadingRequireData && (
+              <div className="flex w-full h-full justify-center items-center">
+                <Loading />
+              </div>
+            )}
+            {openSign.signIn && !isLogging && (
               <LoginModal closeModal={closeModalSign} switchSign={switchSign} />
-            ) : (
+            )}
+            {openSign.signUp && !isLogging && (
               <SignupModal
                 closeModal={closeModalSign}
                 switchSign={switchSign}
               />
+            )}
+            {requireData && isLogging && !loadingRequireData && (
+              <RequireDataModal />
             )}
           </Modal>
           <div className="fixed inset-x-0 bottom-0 z-50 bg-accent-blue h-20 flex justify-center shadow-lg text-white">
@@ -98,18 +114,18 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
               <div className="flex items-center justify-end font-semibold gap-3 mx-3 md:mx-0 w-full md:w-[unset] ">
                 <Button
                   type="button"
-                  onClick={() =>
-                    setOpenSign(() => ({ signUp: false, signIn: true }))
-                  }
+                  onClick={() => {
+                    setOpenSign(() => ({ signUp: false, signIn: true }));
+                  }}
                   className="py-1 px-4 border-[.5px] border-white/40 hover:bg-white/20 shrink-0 flex-1 md:flex-none truncate"
                 >
                   Login
                 </Button>
                 <Button
                   type="button"
-                  onClick={() =>
-                    setOpenSign(() => ({ signIn: false, signUp: true }))
-                  }
+                  onClick={() => {
+                    setOpenSign(() => ({ signIn: false, signUp: true }));
+                  }}
                   className="py-1 px-4 bg-white text-black transition-all hover:brightness-90 active:brightness-85 shrink-0 flex-1 md:flex-none truncate"
                 >
                   Sign up

@@ -1,8 +1,9 @@
 import "../styles/globals.scss";
-import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { ThemeContextProvider } from "@/lib/context/theme-context";
 import { AuthContextProvider } from "@/lib/context/auth-context";
+import { RequireDataProvider } from "@/lib/context/require-data-context";
+import type { Metadata } from "next";
 
 const WindowContextProvider = dynamic(
   () => import("../lib/context/window-context"),
@@ -25,11 +26,13 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <WindowContextProvider>
-          <AuthContextProvider>
-            <ThemeContextProvider>
-              {children}
-            </ThemeContextProvider>
-          </AuthContextProvider>
+          <RequireDataProvider>
+            <AuthContextProvider>
+              <ThemeContextProvider>
+                {children}
+              </ThemeContextProvider>
+            </AuthContextProvider>
+          </RequireDataProvider>
         </WindowContextProvider>
       </body>
     </html>

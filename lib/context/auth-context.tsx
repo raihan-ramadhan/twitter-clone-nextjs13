@@ -1,37 +1,38 @@
 "use client";
 import { useState, useContext, createContext, useMemo, useEffect } from "react";
+import { getRandomId, getRandomInt } from "@/lib/random";
+import { isBirtdateCorrect } from "../utils";
+import { useRequireData } from "./require-data-context";
+import { auth } from "../firebase/app";
 import {
-  signInWithPopup,
-  GoogleAuthProvider,
-  onAuthStateChanged,
   signOut as signOutFirebase,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 import {
-  doc,
-  setDoc,
-  onSnapshot,
   serverTimestamp,
-  collection,
-  query,
-  where,
-  getDocs,
+  onSnapshot,
   getDoc,
+  setDoc,
+  doc,
 } from "firebase/firestore";
 import {
-  usersCollection,
-  userStatsCollection,
   userBookmarksCollection,
+  userStatsCollection,
+  usersCollection,
 } from "@/lib/firebase/collections";
-import { auth, db } from "../firebase/app";
+import {
+  checkUsernameAvailability,
+  updateUserNewUser,
+} from "../firebase/utils";
 
-import { getRandomId, getRandomInt } from "@/lib/random";
-
-import type { ReactNode } from "react";
-import type { User } from "@/lib/types/user";
+import type { WithFieldValue } from "firebase/firestore";
+import type { User as AuthUser } from "firebase/auth";
 import type { Bookmark } from "@/lib/types/bookmark";
 import type { Stats } from "@/lib/types/stats";
-import type { User as AuthUser } from "firebase/auth";
-import type { WithFieldValue } from "firebase/firestore";
+import type { User } from "@/lib/types/user";
+import type { ReactNode } from "react";
 
 type AuthContext = {
   user: User | null;
@@ -56,7 +57,13 @@ export function AuthContextProvider({
   const [user, setUser] = useState<User | null>(null);
   const [userBookmarks, setUserBookmarks] = useState<Bookmark[] | null>(null);
   const [error, setError] = useState<Error | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
+  const {
+    setLoading: setLoadingRequireData,
+    setRequireData,
+    setIsLogging,
+    isLogging,
+  } = useRequireData();
 
   useEffect(() => {
     const manageUser = async (authUser: AuthUser): Promise<void> => {
@@ -72,13 +79,11 @@ export function AuthContextProvider({
           const randomInt = getRandomInt(1, 10_000);
           randomUsername = `${normalizeName as string}${randomInt}`;
 
-          const q = query(
-            usersCollection,
-            where("username", "==", randomUsername)
+          const usernameAvailability = await checkUsernameAvailability(
+            randomUsername
           );
-          const querySnapshot = await getDocs(q);
 
-          if (querySnapshot.empty) available = true;
+          if (usernameAvailability) available = true;
         }
 
         const userData: WithFieldValue<User> = {
@@ -100,12 +105,9 @@ export function AuthContextProvider({
           totalPhotos: 0,
           pinnedTweet: null,
           coverPhotoURL: null,
-          birthdate: {
-            month: 0,
-            date: 0,
-            year: 0,
-          },
+          birthdate: { month: 0, date: 0, year: 0 },
           customizeExperience: null,
+          newUser: true,
         };
 
         const userStatsData: WithFieldValue<Stats> = {
@@ -121,21 +123,33 @@ export function AuthContextProvider({
           ]);
 
           const newUser = (await getDoc(doc(usersCollection, uid))).data();
-          setUser(newUser as User);
+
+          const requireBirtdate = isBirtdateCorrect(newUser as User);
+          if (requireBirtdate) {
+            setUser(newUser as User);
+            setRequireData(false);
+            setIsLogging(false);
+          } else {
+            setRequireData(true);
+          }
+          setLoadingRequireData(false);
         } catch (error) {
           setError(error as Error);
         }
       } else {
+        await updateUserNewUser(uid);
+
         const userData = userSnapshot.data();
 
-        const isBirtdateCorrect = (userData: User): boolean => {
-          const { birthdate } = userData;
-          const { month, date, year } = birthdate;
-          return !(month === 0 || date === 0 || year === 0);
-        };
-
         const requireBirtdate = isBirtdateCorrect(userData);
-        if (requireBirtdate) setUser(userData);
+        if (requireBirtdate) {
+          setUser(userData);
+          setRequireData(true);
+          setIsLogging(false);
+        } else {
+          setRequireData(true);
+        }
+        setLoadingRequireData(false);
       }
 
       setLoading(false);
@@ -143,17 +157,17 @@ export function AuthContextProvider({
 
     const handleUserAuth = (authUser: AuthUser | null): void => {
       setLoading(true);
-      console.log(authUser);
 
       if (authUser) void manageUser(authUser);
       else {
         setUser(null);
         setLoading(false);
+        setLoadingRequireData(false);
       }
     };
 
     onAuthStateChanged(auth, handleUserAuth);
-  }, []);
+  }, [isLogging]);
 
   useEffect(() => {
     if (!user) return;
@@ -186,6 +200,8 @@ export function AuthContextProvider({
         prompt: "select_account consent",
       });
       await signInWithPopup(auth, provider);
+      setIsLogging(true);
+      setLoadingRequireData(true);
     } catch (error) {
       setError(error as Error);
     }

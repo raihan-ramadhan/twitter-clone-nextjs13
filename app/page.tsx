@@ -12,6 +12,15 @@ export default function RootPage() {
           <MainContainer> {/*Where we place the right*/}
             <div className="p-4">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
             </div>
           </MainContainer>
         </HomeLayout>
