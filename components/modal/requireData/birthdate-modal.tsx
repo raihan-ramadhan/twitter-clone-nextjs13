@@ -1,16 +1,20 @@
 "use client";
-import { Select } from "../form/select";
+import { Select } from "../../form/select";
+import { Paragraph } from "../../form/paragaph";
 import { useEffect } from "react";
-import { Paragraph } from "../form/paragaph";
-import { TitleForm } from "../form/title-form";
-import { ButtonHighlight } from "../form/buttons-form";
+import { TitleForm } from "../../form/title-form";
+import { ButtonHighlight } from "../../form/buttons-form";
 import { useFormBirthdate } from "@/lib/hooks/useFormBirthdate";
 
-export const RequireDataModal = (): JSX.Element => {
+type BirthdateModalProps = { nextSlide: () => void };
+
+export const BirthdateModal = (props: BirthdateModalProps): JSX.Element => {
+  const { nextSlide } = props;
+
   const {
-    months,
     days,
     years,
+    months,
     formData,
     setFormData,
     daysInMonth,
@@ -32,8 +36,13 @@ export const RequireDataModal = (): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.month, formData.year]);
 
+  const chageBirthdate = async (): Promise<void> => {
+    // await changeBirthdateFirebaseSDK()
+    nextSlide();
+  };
+
   return (
-    <div className="py-14 px-5 w-full max-w-md mx-auto flex flex-col relative h-[650px] xs:h-full top-1/2 -translate-y-1/2 justify-between">
+    <div className="py-14 px-5 w-full max-w-md mx-auto flex flex-col relative h-[650px] xs:h-full top-1/2 -translate-y-1/2 justify-between border border-red-500">
       <div className="w-full space-y-6">
         <div className="flex flex-col">
           <TitleForm title={"What's your birth date"} />
@@ -64,7 +73,11 @@ export const RequireDataModal = (): JSX.Element => {
           />
         </div>
       </div>
-      <ButtonHighlight text="Next" className="!py-3 !text-lg" />
+      <ButtonHighlight
+        callback={chageBirthdate}
+        text="Next"
+        className="!py-3 !text-lg"
+      />
     </div>
   );
 };

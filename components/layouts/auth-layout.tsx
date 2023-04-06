@@ -5,17 +5,17 @@ import { Button } from "../ui/button";
 import { useAuth } from "@/lib/context/auth-context";
 import { Loading } from "../ui/loading";
 import { useWindow } from "@/lib/context/window-context";
+import { CustomIcon } from "../ui/custom-icons";
 import { LoginModal } from "../modal/login-modal";
 import { Placeholder } from "../common/placeholder";
 import { SignupModal } from "../modal/signup-modal";
 import { useRequireData } from "@/lib/context/require-data-context";
-import { RequireDataModal } from "../modal/require-data-modal";
+import { RequireDataModal } from "../modal/requireData/require-data-modal";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 import type { Variants } from "framer-motion";
 import type { LayoutProps } from "./common-layout";
-import { CustomIcon } from "../ui/custom-icons";
 type OpenState = { signIn: boolean; signUp: boolean };
 
 const initialOpenSign = { signIn: false, signUp: false };
@@ -60,7 +60,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
         exit: { opacity: 0, transition: { duration: 0.15 } },
       };
 
-  const closeModalSign: () => void = () => {
+  const closeModalSign = (): void => {
     setOpenSign(initialOpenSign);
   };
 
@@ -104,7 +104,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
               />
             )}
             {requireData && isLogging && !loadingRequireData && (
-              <RequireDataModal />
+              <RequireDataModal closeModal={closeModalSign} />
             )}
           </Modal>
           <div className="fixed inset-x-0 bottom-0 z-50 bg-accent-blue h-20 flex justify-center shadow-lg text-white">

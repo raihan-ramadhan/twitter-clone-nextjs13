@@ -1,7 +1,7 @@
 import cn from "clsx";
 import { HeroIcon } from "../ui/hero-icon";
 
-import type { Month } from "../modal/require-data-modal";
+import type { Month } from "../../lib/types/requireData";
 import type { PropsSelect } from "../../lib/types/requireData";
 
 export const Select: React.FC<PropsSelect> = ({

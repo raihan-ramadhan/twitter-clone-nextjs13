@@ -1,13 +1,14 @@
 "use client";
-
 import { useState, createContext, useContext } from "react";
+
 import type { ReactNode } from "react";
+import type { RequireData } from "../types/requireData";
 
 type RequireDataContext = {
-  setRequireData: React.Dispatch<React.SetStateAction<boolean>>;
+  setRequireData: React.Dispatch<React.SetStateAction<RequireData>>;
   setIsLogging: React.Dispatch<React.SetStateAction<boolean>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  requireData: boolean;
+  requireData: RequireData;
   isLogging: boolean;
   loading: boolean;
 };
@@ -23,7 +24,7 @@ type RequireDataProviderProps = {
 export function RequireDataProvider({
   children,
 }: RequireDataProviderProps): JSX.Element {
-  const [requireData, setRequireData] = useState<boolean>(false);
+  const [requireData, setRequireData] = useState<RequireData>(null);
   const [isLogging, setIsLogging] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 

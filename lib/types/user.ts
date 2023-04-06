@@ -26,9 +26,9 @@ export type User = {
   totalPhotos: number;
   pinnedTweet: string | null;
   coverPhotoURL: string | null;
+  newUser: boolean;
   birthdate: Birthdate;
   customizeExperience: boolean | null;
-  newUser: boolean;
 };
 
 export type EditableData = Extract<

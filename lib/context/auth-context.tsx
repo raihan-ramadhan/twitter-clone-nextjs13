@@ -1,9 +1,11 @@
 "use client";
-import { useState, useContext, createContext, useMemo, useEffect } from "react";
-import { getRandomId, getRandomInt } from "@/lib/random";
-import { isBirtdateCorrect } from "../utils";
-import { useRequireData } from "./require-data-context";
 import { auth } from "../firebase/app";
+import { useRequireData } from "./require-data-context";
+import { isBirtdateCorrect } from "../utils";
+import { getRandomId, getRandomInt } from "@/lib/random";
+import { mainRequireData, secondaryRequireData } from "../data/requireData";
+import { useState, useContext, createContext, useMemo, useEffect } from "react";
+
 import {
   signOut as signOutFirebase,
   onAuthStateChanged,
@@ -27,12 +29,12 @@ import {
   updateUserNewUser,
 } from "../firebase/utils";
 
-import type { WithFieldValue } from "firebase/firestore";
-import type { User as AuthUser } from "firebase/auth";
-import type { Bookmark } from "@/lib/types/bookmark";
-import type { Stats } from "@/lib/types/stats";
 import type { User } from "@/lib/types/user";
+import type { Stats } from "@/lib/types/stats";
+import type { Bookmark } from "@/lib/types/bookmark";
 import type { ReactNode } from "react";
+import type { User as AuthUser } from "firebase/auth";
+import type { WithFieldValue } from "firebase/firestore";
 
 type AuthContext = {
   user: User | null;
@@ -105,9 +107,9 @@ export function AuthContextProvider({
           totalPhotos: 0,
           pinnedTweet: null,
           coverPhotoURL: null,
+          newUser: true,
           birthdate: { month: 0, date: 0, year: 0 },
           customizeExperience: null,
-          newUser: true,
         };
 
         const userStatsData: WithFieldValue<Stats> = {
@@ -127,10 +129,10 @@ export function AuthContextProvider({
           const requireBirtdate = isBirtdateCorrect(newUser as User);
           if (requireBirtdate) {
             setUser(newUser as User);
-            setRequireData(false);
+            setRequireData(null);
             setIsLogging(false);
           } else {
-            setRequireData(true);
+            setRequireData([...mainRequireData, ...secondaryRequireData]);
           }
           setLoadingRequireData(false);
         } catch (error) {
@@ -142,12 +144,13 @@ export function AuthContextProvider({
         const userData = userSnapshot.data();
 
         const requireBirtdate = isBirtdateCorrect(userData);
+        // add condition customizeExperience
         if (requireBirtdate) {
           setUser(userData);
-          setRequireData(true);
+          setRequireData(null);
           setIsLogging(false);
         } else {
-          setRequireData(true);
+          setRequireData([...mainRequireData]);
         }
         setLoadingRequireData(false);
       }
