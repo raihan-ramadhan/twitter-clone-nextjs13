@@ -55,6 +55,17 @@ export async function updateUserData(
   });
 }
 
+export async function updateUserBirthdate(
+  userId: string,
+  userBirthdate: Birthdate
+): Promise<void> {
+  const userRef = doc(usersCollection, userId);
+  await updateDoc(userRef, {
+    birthdate: userBirthdate,
+    updatedAt: serverTimestamp(),
+  });
+}
+
 export async function updateUserTheme(
   userId: string,
   themeData: { theme?: Theme; accent?: Accent }

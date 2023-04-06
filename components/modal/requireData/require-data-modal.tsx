@@ -28,7 +28,6 @@ export const RequireDataModal = (props: RequireDataModalProps): JSX.Element => {
 
   const nextSlide = async (): Promise<void> => {
     console.log("CLICKED");
-
     if (requireData !== null) {
       if (count < requireData.length - 1) {
         setCount(count + 1);

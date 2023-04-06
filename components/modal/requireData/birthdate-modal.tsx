@@ -1,12 +1,17 @@
 "use client";
+import { auth } from "@/lib/firebase/app";
 import { Select } from "../../form/select";
+import { useState } from "react";
 import { Paragraph } from "../../form/paragaph";
 import { useEffect } from "react";
 import { TitleForm } from "../../form/title-form";
 import { ButtonHighlight } from "../../form/buttons-form";
 import { useFormBirthdate } from "@/lib/hooks/useFormBirthdate";
+import { updateUserBirthdate } from "@/lib/firebase/utils";
+import { onAuthStateChanged } from "firebase/auth";
+import { useRequireData } from "@/lib/context/require-data-context";
 
-type BirthdateModalProps = { nextSlide: () => void };
+type BirthdateModalProps = { nextSlide: () => Promise<void> };
 
 export const BirthdateModal = (props: BirthdateModalProps): JSX.Element => {
   const { nextSlide } = props;
@@ -19,6 +24,8 @@ export const BirthdateModal = (props: BirthdateModalProps): JSX.Element => {
     handleChange,
     setBirthdate,
   } = useFormBirthdate();
+  const [loading, setLoading] = useState<boolean>(false);
+  const { setError } = useRequireData();
 
   useEffect(() => {
     // make correction date if date not exist when change month and year
@@ -35,17 +42,24 @@ export const BirthdateModal = (props: BirthdateModalProps): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [birthdate.month, birthdate.year]);
 
-  const chageBirthdate = async (): Promise<void> => {
-    // await changeBirthdateFirebaseSDK()
-    try {
-      nextSlide();
-    } catch (error) {}
+  const changeBirthdate = () => {
+    onAuthStateChanged(auth, async (user) => {
+      try {
+        if (user) {
+          const uid = user.uid;
+          setLoading(true);
+          await updateUserBirthdate(uid, birthdate);
+          setLoading(false);
+          await nextSlide();
+        }
+      } catch (error) {
+        setError(true);
+      }
+    });
   };
 
-  console.log(birthdate);
-
   return (
-    <div className="py-14 px-5 w-full max-w-md mx-auto flex flex-col relative h-[650px] xs:h-full top-1/2 -translate-y-1/2 justify-between border border-red-500">
+    <div className="py-14 px-5 w-full max-w-md mx-auto flex flex-col relative h-[650px] xs:h-full top-1/2 -translate-y-1/2 justify-between">
       <div className="w-full space-y-6">
         <div className="flex flex-col">
           <TitleForm title={"What's your birth date"} />
@@ -77,7 +91,8 @@ export const BirthdateModal = (props: BirthdateModalProps): JSX.Element => {
         </div>
       </div>
       <ButtonHighlight
-        callback={chageBirthdate}
+        loading={loading}
+        callback={changeBirthdate}
         text="Next"
         className="!py-3 !text-lg"
       />

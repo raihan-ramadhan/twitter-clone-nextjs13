@@ -6,6 +6,7 @@ type ButtonFormProps = {
   text: string;
   callback?: (() => Promise<void>) | (() => void);
   className?: string;
+  loading?: boolean | undefined;
 };
 
 type ProviderProps = ButtonFormProps & {
@@ -55,10 +56,12 @@ export const ButtonHighlight = ({
   text,
   callback,
   className,
+  loading,
 }: ButtonFormProps): JSX.Element => {
   return (
     <>
       <Button
+        loading={loading}
         onClick={() => {
           if (typeof callback === "function") callback();
         }}
