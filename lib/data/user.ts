@@ -1,4 +1,4 @@
-const languages = [
+export const languages = [
   "English",
   "Spanish",
   "French",
@@ -30,7 +30,7 @@ const languages = [
   "Urdu",
 ] as const;
 
-const topics = [
+export const topicsAndSub = [
   {
     topic: "arts & culture",
     sub: [
@@ -279,3 +279,5 @@ const topics = [
     ],
   },
 ] as const;
+
+export const topics = topicsAndSub.map(({ topic }) => topic);

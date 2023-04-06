@@ -1,5 +1,5 @@
 import type { SyntheticEvent } from "react";
-import type { User } from "./types/user";
+import type { Birthdate } from "./types/user";
 
 export function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -17,8 +17,7 @@ export function preventBubbling(
   };
 }
 
-export const isBirtdateCorrect = (userBirtDate: User): boolean => {
-  const { birthdate } = userBirtDate;
-  const { month, date, year } = birthdate;
+export const isBirtdateCorrect = (userBirtDate: Birthdate): boolean => {
+  const { month, date, year } = userBirtDate;
   return !(month === 0 || date === 0 || year === 0);
 };

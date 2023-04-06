@@ -6,6 +6,6 @@ export const secondaryRequireData = [
   "languages",
   "topics",
   "subTopics",
-  "followPerson",
+  "following",
   "lists",
 ] as const;

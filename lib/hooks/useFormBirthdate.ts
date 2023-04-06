@@ -8,14 +8,14 @@ type formBirthdate = {
   days: number[];
   years: number[];
   months: Month[];
-  formData: Birthdate;
-  handleChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  birthdate: Birthdate;
   daysInMonth: (month: number, year: number) => number;
-  setFormData: React.Dispatch<React.SetStateAction<Birthdate>>;
+  handleChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  setBirthdate: React.Dispatch<React.SetStateAction<Birthdate>>;
 };
 
 export const useFormBirthdate = (): formBirthdate => {
-  const [formData, setFormData] = useState<Birthdate>({
+  const [birthdate, setBirthdate] = useState<Birthdate>({
     month: 0,
     date: 0,
     year: 0,
@@ -39,8 +39,8 @@ export const useFormBirthdate = (): formBirthdate => {
     return new Date(year, month, 0).getDate();
   };
 
-  const getDaysOptions = (formData: Birthdate) => {
-    const { month, year } = formData;
+  const getDaysOptions = (birthdate: Birthdate) => {
+    const { month, year } = birthdate;
     const daysInSelectedMonth = daysInMonth(month, year);
     const options = [] as number[];
 
@@ -51,7 +51,7 @@ export const useFormBirthdate = (): formBirthdate => {
     return options;
   };
 
-  const days: number[] = getDaysOptions(formData);
+  const days: number[] = getDaysOptions(birthdate);
 
   const years: number[] = [];
   const currentYear = new Date().getFullYear();
@@ -59,7 +59,7 @@ export const useFormBirthdate = (): formBirthdate => {
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({
+    setBirthdate((prevFormData) => ({
       ...prevFormData,
       [name]: parseInt(value, 10),
     }));
@@ -69,9 +69,9 @@ export const useFormBirthdate = (): formBirthdate => {
     days,
     years,
     months,
-    formData,
-    setFormData,
-    handleChange,
+    birthdate,
     daysInMonth,
+    handleChange,
+    setBirthdate,
   };
 };

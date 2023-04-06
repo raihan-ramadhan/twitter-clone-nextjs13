@@ -1,3 +1,5 @@
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { db, storage } from "./app";
 import {
   doc,
   query,
@@ -14,19 +16,17 @@ import {
   serverTimestamp,
   getCountFromServer,
 } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { db, storage } from "./app";
 import {
   usersCollection,
   tweetsCollection,
   userStatsCollection,
   userBookmarksCollection,
 } from "./collections";
-import type { WithFieldValue, Query } from "firebase/firestore";
-import type { EditableUserData } from "@/lib/types/user";
-import type { FilesWithId, ImagesPreview } from "@/lib/types/file";
 import type { Bookmark } from "@/lib/types/bookmark";
 import type { Theme, Accent } from "@/lib/types/theme";
+import type { WithFieldValue, Query } from "firebase/firestore";
+import type { FilesWithId, ImagesPreview } from "@/lib/types/file";
+import type { Birthdate, EditableUserData } from "@/lib/types/user";
 
 export async function checkUsernameAvailability(
   username: string
@@ -72,11 +72,6 @@ export async function updateUsername(
     ...(username && { username }),
     updatedAt: serverTimestamp(),
   });
-}
-
-export async function updateUserNewUser(userId: string): Promise<void> {
-  const userRef = doc(usersCollection, userId);
-  await updateDoc(userRef, { newUser: false });
 }
 
 export async function managePinnedTweet(

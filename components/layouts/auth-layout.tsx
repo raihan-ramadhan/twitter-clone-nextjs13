@@ -28,6 +28,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
     loading: loadingRequireData,
     requireData,
     isLogging,
+    error,
   } = useRequireData();
   const asPathname = usePathname();
   const router = useRouter();
@@ -68,6 +69,33 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
     setOpenSign(({ signIn, signUp }) => ({ signIn: !signIn, signUp: !signUp }));
   };
 
+  function renderComponentBasedOnCondition(): JSX.Element {
+    if (!error) {
+      if (loadingRequireData) {
+        return (
+          <div className="flex w-full h-full justify-center items-center">
+            <Loading />
+          </div>
+        );
+      } else if (openSign.signIn && !isLogging) {
+        return (
+          <LoginModal closeModal={closeModalSign} switchSign={switchSign} />
+        );
+      } else if (openSign.signUp && !isLogging) {
+        return (
+          <SignupModal closeModal={closeModalSign} switchSign={switchSign} />
+        );
+      } else if (requireData && isLogging && !loadingRequireData) {
+        return <RequireDataModal closeModal={closeModalSign} />;
+      }
+    }
+    return (
+      <div className="text-red-400 text-3xl font-bold w-full h-full flex justify-center items-center">
+        <span>ERROR</span>
+      </div>
+    );
+  }
+
   return (
     <>
       {children}
@@ -89,23 +117,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
                 iconName="TwitterIcon"
               />
             )}
-            {loadingRequireData && (
-              <div className="flex w-full h-full justify-center items-center">
-                <Loading />
-              </div>
-            )}
-            {openSign.signIn && !isLogging && (
-              <LoginModal closeModal={closeModalSign} switchSign={switchSign} />
-            )}
-            {openSign.signUp && !isLogging && (
-              <SignupModal
-                closeModal={closeModalSign}
-                switchSign={switchSign}
-              />
-            )}
-            {requireData && isLogging && !loadingRequireData && (
-              <RequireDataModal closeModal={closeModalSign} />
-            )}
+            {renderComponentBasedOnCondition()}
           </Modal>
           <div className="fixed inset-x-0 bottom-0 z-50 bg-accent-blue h-20 flex justify-center shadow-lg text-white">
             <div className="shrink-0 md:w-24 xl:w-full xl:max-w-[275px]" />

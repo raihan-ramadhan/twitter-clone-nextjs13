@@ -12,6 +12,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+
 import {
   serverTimestamp,
   onSnapshot,
@@ -19,22 +20,21 @@ import {
   setDoc,
   doc,
 } from "firebase/firestore";
+
 import {
   userBookmarksCollection,
   userStatsCollection,
   usersCollection,
 } from "@/lib/firebase/collections";
-import {
-  checkUsernameAvailability,
-  updateUserNewUser,
-} from "../firebase/utils";
 
-import type { User } from "@/lib/types/user";
+import { checkUsernameAvailability } from "../firebase/utils";
+
 import type { Stats } from "@/lib/types/stats";
 import type { Bookmark } from "@/lib/types/bookmark";
 import type { ReactNode } from "react";
-import type { User as AuthUser } from "firebase/auth";
 import type { WithFieldValue } from "firebase/firestore";
+import type { Birthdate, User } from "@/lib/types/user";
+import type { User as AuthUser } from "firebase/auth";
 
 type AuthContext = {
   user: User | null;
@@ -107,9 +107,13 @@ export function AuthContextProvider({
           totalPhotos: 0,
           pinnedTweet: null,
           coverPhotoURL: null,
-          newUser: true,
-          birthdate: { month: 0, date: 0, year: 0 },
+          birthdate: { month: 0, date: 0, year: 0 } as Birthdate,
           customizeExperience: null,
+          notifications: null,
+          languages: [],
+          topics: [],
+          subTopics: [],
+          lists: [],
         };
 
         const userStatsData: WithFieldValue<Stats> = {
@@ -124,35 +128,37 @@ export function AuthContextProvider({
             setDoc(doc(userStatsCollection(uid), "stats"), userStatsData),
           ]);
 
-          const newUser = (await getDoc(doc(usersCollection, uid))).data();
+          await getDoc(doc(usersCollection, uid));
 
-          const requireBirtdate = isBirtdateCorrect(newUser as User);
-          if (requireBirtdate) {
-            setUser(newUser as User);
-            setRequireData(null);
-            setIsLogging(false);
-          } else {
-            setRequireData([...mainRequireData, ...secondaryRequireData]);
-          }
+          setRequireData([...mainRequireData, ...secondaryRequireData]);
           setLoadingRequireData(false);
         } catch (error) {
           setError(error as Error);
         }
       } else {
-        await updateUserNewUser(uid);
+        try {
+          const userData = userSnapshot.data();
 
-        const userData = userSnapshot.data();
+          const { birthdate, customizeExperience } = userData;
 
-        const requireBirtdate = isBirtdateCorrect(userData);
-        // add condition customizeExperience
-        if (requireBirtdate) {
-          setUser(userData);
-          setRequireData(null);
-          setIsLogging(false);
-        } else {
-          setRequireData([...mainRequireData]);
+          const requireBirtdate = isBirtdateCorrect(birthdate);
+
+          if (!requireBirtdate && !customizeExperience) {
+            setRequireData([...mainRequireData]);
+          } else if (!requireBirtdate) {
+            setRequireData(["birthdate"]);
+          } else if (!customizeExperience) {
+            setRequireData(["customizeExperience"]);
+          } else {
+            setUser(userData);
+            setRequireData(null);
+            setIsLogging(false);
+          }
+
+          setLoadingRequireData(false);
+        } catch (error) {
+          setError(error as Error);
         }
-        setLoadingRequireData(false);
       }
 
       setLoading(false);
@@ -232,6 +238,8 @@ export function AuthContextProvider({
     signOut,
     signInWithGoogle,
   };
+
+  console.log(error);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

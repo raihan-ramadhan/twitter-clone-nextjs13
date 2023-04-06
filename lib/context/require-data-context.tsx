@@ -8,9 +8,11 @@ type RequireDataContext = {
   setRequireData: React.Dispatch<React.SetStateAction<RequireData>>;
   setIsLogging: React.Dispatch<React.SetStateAction<boolean>>;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setError: React.Dispatch<React.SetStateAction<boolean>>;
   requireData: RequireData;
   isLogging: boolean;
   loading: boolean;
+  error: boolean;
 };
 
 export const RequireDataContext = createContext<RequireDataContext | null>(
@@ -27,14 +29,17 @@ export function RequireDataProvider({
   const [requireData, setRequireData] = useState<RequireData>(null);
   const [isLogging, setIsLogging] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
   const value: RequireDataContext = {
     setRequireData,
     setIsLogging,
     setLoading,
+    setError,
     requireData,
     isLogging,
     loading,
+    error,
   };
 
   return (

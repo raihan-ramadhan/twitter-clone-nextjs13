@@ -10,36 +10,39 @@ type BirthdateModalProps = { nextSlide: () => void };
 
 export const BirthdateModal = (props: BirthdateModalProps): JSX.Element => {
   const { nextSlide } = props;
-
   const {
     days,
     years,
     months,
-    formData,
-    setFormData,
+    birthdate,
     daysInMonth,
     handleChange,
+    setBirthdate,
   } = useFormBirthdate();
 
   useEffect(() => {
     // make correction date if date not exist when change month and year
-    const { date, month, year } = formData;
+    const { date, month, year } = birthdate;
     const lastDaysInSelectedMonth = daysInMonth(month, year);
     // when initial value we given zero to all value so => daysInMonth(0, 0) === 31
     // because date=31 and lastDaysInSelectedMonth=0 so it's mean ignore bellow line
     if (date > lastDaysInSelectedMonth) {
-      setFormData((prevFormData) => ({
+      setBirthdate((prevFormData) => ({
         ...prevFormData,
         date: lastDaysInSelectedMonth,
       }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formData.month, formData.year]);
+  }, [birthdate.month, birthdate.year]);
 
   const chageBirthdate = async (): Promise<void> => {
     // await changeBirthdateFirebaseSDK()
-    nextSlide();
+    try {
+      nextSlide();
+    } catch (error) {}
   };
+
+  console.log(birthdate);
 
   return (
     <div className="py-14 px-5 w-full max-w-md mx-auto flex flex-col relative h-[650px] xs:h-full top-1/2 -translate-y-1/2 justify-between border border-red-500">
@@ -53,21 +56,21 @@ export const BirthdateModal = (props: BirthdateModalProps): JSX.Element => {
             name="month"
             options={months}
             placeholder={"Month"}
-            value={formData.month}
+            value={birthdate.month}
             handler={handleChange}
           />
           <Select
             name="date"
             options={days}
             placeholder={"Day"}
-            value={formData.date}
+            value={birthdate.date}
             handler={handleChange}
           />
           <Select
             name="year"
             options={years}
             placeholder={"Year"}
-            value={formData.year}
+            value={birthdate.year}
             handler={handleChange}
             classSelect="col-span-full xs:col-span-1"
           />

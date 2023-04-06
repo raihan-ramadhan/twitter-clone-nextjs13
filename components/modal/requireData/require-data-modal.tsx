@@ -9,7 +9,7 @@ import { useRequireData } from "@/lib/context/require-data-context";
 import { LanguagesModal } from "./languages-modal";
 import { SubTopicsModal } from "./subTopics-modal";
 import { NotificationsModal } from "./notifications-modal";
-import { FollowPersonModal } from "./followPerson-modal";
+import { FollowingModal } from "./following-modal";
 import { CustomizeExperienceModal } from "./customizeExperience-modal";
 
 import type {
@@ -22,7 +22,7 @@ type RequireDataModalProps = { closeModal: () => void };
 export const RequireDataModal = (props: RequireDataModalProps): JSX.Element => {
   const { closeModal } = props;
   const [count, setCount] = useState<number>(0);
-  const { requireData, setIsLogging, setLoading } = useRequireData();
+  const { requireData, setIsLogging } = useRequireData();
 
   const currentSlideName = requireData?.[count];
 
@@ -42,7 +42,7 @@ export const RequireDataModal = (props: RequireDataModalProps): JSX.Element => {
 
   function renderComponentBasedOnCase(
     caseValue: (MainRequireData | SecondaryRequireData) | undefined
-  ) {
+  ): JSX.Element {
     switch (caseValue) {
       case "birthdate":
         return <BirthdateModal nextSlide={nextSlide} />;
@@ -58,8 +58,8 @@ export const RequireDataModal = (props: RequireDataModalProps): JSX.Element => {
         return <TopicsModal />;
       case "subTopics":
         return <SubTopicsModal />;
-      case "followPerson":
-        return <FollowPersonModal />;
+      case "following":
+        return <FollowingModal />;
       case "lists":
         return <ListsModal />;
       default:
