@@ -66,6 +66,17 @@ export async function updateUserBirthdate(
   });
 }
 
+export async function updateUserCustomizeExperience(
+  userId: string,
+  userCustomizeExperience: boolean
+): Promise<void> {
+  const userRef = doc(usersCollection, userId);
+  await updateDoc(userRef, {
+    customizeExperience: userCustomizeExperience,
+    updatedAt: serverTimestamp(),
+  });
+}
+
 export async function updateUserTheme(
   userId: string,
   themeData: { theme?: Theme; accent?: Accent }

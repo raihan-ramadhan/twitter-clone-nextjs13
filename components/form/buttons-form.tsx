@@ -7,6 +7,7 @@ type ButtonFormProps = {
   callback?: (() => Promise<void>) | (() => void);
   className?: string;
   loading?: boolean | undefined;
+  disabled?: boolean;
 };
 
 type ProviderProps = ButtonFormProps & {
@@ -57,16 +58,19 @@ export const ButtonHighlight = ({
   callback,
   className,
   loading,
+  disabled,
 }: ButtonFormProps): JSX.Element => {
   return (
     <>
       <Button
+        disabled={disabled}
         loading={loading}
         onClick={() => {
           if (typeof callback === "function") callback();
         }}
         className={cn(
-          "truncate w-full font-semibold py-1 border border-light-line-reply dark:border-light-secondary text-center bg-black dark:bg-white hover:opacity-80 active:opacity-100 transition-opacity duration-200 text-white dark:text-black",
+          "truncate w-full font-semibold py-1 border border-light-line-reply dark:border-light-secondary text-center bg-black dark:bg-white  transition-opacity duration-200 text-white dark:text-black ",
+          !disabled && !loading && "hover:opacity-80 active:opacity-100",
           className
         )}
       >

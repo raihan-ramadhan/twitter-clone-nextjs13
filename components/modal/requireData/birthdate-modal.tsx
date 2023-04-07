@@ -5,15 +5,15 @@ import { useState } from "react";
 import { Paragraph } from "../../form/paragaph";
 import { useEffect } from "react";
 import { TitleForm } from "../../form/title-form";
+import { useRequireData } from "@/lib/context/require-data-context";
 import { ButtonHighlight } from "../../form/buttons-form";
 import { useFormBirthdate } from "@/lib/hooks/useFormBirthdate";
-import { updateUserBirthdate } from "@/lib/firebase/utils";
 import { onAuthStateChanged } from "firebase/auth";
-import { useRequireData } from "@/lib/context/require-data-context";
+import { ComponentModalProps } from "./require-data-modal";
+import { updateUserBirthdate } from "@/lib/firebase/utils";
+import { isBirtdateCorrect } from "@/lib/utils";
 
-type BirthdateModalProps = { nextSlide: () => Promise<void> };
-
-export const BirthdateModal = (props: BirthdateModalProps): JSX.Element => {
+export const BirthdateModal = (props: ComponentModalProps): JSX.Element => {
   const { nextSlide } = props;
   const {
     days,
@@ -58,8 +58,10 @@ export const BirthdateModal = (props: BirthdateModalProps): JSX.Element => {
     });
   };
 
+  const isBirtdateNotInCorrect = !isBirtdateCorrect(birthdate);
+
   return (
-    <div className="py-14 px-5 w-full max-w-md mx-auto flex flex-col relative h-[650px] xs:h-full top-1/2 -translate-y-1/2 justify-between">
+    <div className="py-14 px-5 w-full max-w-md mx-auto flex flex-col relative min-h-[650px] xs:h-full top-1/2 -translate-y-1/2 justify-between space-y-3">
       <div className="w-full space-y-6">
         <div className="flex flex-col">
           <TitleForm title={"What's your birth date"} />
@@ -91,6 +93,7 @@ export const BirthdateModal = (props: BirthdateModalProps): JSX.Element => {
         </div>
       </div>
       <ButtonHighlight
+        disabled={isBirtdateNotInCorrect}
         loading={loading}
         callback={changeBirthdate}
         text="Next"

@@ -19,6 +19,8 @@ import type {
 
 type RequireDataModalProps = { closeModal: () => void };
 
+export type ComponentModalProps = { nextSlide: () => Promise<void> };
+
 export const RequireDataModal = (props: RequireDataModalProps): JSX.Element => {
   const { closeModal } = props;
   const [count, setCount] = useState<number>(0);
@@ -27,7 +29,6 @@ export const RequireDataModal = (props: RequireDataModalProps): JSX.Element => {
   const currentSlideName = requireData?.[count];
 
   const nextSlide = async (): Promise<void> => {
-    console.log("CLICKED");
     if (requireData !== null) {
       if (count < requireData.length - 1) {
         setCount(count + 1);
@@ -46,7 +47,7 @@ export const RequireDataModal = (props: RequireDataModalProps): JSX.Element => {
       case "birthdate":
         return <BirthdateModal nextSlide={nextSlide} />;
       case "customizeExperience":
-        return <CustomizeExperienceModal />;
+        return <CustomizeExperienceModal nextSlide={nextSlide} />;
       case "username":
         return <UsernameModal />;
       case "notifications":
@@ -62,19 +63,9 @@ export const RequireDataModal = (props: RequireDataModalProps): JSX.Element => {
       case "lists":
         return <ListsModal />;
       default:
-        return <div>Invalid case value</div>;
+        return <div className="text-red-400">Invalid case value</div>;
     }
   }
 
-  return (
-    <>
-      <div className="absolute -top-5 flex">
-        <div>{count}</div>
-        <button type="button" onClick={nextSlide}>
-          CLICK
-        </button>
-      </div>
-      {renderComponentBasedOnCase(currentSlideName)}
-    </>
-  );
+  return <>{renderComponentBasedOnCase(currentSlideName)}</>;
 };

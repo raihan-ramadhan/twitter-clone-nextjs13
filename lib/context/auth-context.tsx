@@ -69,7 +69,6 @@ export function AuthContextProvider({
 
   useEffect(() => {
     const manageUser = async (authUser: AuthUser): Promise<void> => {
-      console.log("TEST1");
       const { uid, displayName, photoURL } = authUser;
       const userSnapshot = await getDoc(doc(usersCollection, uid));
 

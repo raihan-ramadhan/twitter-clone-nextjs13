@@ -1,6 +1,18 @@
-export const Paragraph = ({ text }: { text: string }): JSX.Element => {
+import cn from "clsx";
+export const Paragraph = ({
+  text,
+  className,
+}: {
+  text: string;
+  className?: string;
+}): JSX.Element => {
   return (
-    <p className="text-xl text-light-secondary dark:text-light-line-reply">
+    <p
+      className={cn(
+        "text-light-secondary dark:text-light-line-reply",
+        className ?? "text-xl"
+      )}
+    >
       {text}
     </p>
   );

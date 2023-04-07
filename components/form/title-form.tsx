@@ -1,7 +1,31 @@
-export const TitleForm = ({ title }: { title: string }): JSX.Element => {
+import cn from "clsx";
+export const TitleForm = ({
+  title,
+  className,
+}: {
+  title: string;
+  className?: string;
+}): JSX.Element => {
   return (
     <>
-      <h2 className="text-3xl font-semibold py-2">{title}</h2>
+      <h2 className={cn("font-semibold", className ?? "text-3xl py-2")}>
+        {title}
+      </h2>
+    </>
+  );
+};
+export const SubTitleForm = ({
+  title,
+  className,
+}: {
+  title: string;
+  className?: string;
+}): JSX.Element => {
+  return (
+    <>
+      <h2 className={cn("font-semibold", className ?? "text-xl py-2")}>
+        {title}
+      </h2>
     </>
   );
 };
