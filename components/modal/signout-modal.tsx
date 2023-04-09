@@ -1,4 +1,4 @@
-import { ButtonHighlight, ButtonSecondary } from "../form/buttons-form";
+import { ButtonHighlight, ButtonSecondary } from "../ui/form/buttons-form";
 import { CustomIcon } from "../ui/custom-icons";
 
 type SignoutProps = {

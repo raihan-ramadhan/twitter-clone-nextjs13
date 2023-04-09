@@ -1,14 +1,14 @@
-import { XForm } from "../form/x-form";
+import { XForm } from "../ui/form/x-form";
 import { useAuth } from "../../lib/context/auth-context";
-import { TitleForm } from "../form/title-form";
-import { InputForm } from "../form/input-form";
-import { SwitchForm } from "../form/switch-form";
-import { OrLineForm } from "../form/or-line-form";
+import { TitleForm } from "../ui/form/title-form";
+import { InputText } from "../ui/form/input-form";
+import { SwitchForm } from "../ui/form/switch-form";
+import { OrLineForm } from "../ui/form/or-line-form";
 import {
   ButtonHighlight,
   ButtonProvider,
   ButtonSecondary,
-} from "../form/buttons-form";
+} from "../ui/form/buttons-form";
 
 export const LoginModal = ({
   closeModal,
@@ -36,7 +36,7 @@ export const LoginModal = ({
             provider={"apple"}
           />
           <OrLineForm />
-          <InputForm placeholder="Phone,email,or username" />
+          <InputText placeholder="Phone,email,or username" required />
           <ButtonHighlight text="Next" />
           <ButtonSecondary text="Forgot password?" />
           <SwitchForm

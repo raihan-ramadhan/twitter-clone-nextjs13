@@ -1,5 +1,5 @@
-import { Button } from "../ui/button";
-import { HeroIcon } from "../ui/hero-icon";
+import { Button } from "../button";
+import { HeroIcon } from "../hero-icon";
 import type { ComponentPropsWithRef } from "react";
 
 type ButtonProps = ComponentPropsWithRef<"button"> & {

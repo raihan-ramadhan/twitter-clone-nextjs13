@@ -1,9 +1,9 @@
-import { XForm } from "../form/x-form";
+import { XForm } from "../ui/form/x-form";
 import { useAuth } from "@/lib/context/auth-context";
-import { TitleForm } from "../form/title-form";
-import { OrLineForm } from "../form/or-line-form";
-import { SwitchForm } from "../form/switch-form";
-import { ButtonHighlight, ButtonProvider } from "../form/buttons-form";
+import { TitleForm } from "../ui/form/title-form";
+import { OrLineForm } from "../ui/form/or-line-form";
+import { SwitchForm } from "../ui/form/switch-form";
+import { ButtonHighlight, ButtonProvider } from "../ui/form/buttons-form";
 
 export const SignupModal = ({
   closeModal,

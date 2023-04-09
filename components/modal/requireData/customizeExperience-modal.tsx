@@ -2,12 +2,12 @@
 import { auth } from "@/lib/firebase/app";
 import { useState } from "react";
 import { useRequireData } from "@/lib/context/require-data-context";
-import { ButtonHighlight } from "@/components/form/buttons-form";
+import { ButtonHighlight } from "@/components/ui/form/buttons-form";
 import { ComponentModalProps } from "./require-data-modal";
 import { onAuthStateChanged } from "firebase/auth";
 import { updateUserCustomizeExperience } from "@/lib/firebase/utils";
-import { SubTitleForm, TitleForm } from "@/components/form/title-form";
-import { Paragraph } from "@/components/form/paragaph";
+import { SubTitleForm, TitleForm } from "@/components/ui/form/title-form";
+import { Paragraph } from "@/components/ui/form/paragaph";
 
 export const CustomizeExperienceModal = (
   props: ComponentModalProps
@@ -55,8 +55,8 @@ export const CustomizeExperienceModal = (
             />
             <div className="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem] relative top-1">
               <input
-                className="relative float-left -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-main-accent outline-none hover:cursor-pointer dark:border-main-accent dark:checked:border-main-accent dark:checked:bg-main-accent
-                checked:border-main-accent checked:bg-main-accent checked:after:absolute checked:after:-mt-px checked:after:ml-[0.25rem] checked:after:block checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-l-0 checked:after:border-t-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:content-[''] 
+                className="relative float-left -ml-[1.5rem] mr-[6px] mt-[0.15rem] h-[1.125rem] w-[1.125rem] appearance-none rounded-[0.25rem] border-[0.125rem] border-solid border-accent-blue outline-none hover:cursor-pointer dark:border-accent-blue dark:checked:border-accent-blue dark:checked:bg-accent-blue
+                checked:border-accent-blue checked:bg-accent-blue checked:after:absolute checked:after:-mt-px checked:after:ml-[0.25rem] checked:after:block checked:after:h-[0.8125rem] checked:after:w-[0.375rem] checked:after:rotate-45 checked:after:border-[0.125rem] checked:after:border-l-0 checked:after:border-t-0 checked:after:border-solid checked:after:border-white checked:after:bg-transparent checked:after:content-[''] 
                 focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-[0.875rem] focus:after:w-[0.875rem] focus:after:rounded-[0.125rem] focus:after:content-[''] checked:focus:after:-mt-px checked:focus:after:ml-[0.25rem] checked:focus:after:h-[0.8125rem] checked:focus:after:w-[0.375rem] checked:focus:after:rotate-45 checked:focus:after:rounded-none checked:focus:after:border-[0.125rem] checked:focus:after:border-l-0 checked:focus:after:border-t-0 checked:focus:after:border-solid checked:focus:after:border-white checked:focus:after:bg-transparent "
                 type="checkbox"
                 id="checkboxNoLabel"

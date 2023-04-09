@@ -1,7 +1,7 @@
 "use client";
 import { auth } from "../firebase/app";
 import { useRequireData } from "./require-data-context";
-import { isBirtdateCorrect } from "../utils";
+import { generateStringAndNumber, isBirtdateCorrect } from "../utils";
 import { getRandomId, getRandomInt } from "@/lib/random";
 import { mainRequireData, secondaryRequireData } from "../data/requireData";
 import { useState, useContext, createContext, useMemo, useEffect } from "react";
@@ -75,11 +75,17 @@ export function AuthContextProvider({
       if (!userSnapshot.exists()) {
         let available = false;
         let randomUsername = "";
+        const maxLength = 15;
 
         while (!available) {
           const normalizeName = displayName?.replace(/\s/g, "").toLowerCase();
-          const randomInt = getRandomInt(1, 10_000);
-          randomUsername = `${normalizeName as string}${randomInt}`;
+          const randomInt = getRandomInt(1, 99999);
+
+          randomUsername = generateStringAndNumber(
+            normalizeName ?? "",
+            randomInt,
+            maxLength
+          );
 
           const usernameAvailability = await checkUsernameAvailability(
             randomUsername

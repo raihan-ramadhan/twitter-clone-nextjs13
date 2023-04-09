@@ -74,7 +74,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
       if (loadingRequireData) {
         return (
           <div className="flex w-full h-full justify-center items-center">
-            <Loading />
+            <Loading iconClassName="h-7 w-7 !text-accent-blue" />
           </div>
         );
       } else if (openSign.signIn && !isLogging) {

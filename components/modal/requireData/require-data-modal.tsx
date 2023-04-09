@@ -49,7 +49,7 @@ export const RequireDataModal = (props: RequireDataModalProps): JSX.Element => {
       case "customizeExperience":
         return <CustomizeExperienceModal nextSlide={nextSlide} />;
       case "username":
-        return <UsernameModal />;
+        return <UsernameModal nextSlide={nextSlide} />;
       case "notifications":
         return <NotificationsModal />;
       case "languages":

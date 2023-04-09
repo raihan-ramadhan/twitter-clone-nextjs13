@@ -1,12 +1,12 @@
 "use client";
 import { auth } from "@/lib/firebase/app";
-import { Select } from "../../form/select";
+import { Select } from "../../ui/form/select";
 import { useState } from "react";
-import { Paragraph } from "../../form/paragaph";
+import { Paragraph } from "../../ui/form/paragaph";
 import { useEffect } from "react";
-import { TitleForm } from "../../form/title-form";
+import { TitleForm } from "../../ui/form/title-form";
 import { useRequireData } from "@/lib/context/require-data-context";
-import { ButtonHighlight } from "../../form/buttons-form";
+import { ButtonHighlight } from "../../ui/form/buttons-form";
 import { useFormBirthdate } from "@/lib/hooks/useFormBirthdate";
 import { onAuthStateChanged } from "firebase/auth";
 import { ComponentModalProps } from "./require-data-modal";
@@ -42,7 +42,7 @@ export const BirthdateModal = (props: ComponentModalProps): JSX.Element => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [birthdate.month, birthdate.year]);
 
-  const changeBirthdate = () => {
+  const fillBirthdate = () => {
     onAuthStateChanged(auth, async (user) => {
       try {
         if (user) {
@@ -95,7 +95,7 @@ export const BirthdateModal = (props: ComponentModalProps): JSX.Element => {
       <ButtonHighlight
         disabled={isBirtdateNotInCorrect}
         loading={loading}
-        callback={changeBirthdate}
+        callback={fillBirthdate}
         text="Next"
         className="!py-3 !text-lg"
       />

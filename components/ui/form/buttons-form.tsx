@@ -1,5 +1,5 @@
-import { Button } from "../ui/button";
-import { CustomIcon } from "../ui/custom-icons";
+import { Button } from "../button";
+import { CustomIcon } from "../custom-icons";
 import cn from "clsx";
 
 type ButtonFormProps = {
