@@ -1,5 +1,5 @@
 import cn from "clsx";
-export const Paragraph = ({
+export const ParagraphModal = ({
   text,
   className,
 }: {

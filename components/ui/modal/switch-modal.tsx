@@ -4,7 +4,7 @@ type SwitchSignProps = {
   textButton: string;
 };
 
-export const SwitchForm = ({
+export const SwitchModal = ({
   switchSign,
   textP,
   textButton,

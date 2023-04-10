@@ -5,7 +5,6 @@ import { Button } from "../ui/button";
 import { useAuth } from "@/lib/context/auth-context";
 import { Loading } from "../ui/loading";
 import { useWindow } from "@/lib/context/window-context";
-import { CustomIcon } from "../ui/custom-icons";
 import { LoginModal } from "../modal/login-modal";
 import { Placeholder } from "../common/placeholder";
 import { SignupModal } from "../modal/signup-modal";
@@ -85,7 +84,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
         return (
           <SignupModal closeModal={closeModalSign} switchSign={switchSign} />
         );
-      } else if (requireData && isLogging && !loadingRequireData) {
+      } else if (!loadingRequireData && isLogging && requireData) {
         return <RequireDataModal closeModal={closeModalSign} />;
       }
     }
@@ -102,7 +101,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
       {!user && (
         <>
           <Modal
-            modalClassName="bg-main-background-1 w-full xs:max-w-xl xs:rounded-2xl xs:p-3 hover-animation h-full xs:max-h-[650px] relative"
+            modalClassName="bg-main-background-1 w-full xs:max-w-xl xs:rounded-2xl hover-animation h-full xs:h-[unset] xs:min-h-[650px] relative px-5 xs:p-3 flex justify-center items-center"
             className={cn(
               "flex items-center justify-center",
               isMobile && "!p-0"
@@ -111,12 +110,6 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
             closeModal={() => {}}
             modalAnimation={variants}
           >
-            {!loadingRequireData && (
-              <CustomIcon
-                className="w-8 h-8 text-accent-blue mx-auto absolute top-5 left-1/2 -translate-x-1/2 "
-                iconName="TwitterIcon"
-              />
-            )}
             {renderComponentBasedOnCondition()}
           </Modal>
           <div className="fixed inset-x-0 bottom-0 z-50 bg-accent-blue h-20 flex justify-center shadow-lg text-white">

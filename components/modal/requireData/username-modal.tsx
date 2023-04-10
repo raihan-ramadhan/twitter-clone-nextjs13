@@ -5,14 +5,15 @@ import { motion } from "framer-motion";
 import { Loading } from "@/components/ui/loading";
 import { HeroIcon } from "@/components/ui/hero-icon";
 import { debounce } from "lodash";
-import { InputText } from "@/components/ui/form/input-form";
-import { TitleForm } from "@/components/ui/form/title-form";
-import { Paragraph } from "@/components/ui/form/paragaph";
+import { InputText } from "@/components/ui/modal/input-modal";
+import { TitleForm } from "@/components/ui/modal/title-modal";
+import { ParagraphModal } from "@/components/ui/modal/paragaph-modal";
+import { CustomIcon } from "@/components/ui/custom-icons";
 import { doc, getDoc } from "firebase/firestore";
 import { getRandomInt } from "@/lib/random";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { usersCollection } from "@/lib/firebase/collections";
-import { ButtonHighlight } from "@/components/ui/form/buttons-form";
+import { ButtonHighlight } from "@/components/ui/modal/buttons-modal";
 import { onAuthStateChanged } from "firebase/auth";
 import { ComponentModalProps } from "./require-data-modal";
 import { generateStringAndNumber } from "@/lib/utils";
@@ -197,112 +198,124 @@ export const UsernameModal = (props: ComponentModalProps): JSX.Element => {
   };
 
   return (
-    <div className="py-14 px-5 w-full max-w-md mx-auto flex flex-col relative min-h-[650px] xs:h-full top-1/2 -translate-y-1/2 justify-between space-y-3">
-      <div className="flex flex-col w-full gap-6 items-start">
-        <div>
-          <TitleForm title={"What should we call you?"} />
-          <Paragraph
-            text={"Your @username is unique. You can always change it later."}
-            className="text-base"
-          />
-        </div>
-        <div className="relative w-full mb-5">
-          <InputText
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            classNameInput={cn(
-              "pl-7 pr-8",
-              availability && "focus:!border-accent-red !border-accent-red"
-            )}
-            disabled={loadInitial}
-          />
-          {availability && (
-            <p className="text-sm text-accent-red absolute -bottom-5 left-2">
-              {errorUsername}
-            </p>
-          )}
-
-          {loadInitial ? (
-            <>
-              <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
-                <Loading iconClassName="h-5 w-5 !text-accent-blue" />
-              </div>
-            </>
-          ) : (
-            <>
-              <span className="absolute text-light-secondary text-xl top-1/2 -translate-y-1/2 left-2 dark:text-light-line-reply pt-4">
-                @
-              </span>
-              <label
-                className={cn(
-                  "pointer-events-none text-light-secondary dark:text-light-line-reply absolute text-sm top-2 left-2 mb-0 max-w-[90%] origin-[0_0] truncate transition-all duration-200 ease-out motion-reduce:transition-none"
-                )}
-              >
-                Username
-              </label>
-
-              {!availability && (
-                <motion.div {...variants} className="absolute bottom-3 right-2">
-                  <HeroIcon
-                    iconName="CheckCircleIcon"
-                    solid
-                    className="h-5 w-5 text-accent-green"
-                  />
-                </motion.div>
-              )}
-
-              {availability && (
-                <motion.div {...variants} className="absolute bottom-3 right-2">
-                  <HeroIcon
-                    iconName="XCircleIcon"
-                    solid
-                    className="h-5 w-5 text-accent-red"
-                  />
-                </motion.div>
-              )}
-            </>
-          )}
-        </div>
-        {usernames.length != 0 && (
-          <div>
-            {usernames.map((username, index) => {
-              return (
-                <span
-                  key={username}
-                  className="span-link cursor-pointer"
-                  onClick={() => {
-                    setUsername(username);
-                    setUsernames((prev) => {
-                      const remainAvailabilityUsername = prev.filter(
-                        (name) => name !== username
-                      );
-                      return [...remainAvailabilityUsername];
-                    });
-                  }}
-                >
-                  @{username}
-                  {index !== usernames.length - 1 && ", "}
-                </span>
-              );
-            })}
-          </div>
-        )}
-
-        <a
-          className="span-link inline"
-          target="_blank"
-          href="https://help.twitter.com/en/managing-your-account/help-with-common-username-issues"
-        >
-          Show More
-        </a>
-      </div>
-      <ButtonHighlight
-        disabled={availability}
-        loading={loading || loadInitial}
-        callback={fillUsername}
-        text="Next"
-        className="!py-3 !text-lg"
+    <>
+      <CustomIcon
+        className="w-8 h-8 text-accent-blue mx-auto absolute top-5 left-1/2 -translate-x-1/2 "
+        iconName="TwitterIcon"
       />
-    </div>
+      <div className="py-14 px-5 xs:px-14 w-full min-h-[624px] flex flex-col justify-between gap-3">
+        <div className="flex flex-col w-full gap-6 items-start">
+          <div>
+            <TitleForm title={"What should we call you?"} />
+            <ParagraphModal
+              text={"Your @username is unique. You can always change it later."}
+              className="text-base"
+            />
+          </div>
+          <div className="relative w-full mb-5">
+            <InputText
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              classNameInput={cn(
+                "pl-7 pr-8",
+                availability && "focus:!border-accent-red !border-accent-red"
+              )}
+              disabled={loadInitial}
+            />
+            {availability && (
+              <p className="text-sm text-accent-red absolute -bottom-5 left-2">
+                {errorUsername}
+              </p>
+            )}
+
+            {loadInitial ? (
+              <>
+                <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2">
+                  <Loading iconClassName="h-5 w-5 !text-accent-blue" />
+                </div>
+              </>
+            ) : (
+              <>
+                <span className="absolute text-light-secondary text-xl top-1/2 -translate-y-1/2 left-2 dark:text-light-line-reply pt-4">
+                  @
+                </span>
+                <label
+                  className={cn(
+                    "pointer-events-none text-light-secondary dark:text-light-line-reply absolute text-sm top-2 left-2 mb-0 max-w-[90%] origin-[0_0] truncate transition-all duration-200 ease-out motion-reduce:transition-none"
+                  )}
+                >
+                  Username
+                </label>
+
+                {!availability && (
+                  <motion.div
+                    {...variants}
+                    className="absolute bottom-3 right-2"
+                  >
+                    <HeroIcon
+                      iconName="CheckCircleIcon"
+                      solid
+                      className="h-5 w-5 text-accent-green"
+                    />
+                  </motion.div>
+                )}
+
+                {availability && (
+                  <motion.div
+                    {...variants}
+                    className="absolute bottom-3 right-2"
+                  >
+                    <HeroIcon
+                      iconName="XCircleIcon"
+                      solid
+                      className="h-5 w-5 text-accent-red"
+                    />
+                  </motion.div>
+                )}
+              </>
+            )}
+          </div>
+          {usernames.length != 0 && (
+            <div>
+              {usernames.map((username, index) => {
+                return (
+                  <span
+                    key={username}
+                    className="span-link cursor-pointer"
+                    onClick={() => {
+                      setUsername(username);
+                      setUsernames((prev) => {
+                        const remainAvailabilityUsername = prev.filter(
+                          (name) => name !== username
+                        );
+                        return [...remainAvailabilityUsername];
+                      });
+                    }}
+                  >
+                    @{username}
+                    {index !== usernames.length - 1 && ", "}
+                  </span>
+                );
+              })}
+            </div>
+          )}
+
+          <a
+            className="span-link inline"
+            target="_blank"
+            href="https://help.twitter.com/en/managing-your-account/help-with-common-username-issues"
+          >
+            Show More
+          </a>
+        </div>
+        <ButtonHighlight
+          disabled={availability}
+          loading={loading || loadInitial}
+          callback={fillUsername}
+          text="Next"
+          className="py-3 text-lg"
+        />
+      </div>
+    </>
   );
 };

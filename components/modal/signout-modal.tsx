@@ -1,4 +1,4 @@
-import { ButtonHighlight, ButtonSecondary } from "../ui/form/buttons-form";
+import { ButtonHighlight, ButtonSecondary } from "../ui/modal/buttons-modal";
 import { CustomIcon } from "../ui/custom-icons";
 
 type SignoutProps = {
@@ -23,12 +23,12 @@ export const SignoutModal = ({
       <ButtonHighlight
         callback={signOut}
         text="Log Out"
-        className="!py-3 !text-lg"
+        className="py-3 text-lg"
       />
       <ButtonSecondary
         callback={closeModal}
         text="Cancel"
-        className="!py-3 !text-lg"
+        className="py-3 text-lg"
       />
     </div>
   );

@@ -1,14 +1,15 @@
-import { XForm } from "../ui/form/x-form";
+import { XModal } from "../ui/modal/x-modal";
 import { useAuth } from "../../lib/context/auth-context";
-import { TitleForm } from "../ui/form/title-form";
-import { InputText } from "../ui/form/input-form";
-import { SwitchForm } from "../ui/form/switch-form";
-import { OrLineForm } from "../ui/form/or-line-form";
+import { InputText } from "../ui/modal/input-modal";
+import { TitleForm } from "../ui/modal/title-modal";
+import { CustomIcon } from "../ui/custom-icons";
+import { SwitchModal } from "../ui/modal/switch-modal";
+import { OrLineModal } from "../ui/modal/or-line-modal";
 import {
   ButtonHighlight,
   ButtonProvider,
   ButtonSecondary,
-} from "../ui/form/buttons-form";
+} from "../ui/modal/buttons-modal";
 
 export const LoginModal = ({
   closeModal,
@@ -21,30 +22,32 @@ export const LoginModal = ({
 
   return (
     <>
-      <div className="w-full h-full flex flex-col justify-center items-center relative p-5 py-14">
-        <XForm closeModal={closeModal} />
-        <form className="w-full max-w-xs mx-auto space-y-6 ">
-          <TitleForm title={"Sign in to Twitter"} />
-          <ButtonProvider
-            callback={signInWithGoogle}
-            text="Sign in with Google"
-            provider={"google"}
-          />
-          <ButtonProvider
-            callback={() => alert("Coming Soon")}
-            text="Sign in with Apple"
-            provider={"apple"}
-          />
-          <OrLineForm />
-          <InputText placeholder="Phone,email,or username" required />
-          <ButtonHighlight text="Next" />
-          <ButtonSecondary text="Forgot password?" />
-          <SwitchForm
-            switchSign={switchSign}
-            textP="Don't have an account?"
-            textButton="Sign up"
-          />
-        </form>
+      <CustomIcon
+        className="w-8 h-8 text-accent-blue mx-auto absolute top-5 left-1/2 -translate-x-1/2 "
+        iconName="TwitterIcon"
+      />
+      <XModal closeModal={closeModal} />
+      <div className="w-full max-w-xs mx-auto min-h-[500px] space-y-6">
+        <TitleForm title={"Sign in to Twitter"} />
+        <ButtonProvider
+          callback={signInWithGoogle}
+          text="Sign in with Google"
+          provider={"google"}
+        />
+        <ButtonProvider
+          callback={() => alert("Coming Soon")}
+          text="Sign in with Apple"
+          provider={"apple"}
+        />
+        <OrLineModal />
+        <InputText placeholder="Phone,email,or username" required />
+        <ButtonHighlight text="Next" />
+        <ButtonSecondary text="Forgot password?" />
+        <SwitchModal
+          switchSign={switchSign}
+          textP="Don't have an account?"
+          textButton="Sign up"
+        />
       </div>
     </>
   );

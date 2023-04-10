@@ -1,6 +1,6 @@
+import cn from "clsx";
 import { Button } from "../button";
 import { CustomIcon } from "../custom-icons";
-import cn from "clsx";
 
 type ButtonFormProps = {
   text: string;
@@ -69,9 +69,9 @@ export const ButtonHighlight = ({
           if (typeof callback === "function") callback();
         }}
         className={cn(
-          "truncate w-full font-semibold py-1 border border-light-line-reply dark:border-light-secondary text-center bg-black dark:bg-white  transition-opacity duration-200 text-white dark:text-black ",
+          "truncate w-full font-semibold border border-light-line-reply dark:border-light-secondary text-center bg-black dark:bg-white  transition-opacity duration-200 text-white dark:text-black",
           !disabled && !loading && "hover:opacity-80 active:opacity-100",
-          className
+          className ?? "py-1"
         )}
       >
         {text}
@@ -92,8 +92,8 @@ export const ButtonSecondary = ({
           if (typeof callback === "function") callback();
         }}
         className={cn(
-          "truncate w-full hover:bg-main-background-3/50 active:bg-transparent font-semibold py-1 border border-light-line-reply dark:border-light-secondary text-center",
-          className
+          "truncate w-full hover:bg-main-background-3/50 active:bg-transparent font-semibold border border-light-line-reply dark:border-light-secondary text-center",
+          className ?? "py-1"
         )}
       >
         {text}

@@ -14,7 +14,7 @@ export const TitleForm = ({
     </>
   );
 };
-export const SubTitleForm = ({
+export const SubTitleModal = ({
   title,
   className,
 }: {

@@ -1,12 +1,13 @@
 "use client";
 import { auth } from "@/lib/firebase/app";
-import { Select } from "../../ui/form/select";
+import { Select } from "../../ui/modal/select-modal";
 import { useState } from "react";
-import { Paragraph } from "../../ui/form/paragaph";
+import { ParagraphModal } from "../../ui/modal/paragaph-modal";
 import { useEffect } from "react";
-import { TitleForm } from "../../ui/form/title-form";
+import { TitleForm } from "../../ui/modal/title-modal";
+import { CustomIcon } from "@/components/ui/custom-icons";
 import { useRequireData } from "@/lib/context/require-data-context";
-import { ButtonHighlight } from "../../ui/form/buttons-form";
+import { ButtonHighlight } from "../../ui/modal/buttons-modal";
 import { useFormBirthdate } from "@/lib/hooks/useFormBirthdate";
 import { onAuthStateChanged } from "firebase/auth";
 import { ComponentModalProps } from "./require-data-modal";
@@ -61,44 +62,50 @@ export const BirthdateModal = (props: ComponentModalProps): JSX.Element => {
   const isBirtdateNotInCorrect = !isBirtdateCorrect(birthdate);
 
   return (
-    <div className="py-14 px-5 w-full max-w-md mx-auto flex flex-col relative min-h-[650px] xs:h-full top-1/2 -translate-y-1/2 justify-between space-y-3">
-      <div className="w-full space-y-6">
-        <div className="flex flex-col">
-          <TitleForm title={"What's your birth date"} />
-          <Paragraph text={"This wont be public"} />
-        </div>
-        <div className="grid grid-cols-2 xs:grid-cols-3 gap-5 ">
-          <Select
-            name="month"
-            options={months}
-            placeholder={"Month"}
-            value={birthdate.month}
-            handler={handleChange}
-          />
-          <Select
-            name="date"
-            options={days}
-            placeholder={"Day"}
-            value={birthdate.date}
-            handler={handleChange}
-          />
-          <Select
-            name="year"
-            options={years}
-            placeholder={"Year"}
-            value={birthdate.year}
-            handler={handleChange}
-            classSelect="col-span-full xs:col-span-1"
-          />
-        </div>
-      </div>
-      <ButtonHighlight
-        disabled={isBirtdateNotInCorrect}
-        loading={loading}
-        callback={fillBirthdate}
-        text="Next"
-        className="!py-3 !text-lg"
+    <>
+      <CustomIcon
+        className="w-8 h-8 text-accent-blue mx-auto absolute top-5 left-1/2 -translate-x-1/2 "
+        iconName="TwitterIcon"
       />
-    </div>
+      <div className="py-14 px-5 xs:px-14 w-full min-h-[624px] flex flex-col justify-between gap-3">
+        <div className="w-full space-y-6">
+          <div className="flex flex-col">
+            <TitleForm title={"What's your birth date"} />
+            <ParagraphModal text={"This wont be public"} />
+          </div>
+          <div className="grid grid-cols-2 xs:grid-cols-3 gap-5 ">
+            <Select
+              name="month"
+              options={months}
+              placeholder={"Month"}
+              value={birthdate.month}
+              handler={handleChange}
+            />
+            <Select
+              name="date"
+              options={days}
+              placeholder={"Day"}
+              value={birthdate.date}
+              handler={handleChange}
+            />
+            <Select
+              name="year"
+              options={years}
+              placeholder={"Year"}
+              value={birthdate.year}
+              handler={handleChange}
+              classSelect="col-span-full xs:col-span-1"
+            />
+          </div>
+        </div>
+        <ButtonHighlight
+          disabled={isBirtdateNotInCorrect}
+          loading={loading}
+          callback={fillBirthdate}
+          text="Next"
+          className="py-3 text-lg"
+        />
+      </div>
+    </>
   );
 };

@@ -1,4 +1,4 @@
-export const OrLineForm = (): JSX.Element => {
+export const OrLineModal = (): JSX.Element => {
   return (
     <>
       <div className="relative">
