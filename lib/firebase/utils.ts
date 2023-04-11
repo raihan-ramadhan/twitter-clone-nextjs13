@@ -76,6 +76,16 @@ export async function updateUserCustomizeExperience(
     updatedAt: serverTimestamp(),
   });
 }
+export async function updateUserNotifications(
+  userId: string,
+  userNotifications: boolean
+): Promise<void> {
+  const userRef = doc(usersCollection, userId);
+  await updateDoc(userRef, {
+    notifications: userNotifications,
+    updatedAt: serverTimestamp(),
+  });
+}
 
 export async function updateUserTheme(
   userId: string,

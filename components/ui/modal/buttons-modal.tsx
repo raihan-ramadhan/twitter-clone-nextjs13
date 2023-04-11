@@ -84,10 +84,12 @@ export const ButtonSecondary = ({
   text,
   callback,
   className,
+  loading,
 }: ButtonFormProps): JSX.Element => {
   return (
     <>
       <Button
+        loading={loading}
         onClick={() => {
           if (typeof callback === "function") callback();
         }}
