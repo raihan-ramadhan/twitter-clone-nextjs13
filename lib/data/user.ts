@@ -1,5 +1,7 @@
 export const languages = [
+  "Dutch - Nederlands",
   "English",
+  "Malay - Melayu",
   "Spanish",
   "French",
   "German",
@@ -13,7 +15,6 @@ export const languages = [
   "Hindi",
   "Bengali",
   "Swahili",
-  "Dutch",
   "Turkish",
   "Polish",
   "Swedish",
@@ -21,7 +22,6 @@ export const languages = [
   "Finnish",
   "Danish",
   "Indonesian",
-  "Malay",
   "Thai",
   "Vietnamese",
   "Tagalog",

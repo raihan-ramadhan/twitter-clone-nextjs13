@@ -26,7 +26,7 @@ import type { Bookmark } from "@/lib/types/bookmark";
 import type { Theme, Accent } from "@/lib/types/theme";
 import type { WithFieldValue, Query } from "firebase/firestore";
 import type { FilesWithId, ImagesPreview } from "@/lib/types/file";
-import type { Birthdate, EditableUserData } from "@/lib/types/user";
+import type { Birthdate, EditableUserData, Languages } from "@/lib/types/user";
 
 export async function checkUsernameAvailability(
   username: string
@@ -83,6 +83,17 @@ export async function updateUserNotifications(
   const userRef = doc(usersCollection, userId);
   await updateDoc(userRef, {
     notifications: userNotifications,
+    updatedAt: serverTimestamp(),
+  });
+}
+
+export async function updateUserLanguages(
+  userId: string,
+  updateUserLanguages: Languages[]
+): Promise<void> {
+  const userRef = doc(usersCollection, userId);
+  await updateDoc(userRef, {
+    languages: updateUserLanguages,
     updatedAt: serverTimestamp(),
   });
 }

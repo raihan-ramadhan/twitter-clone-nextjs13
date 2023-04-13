@@ -1,12 +1,15 @@
+import { languages, topics, topicsAndSub } from "../data/user";
+
 import type { Theme, Accent } from "./theme";
 import type { Timestamp, FirestoreDataConverter } from "firebase/firestore";
-import { languages, topics, topicsAndSub } from "../data/user";
 
 export type Birthdate = {
   month: number;
   date: number;
   year: number;
 };
+
+export type Languages = typeof languages[number];
 
 export type User = {
   id: string;
@@ -30,7 +33,7 @@ export type User = {
   birthdate: Birthdate;
   customizeExperience: boolean | null;
   notifications: boolean | null;
-  languages: typeof languages[number][];
+  languages: Languages[];
   topics: typeof topics[number][];
   subTopics: typeof topicsAndSub[number][];
   lists: string[];
