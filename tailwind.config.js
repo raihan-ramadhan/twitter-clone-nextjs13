@@ -7,7 +7,7 @@ module.exports = {
   content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   theme: {
     screens: {
-      xs: "550px",
+      xs: "500px",
       ...defaultTheme.screens,
     },
     extend: {
