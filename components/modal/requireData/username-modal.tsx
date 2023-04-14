@@ -5,12 +5,12 @@ import { motion } from "framer-motion";
 import { Loading } from "@/components/ui/loading";
 import { HeroIcon } from "@/components/ui/hero-icon";
 import { debounce } from "lodash";
-import { InputText } from "@/components/ui/modal/input-modal";
+import { InputText } from "@/components/ui/input";
 import { TitleForm } from "@/components/ui/modal/title-modal";
-import { ParagraphModal } from "@/components/ui/modal/paragaph-modal";
 import { CustomIcon } from "@/components/ui/custom-icons";
 import { doc, getDoc } from "firebase/firestore";
 import { getRandomInt } from "@/lib/random";
+import { ParagraphModal } from "@/components/ui/modal/paragaph-modal";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { usersCollection } from "@/lib/firebase/collections";
 import { ButtonHighlight } from "@/components/ui/modal/buttons-modal";
@@ -214,9 +214,10 @@ export const UsernameModal = (props: ComponentModalProps): JSX.Element => {
           </div>
           <div className="relative w-full mb-5">
             <InputText
+              id="inputTextUsername"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              classNameInput={cn(
+              className={cn(
                 "pl-7 pr-8",
                 availability && "focus:!border-accent-red !border-accent-red"
               )}

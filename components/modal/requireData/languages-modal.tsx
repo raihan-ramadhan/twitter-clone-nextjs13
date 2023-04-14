@@ -4,7 +4,7 @@ import { useState } from "react";
 import { TitleForm } from "@/components/ui/modal/title-modal";
 import { languages } from "@/lib/data/user";
 import { CustomIcon } from "@/components/ui/custom-icons";
-import { Checkbox } from "@/components/ui/checkbox";
+import { InputCheckbox } from "@/components/ui/input";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { ParagraphModal } from "@/components/ui/modal/paragaph-modal";
 import { ButtonHighlight } from "@/components/ui/modal/buttons-modal";
@@ -45,7 +45,10 @@ export const LanguagesModal = (props: ComponentModalProps): JSX.Element => {
     }
   };
 
-  const handleCheckboxChange = (languageInput: Languages, checked: boolean) => {
+  const handleInputCheckboxChange = (
+    languageInput: Languages,
+    checked: boolean
+  ) => {
     if (checked) {
       setLanguagesChecked([...languagesChecked, languageInput]);
     } else {
@@ -89,10 +92,10 @@ export const LanguagesModal = (props: ComponentModalProps): JSX.Element => {
                   className="border-b flex justify-between items-center w-full h-[50px] text-lg cursor-pointer text-light-secondary dark:text-light-line-reply overflow-x-visible pr-2 group"
                 >
                   <span>{language}</span>
-                  <Checkbox
+                  <InputCheckbox
                     checked={languagesChecked.includes(language)}
                     onChange={(event) => {
-                      handleCheckboxChange(language, event.target.checked);
+                      handleInputCheckboxChange(language, event.target.checked);
                     }}
                     beforeClassName="scale-[1.75] group-hover:bg-dark-line-reply/10 peer-focus:bg-dark-line-reply/10 dark:group-hover:bg-accent-blue/5 dark:peer-focus:bg-accent-blue/5 peer-checked:bg-transparent"
                   />

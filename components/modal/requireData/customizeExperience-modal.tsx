@@ -1,8 +1,8 @@
 "use client";
 import { auth } from "@/lib/firebase/app";
-import { Checkbox } from "@/components/ui/checkbox";
 import { useState } from "react";
 import { CustomIcon } from "@/components/ui/custom-icons";
+import { InputCheckbox } from "@/components/ui/input";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { ButtonHighlight } from "@/components/ui/modal/buttons-modal";
 import { ComponentModalProps } from "./require-data-modal";
@@ -60,7 +60,7 @@ export const CustomizeExperienceModal = (
                 }
                 className="text-sm flex-1"
               />
-              <Checkbox
+              <InputCheckbox
                 checked={customizeExperience}
                 onChange={() => setCustomizeExperience(!customizeExperience)}
               />

@@ -1,6 +1,6 @@
 import { XModal } from "../ui/modal/x-modal";
 import { useAuth } from "../../lib/context/auth-context";
-import { InputText } from "../ui/modal/input-modal";
+import { InputText } from "../ui/input";
 import { TitleForm } from "../ui/modal/title-modal";
 import { CustomIcon } from "../ui/custom-icons";
 import { SwitchModal } from "../ui/modal/switch-modal";
@@ -40,7 +40,11 @@ export const LoginModal = ({
           provider={"apple"}
         />
         <OrLineModal />
-        <InputText placeholder="Phone,email,or username" required />
+        <InputText
+          id="InputTextLogin"
+          placeholder="Phone,email,or username"
+          required
+        />
         <ButtonHighlight text="Next" />
         <ButtonSecondary text="Forgot password?" />
         <SwitchModal
