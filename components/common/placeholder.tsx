@@ -4,7 +4,7 @@ export function Placeholder(): JSX.Element {
   return (
     <main
       id="globalLoader"
-      className="flex min-h-screen items-center justify-center"
+      className="fixed inset-0 flex w-full h-full overflow-hidden items-center justify-center"
     >
       <i>
         <CustomIcon

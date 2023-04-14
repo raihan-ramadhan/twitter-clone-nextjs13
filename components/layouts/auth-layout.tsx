@@ -41,8 +41,16 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
   if ((loading && !isLogging) || (user && asPathname === "/"))
     return <Placeholder />;
 
-  const variants: Variants = !isMobile
+  const variants: Variants = isMobile
     ? {
+        initial: { opacity: 0 },
+        animate: {
+          opacity: 1,
+          transition: { duration: 0.2 },
+        },
+        exit: { opacity: 0, transition: { duration: 0.15 } },
+      }
+    : {
         initial: { opacity: 0, scale: 0.8 },
         animate: {
           opacity: 1,
@@ -50,14 +58,6 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
           transition: { type: "spring", duration: 0.5, bounce: 0.4 },
         },
         exit: { opacity: 0, scale: 0.8, transition: { duration: 0.15 } },
-      }
-    : {
-        initial: { opacity: 0 },
-        animate: {
-          opacity: 1,
-          transition: { duration: 0.2 },
-        },
-        exit: { opacity: 0, transition: { duration: 0.15 } },
       };
 
   const closeModalSign = (): void => {

@@ -53,7 +53,7 @@ export const CustomizeExperienceModal = (
               title={"Track where you see Twitter content across the web"}
               className="text-xl py-0"
             />
-            <div className="flex">
+            <div className="flex gap-3">
               <ParagraphModal
                 text={
                   "Twitter uses this data to personalize your experience. This web browsing history will never be stored with your name, email, or phone number."

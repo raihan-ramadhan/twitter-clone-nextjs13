@@ -8,7 +8,7 @@ export const TitleForm = ({
 }): JSX.Element => {
   return (
     <>
-      <h2 className={cn("font-semibold", className ?? "text-3xl py-2")}>
+      <h2 className={cn("font-semibold", className ?? "text-2xl py-2")}>
         {title}
       </h2>
     </>
