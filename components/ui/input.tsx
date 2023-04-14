@@ -55,6 +55,7 @@ export const InputCheckbox = forwardRef<
     );
   }
 );
+InputCheckbox.displayName = "MyInputCheckboxComponent";
 
 //  Cannot give type prop to this component
 type InputTextProps = Omit<ComponentPropsWithRef<"input">, "type"> & {
@@ -103,3 +104,4 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(
     );
   }
 );
+InputText.displayName = "MyInputTextComponent";
