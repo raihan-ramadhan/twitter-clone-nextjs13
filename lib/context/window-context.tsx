@@ -1,6 +1,11 @@
 "use client";
-
-import { createContext, useContext, useState, useEffect } from "react";
+import {
+  useState,
+  useContext,
+  useEffect,
+  createContext,
+  useLayoutEffect,
+} from "react";
 import type { ReactNode } from "react";
 
 type WindowSize = {
@@ -26,13 +31,19 @@ export default function WindowContextProvider({
     height: window.innerHeight,
   });
 
-  useEffect(() => {
-    const handleResize = (): void =>
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
+  const handleResize = (): void => {
+    setWindowSize({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    });
+  };
 
+  useLayoutEffect(() => {
+    // this make first value innerWidth and innerHeight in nextjs correct
+    handleResize();
+  }, []);
+
+  useEffect(() => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
