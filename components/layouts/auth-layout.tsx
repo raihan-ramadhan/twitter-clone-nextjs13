@@ -101,8 +101,11 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
       {!user && (
         <>
           <Modal
-            modalClassName="bg-main-background-1 w-full xs:max-w-xl xs:rounded-2xl hover-animation h-full xs:h-[unset] xs:min-h-[650px] relative px-5 xs:p-3 flex justify-center items-center"
-            className={cn("flex items-center justify-center !p-0")}
+            modalClassName="bg-main-background-1 w-full xs:max-w-xl xs:rounded-2xl hover-animation h-full xs:h-[unset] xs:min-h-[650px] relative flex justify-center items-center"
+            className={cn(
+              "flex items-center justify-center",
+              isMobile && "!p-0"
+            )}
             open={openSign.signIn || openSign.signUp}
             closeModal={() => {}}
             modalAnimation={variants}

@@ -7,9 +7,8 @@ import { UsernameModal } from "./username-modal";
 import { BirthdateModal } from "./birthdate-modal";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { LanguagesModal } from "./languages-modal";
-import { SubTopicsModal } from "./subTopics-modal";
-import { NotificationsModal } from "./notifications-modal";
 import { FollowingModal } from "./following-modal";
+import { NotificationsModal } from "./notifications-modal";
 import { CustomizeExperienceModal } from "./customizeExperience-modal";
 
 import type {
@@ -55,9 +54,7 @@ export const RequireDataModal = (props: RequireDataModalProps): JSX.Element => {
       case "languages":
         return <LanguagesModal nextSlide={nextSlide} />;
       case "topics":
-        return <TopicsModal />;
-      case "subTopics":
-        return <SubTopicsModal />;
+        return <TopicsModal nextSlide={nextSlide} />;
       case "following":
         return <FollowingModal />;
       case "lists":

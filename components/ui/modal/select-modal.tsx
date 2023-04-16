@@ -1,5 +1,6 @@
 import cn from "clsx";
 import { HeroIcon } from "../hero-icon";
+import { capitalizeFirstChar } from "@/lib/utils";
 
 import type { Month } from "../../../lib/types/requireData";
 import type { PropsSelect } from "../../../lib/types/requireData";
@@ -29,7 +30,7 @@ export const Select: React.FC<PropsSelect> = ({
         className="bg-main-background-1"
         value={option.value}
       >
-        {option.name.charAt(0).toUpperCase() + option.name.slice(1)}
+        {capitalizeFirstChar(option.name)}
       </option>
     );
   });

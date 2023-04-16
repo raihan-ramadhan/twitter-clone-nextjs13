@@ -82,7 +82,7 @@ export const LanguagesModal = (props: ComponentModalProps): JSX.Element => {
           <div>
             <div
               className={cn(
-                "h-full max-h-[200px] overflow-y-auto overflow-x-clip scrollbar-thumb-accent-blue scrollbar-track-main-background-3 scrollbar-thin",
+                "h-full max-h-[200px] overflow-y-auto overflow-x-clip scrollbar-w-1 scrollbar-thumb-accent-blue scrollbar-track-main-background-3 scrollbar-thin",
                 !showLanguages && "pr-3"
               )}
             >

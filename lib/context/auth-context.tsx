@@ -118,7 +118,6 @@ export function AuthContextProvider({
           notifications: null,
           languages: [],
           topics: [],
-          subTopics: [],
           lists: [],
         };
 
@@ -155,6 +154,8 @@ export function AuthContextProvider({
             setRequireData(["birthdate"]);
           } else if (!customizeExperience) {
             setRequireData(["customizeExperience"]);
+          } else if (true) {
+            setRequireData(["topics"]);
           } else {
             setUser(userData);
             setRequireData(null);

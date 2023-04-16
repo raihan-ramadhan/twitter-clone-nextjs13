@@ -1,4 +1,4 @@
-import { languages, topics, topicsAndSub } from "../data/user";
+import { languages, topics } from "../data/user";
 
 import type { Theme, Accent } from "./theme";
 import type { Timestamp, FirestoreDataConverter } from "firebase/firestore";
@@ -35,7 +35,6 @@ export type User = {
   notifications: boolean | null;
   languages: Languages[];
   topics: typeof topics[number][];
-  subTopics: typeof topicsAndSub[number][];
   lists: string[];
 };
 
