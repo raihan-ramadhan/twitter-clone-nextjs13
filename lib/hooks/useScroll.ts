@@ -1,5 +1,5 @@
 "use client";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, useCallback } from "react";
 
 export const useScroll = (): {
   scrollTop: number;
@@ -14,18 +14,17 @@ export const useScroll = (): {
   const myDivRef = useRef<HTMLDivElement>(null);
   const isScrollable = scrollHeight !== clientHeight;
 
-  const onScroll = (event: React.UIEvent<HTMLDivElement>) => {
+  const onScroll = useCallback((event: React.UIEvent<HTMLDivElement>) => {
     const { scrollTop, clientHeight, scrollHeight } = event.currentTarget;
     setScrollTop(scrollTop);
     setScrollHeight(scrollHeight);
     setClientHeight(clientHeight);
-  };
+  }, []);
 
   useLayoutEffect(() => {
     const el = myDivRef.current;
 
     if (el) {
-      console.log(el.scrollHeight);
       setScrollHeight(el.scrollHeight);
       setClientHeight(el.clientHeight);
     }

@@ -27,6 +27,10 @@ import type { Theme, Accent } from "@/lib/types/theme";
 import type { WithFieldValue, Query } from "firebase/firestore";
 import type { FilesWithId, ImagesPreview } from "@/lib/types/file";
 import type { Birthdate, EditableUserData, Languages } from "@/lib/types/user";
+import {
+  TopicsAndSubUnion,
+  TopicsProps,
+} from "@/components/modal/requireData/topicsAndSub-modal";
 
 export async function checkUsernameAvailability(
   username: string
@@ -113,6 +117,17 @@ export async function updateUsername(
   const userRef = doc(usersCollection, userId);
   await updateDoc(userRef, {
     ...(username && { username }),
+    updatedAt: serverTimestamp(),
+  });
+}
+
+export async function updateUserTopics(
+  userId: string,
+  topics: TopicsProps<TopicsAndSubUnion>
+): Promise<void> {
+  const userRef = doc(usersCollection, userId);
+  await updateDoc(userRef, {
+    topics,
     updatedAt: serverTimestamp(),
   });
 }

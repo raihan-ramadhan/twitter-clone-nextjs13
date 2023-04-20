@@ -135,7 +135,13 @@ export function AuthContextProvider({
 
           await getDoc(doc(usersCollection, uid));
 
-          setRequireData([...mainRequireData, ...secondaryRequireData]);
+          setRequireData([
+            ...mainRequireData,
+            secondaryRequireData[0],
+            secondaryRequireData[1],
+            secondaryRequireData[2],
+            secondaryRequireData[3],
+          ]);
           setLoadingRequireData(false);
         } catch (error) {
           setError(error as Error);
@@ -154,8 +160,6 @@ export function AuthContextProvider({
             setRequireData(["birthdate"]);
           } else if (!customizeExperience) {
             setRequireData(["customizeExperience"]);
-          } else if (true) {
-            setRequireData(["topics"]);
           } else {
             setUser(userData);
             setRequireData(null);

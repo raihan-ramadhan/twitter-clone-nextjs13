@@ -2,12 +2,12 @@
 import { sleep } from "@/lib/utils";
 import { useState } from "react";
 import { ListsModal } from "./lists-modal";
-import { TopicsModal } from "./topics-modal";
 import { UsernameModal } from "./username-modal";
 import { BirthdateModal } from "./birthdate-modal";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { LanguagesModal } from "./languages-modal";
 import { FollowingModal } from "./following-modal";
+import { TopicsAndSubModal } from "./topicsAndSub-modal";
 import { NotificationsModal } from "./notifications-modal";
 import { CustomizeExperienceModal } from "./customizeExperience-modal";
 
@@ -54,7 +54,7 @@ export const RequireDataModal = (props: RequireDataModalProps): JSX.Element => {
       case "languages":
         return <LanguagesModal nextSlide={nextSlide} />;
       case "topics":
-        return <TopicsModal nextSlide={nextSlide} />;
+        return <TopicsAndSubModal nextSlide={nextSlide} />;
       case "following":
         return <FollowingModal />;
       case "lists":

@@ -1,3 +1,7 @@
+import {
+  TopicsAndSubUnion,
+  TopicsProps,
+} from "@/components/modal/requireData/topicsAndSub-modal";
 import { languages, topics } from "../data/user";
 
 import type { Theme, Accent } from "./theme";
@@ -34,7 +38,7 @@ export type User = {
   customizeExperience: boolean | null;
   notifications: boolean | null;
   languages: Languages[];
-  topics: typeof topics[number][];
+  topics: TopicsProps<TopicsAndSubUnion>;
   lists: string[];
 };
 
