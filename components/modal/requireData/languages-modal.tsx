@@ -70,7 +70,7 @@ export const LanguagesModal = (props: ComponentModalProps): JSX.Element => {
         iconName="TwitterIcon"
       />
       <div className="pt-[75px] h-full xs:min-h-[inherit] w-full flex flex-col">
-        <div className="h-[calc(100%_-_100px)] xs:h-[475px] w-full relative z-0 space-y-6 px-5 xs:px-16 overflow-hidden">
+        <div className="h-[calc(100%_-_100px)] xs:h-[475px] w-full relative z-0 space-y-3 px-5 xs:px-16 overflow-hidden flex flex-col">
           <div>
             <TitleForm title={"Which languages do you speak?"} />
             <ParagraphModal
@@ -80,37 +80,35 @@ export const LanguagesModal = (props: ComponentModalProps): JSX.Element => {
               }
             />
           </div>
-          <div className="h-full">
-            <div
-              className={cn(
-                "h-[150px] overflow-y-auto scrollbar-w-1 scrollbar-thumb-accent-blue scrollbar-track-main-background-3 scrollbar-thin",
-                !showLanguages && "pr-3 !h-[calc(100%_-_175px)]"
-              )}
-            >
-              {displayedLanguages.map((language, index) => (
-                <label
-                  key={index}
-                  className="border-b flex justify-between items-center w-full h-[50px] text-lg cursor-pointer text-light-secondary dark:text-light-line-reply overflow-x-visible pr-2 group"
-                >
-                  <span>{language}</span>
-                  <InputCheckbox
-                    checked={languagesChecked.includes(language)}
-                    onChange={(event) => {
-                      handleInputCheckboxChange(language, event.target.checked);
-                    }}
-                    beforeClassName="scale-[1.75] group-hover:bg-dark-line-reply/10 peer-focus:bg-dark-line-reply/10 dark:group-hover:bg-accent-blue/5 dark:peer-focus:bg-accent-blue/5 peer-checked:bg-transparent"
-                  />
-                </label>
-              ))}
-            </div>
-            <div
-              onClick={handleToggleClick}
-              className="bg-accent-blue/[0.01] hover:bg-accent-blue/[0.05] hover-animation cursor-pointer h-[50px] flex justify-center items-center mt-2"
-            >
-              <button type="button" className="text-accent-blue font-semibold ">
-                {showLanguages ? "Show more" : "Hide"}
-              </button>
-            </div>
+          <div
+            className={cn(
+              "h-[150px] overflow-y-auto scrollbar-w-1 scrollbar-thumb-accent-blue scrollbar-track-main-background-3 scrollbar-thin",
+              !showLanguages && "pr-3 flex-1"
+            )}
+          >
+            {displayedLanguages.map((language, index) => (
+              <label
+                key={index}
+                className="border-b flex justify-between items-center w-full h-[50px] text-lg cursor-pointer text-light-secondary dark:text-light-line-reply overflow-x-visible pr-2 group"
+              >
+                <span>{language}</span>
+                <InputCheckbox
+                  checked={languagesChecked.includes(language)}
+                  onChange={(event) => {
+                    handleInputCheckboxChange(language, event.target.checked);
+                  }}
+                  beforeClassName="scale-[1.75] group-hover:bg-dark-line-reply/10 peer-focus:bg-dark-line-reply/10 dark:group-hover:bg-accent-blue/5 dark:peer-focus:bg-accent-blue/5 peer-checked:bg-transparent"
+                />
+              </label>
+            ))}
+          </div>
+          <div
+            onClick={handleToggleClick}
+            className="bg-accent-blue/[0.01] hover:bg-accent-blue/[0.05] hover-animation cursor-pointer h-[50px] flex justify-center items-center"
+          >
+            <button type="button" className="text-accent-blue font-semibold ">
+              {showLanguages ? "Show more" : "Hide"}
+            </button>
           </div>
         </div>
         <div className="h-[100px] px-5 xs:px-16 flex items-center bg-main-background-1 xs:rounded-b-2xl">
