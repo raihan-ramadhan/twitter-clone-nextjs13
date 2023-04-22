@@ -56,9 +56,9 @@ export const RequireDataModal = (props: RequireDataModalProps): JSX.Element => {
       case "topics":
         return <TopicsAndSubModal nextSlide={nextSlide} />;
       case "following":
-        return <FollowingModal />;
+        return <FollowingModal nextSlide={nextSlide} />;
       case "lists":
-        return <ListsModal />;
+        return <ListsModal nextSlide={nextSlide} />;
       default:
         return <div className="text-red-400">Invalid case value</div>;
     }

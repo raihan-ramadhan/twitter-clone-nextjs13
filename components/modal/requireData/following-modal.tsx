@@ -1,9 +1,36 @@
+"use client";
+import { useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+
+import { auth } from "@/lib/firebase/app";
 import { CustomIcon } from "@/components/ui/custom-icons";
-import { ButtonHighlight } from "@/components/ui/modal/buttons-modal";
 import { ParagraphModal } from "@/components/ui/modal/paragaph-modal";
+import { useRequireData } from "@/lib/context/require-data-context";
+import { ButtonHighlight } from "@/components/ui/modal/buttons-modal";
+import { ComponentModalProps } from "./require-data-modal";
 import { SubTitleModal, TitleForm } from "@/components/ui/modal/title-modal";
 
-export const FollowingModal = () => {
+export const FollowingModal = (props: ComponentModalProps) => {
+  const { nextSlide } = props;
+  const [loading, setLoading] = useState<boolean>(false);
+  const { setError } = useRequireData();
+
+  const fillFollowing = () => {
+    onAuthStateChanged(auth, async (user) => {
+      try {
+        if (user) {
+          const uid = user.uid;
+          setLoading(true);
+          // await updateUserFollowing(uid, birthdate);
+          setLoading(false);
+          await nextSlide();
+        }
+      } catch (error) {
+        setError(true);
+      }
+    });
+  };
+
   return (
     <>
       <CustomIcon
@@ -30,7 +57,12 @@ export const FollowingModal = () => {
           </div>
         </div>
         <div className="h-[100px] px-5 xs:px-12 bg-main-background-1 xs:rounded-b-2xl flex items-center">
-          <ButtonHighlight text="Next" className="text-lg p-2" />
+          <ButtonHighlight
+            callback={fillFollowing}
+            loading={loading}
+            text="Next"
+            className="text-lg p-2"
+          />
         </div>
       </div>
     </>
