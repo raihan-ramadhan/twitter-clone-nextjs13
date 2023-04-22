@@ -82,11 +82,11 @@ export const Topics = ({
   };
   return (
     <>
-      <div className="h-full max-h-[575px] relative z-0">
+      <div className="h-full max-h-[calc(100%_-_100px)] xs:h-[475px] relative z-0">
         <div
           {...scrollProps}
           className={cn(
-            `h-full max-h-[inherit] xs:max-h-[475px] overflow-y-auto scrollbar-w-1 scrollbar-thumb-accent-blue hover:scrollbar-thumb-accent-blue/80 scrollbar-track-main-background-3 scrollbar-thin px-10 xs:px-16 relative bg-main-background-1`
+            `h-full overflow-y-auto scrollbar-w-1 scrollbar-thumb-accent-blue hover:scrollbar-thumb-accent-blue/80 scrollbar-track-main-background-3 scrollbar-thin px-10 xs:px-16 relative bg-main-background-1`
           )}
         >
           <div className="flex flex-col mb-6 z-0">

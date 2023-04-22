@@ -141,6 +141,7 @@ export function AuthContextProvider({
             secondaryRequireData[1],
             secondaryRequireData[2],
             secondaryRequireData[3],
+            secondaryRequireData[4],
           ]);
           setLoadingRequireData(false);
         } catch (error) {
@@ -160,6 +161,8 @@ export function AuthContextProvider({
             setRequireData(["birthdate"]);
           } else if (!customizeExperience) {
             setRequireData(["customizeExperience"]);
+          } else if (true) {
+            setRequireData(["following"]);
           } else {
             setUser(userData);
             setRequireData(null);
