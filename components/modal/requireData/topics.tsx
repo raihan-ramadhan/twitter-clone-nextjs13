@@ -98,7 +98,7 @@ export const Topics = ({
               className="text-base"
             />
           </div>
-          <div className="grid grid-cols-2 xs:grid-cols-3 gap-3 min-h-[575px] w-full pb-10">
+          <div className="grid grid-cols-2 xs:grid-cols-3 gap-3 min-h-[575px] w-full pb-10 px-2">
             {topicsName.map((topic, index) => {
               const exist = topics.some((item) => item.topic === topic);
               return (
@@ -151,7 +151,7 @@ export const Topics = ({
           style={{ opacity: opacityShadowBottom }}
         />
       </div>
-      <div className="h-[100px] px-5 xs:px-12 flex items-center bg-main-background-1 xs:rounded-b-2xl">
+      <div className="h-[100px] px-5 xs:px-16 flex items-center bg-main-background-1 xs:rounded-b-2xl">
         <div className="flex-1 overflow-hidden">
           {topics.length >= 3 && (
             <motion.div

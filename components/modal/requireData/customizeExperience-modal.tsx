@@ -1,15 +1,16 @@
 "use client";
-import { auth } from "@/lib/firebase/app";
+import { onAuthStateChanged } from "firebase/auth";
 import { useState } from "react";
+
+import { auth } from "@/lib/firebase/app";
 import { CustomIcon } from "@/components/ui/custom-icons";
 import { InputCheckbox } from "@/components/ui/input";
+import { ParagraphModal } from "@/components/ui/modal/paragaph-modal";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { ButtonHighlight } from "@/components/ui/modal/buttons-modal";
 import { ComponentModalProps } from "./require-data-modal";
-import { onAuthStateChanged } from "firebase/auth";
-import { updateUserCustomizeExperience } from "@/lib/firebase/utils";
 import { SubTitleModal, TitleForm } from "@/components/ui/modal/title-modal";
-import { ParagraphModal } from "@/components/ui/modal/paragaph-modal";
+import { updateUserCustomizeExperience } from "@/lib/firebase/utils";
 
 export const CustomizeExperienceModal = (
   props: ComponentModalProps
@@ -42,8 +43,8 @@ export const CustomizeExperienceModal = (
         className="w-8 h-8 text-accent-blue mx-auto absolute top-5 left-1/2 -translate-x-1/2 "
         iconName="TwitterIcon"
       />
-      <div className="py-14 px-5 xs:px-14 w-full min-h-[624px] flex flex-col justify-between gap-3">
-        <div className="w-full space-y-6">
+      <div className="pt-[75px] h-full xs:min-h-[inherit] w-full flex flex-col">
+        <div className="h-[calc(100%_-_100px)] xs:h-[475px] w-full relative z-0 space-y-6 px-5 xs:px-16">
           <TitleForm
             title={"Customize your experience"}
             className="py-0 text-3xl"
@@ -96,13 +97,15 @@ export const CustomizeExperienceModal = (
             </a>
           </p>
         </div>
-        <ButtonHighlight
-          loading={loading}
-          disabled={!customizeExperience}
-          callback={changeCustomizeExperience}
-          text="Next"
-          className="py-3 text-lg"
-        />
+        <div className="h-[100px] px-5 xs:px-16 flex items-center bg-main-background-1 xs:rounded-b-2xl">
+          <ButtonHighlight
+            loading={loading}
+            disabled={!customizeExperience}
+            callback={changeCustomizeExperience}
+            text="Next"
+            className="py-3 text-lg"
+          />
+        </div>
       </div>
     </>
   );

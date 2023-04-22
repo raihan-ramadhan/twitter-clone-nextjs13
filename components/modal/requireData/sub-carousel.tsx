@@ -66,7 +66,7 @@ export const SubCarousel = ({
     <div className="border-b border-b-light-secondary dark:border-b-light-line-reply">
       <SubTitleModal
         title={capitalizeFirstChar(topic.topic)}
-        className="text-2xl mt-6"
+        className="text-xl mt-6 px-2"
       />
       <div className="relative overflow-hidden">
         {isScrollable && (

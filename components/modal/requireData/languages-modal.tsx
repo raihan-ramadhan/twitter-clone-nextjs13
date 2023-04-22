@@ -13,6 +13,7 @@ import { updateUserLanguages } from "@/lib/firebase/utils";
 
 import type { Languages } from "@/lib/types/user";
 import type { ComponentModalProps } from "./require-data-modal";
+import { useWindow } from "@/lib/context/window-context";
 
 export const LanguagesModal = (props: ComponentModalProps): JSX.Element => {
   const { nextSlide } = props;
@@ -68,8 +69,8 @@ export const LanguagesModal = (props: ComponentModalProps): JSX.Element => {
         className="w-8 h-8 text-accent-blue mx-auto absolute top-5 left-1/2 -translate-x-1/2 "
         iconName="TwitterIcon"
       />
-      <div className="py-14 px-5 xs:px-14 w-full min-h-[624px] flex flex-col justify-between gap-3">
-        <div className="w-full space-y-6">
+      <div className="pt-[75px] h-full xs:min-h-[inherit] w-full flex flex-col">
+        <div className="h-[calc(100%_-_100px)] xs:h-[475px] w-full relative z-0 space-y-6 px-5 xs:px-16 overflow-hidden">
           <div>
             <TitleForm title={"Which languages do you speak?"} />
             <ParagraphModal
@@ -79,11 +80,11 @@ export const LanguagesModal = (props: ComponentModalProps): JSX.Element => {
               }
             />
           </div>
-          <div>
+          <div className="h-full">
             <div
               className={cn(
-                "h-full max-h-[200px] overflow-y-auto overflow-x-clip scrollbar-w-1 scrollbar-thumb-accent-blue scrollbar-track-main-background-3 scrollbar-thin",
-                !showLanguages && "pr-3"
+                "h-[150px] overflow-y-auto scrollbar-w-1 scrollbar-thumb-accent-blue scrollbar-track-main-background-3 scrollbar-thin",
+                !showLanguages && "pr-3 !h-[calc(100%_-_175px)]"
               )}
             >
               {displayedLanguages.map((language, index) => (
@@ -112,12 +113,14 @@ export const LanguagesModal = (props: ComponentModalProps): JSX.Element => {
             </div>
           </div>
         </div>
-        <ButtonHighlight
-          loading={loading}
-          callback={fillLanguages}
-          text="Next"
-          className="py-3 text-lg"
-        />
+        <div className="h-[100px] px-5 xs:px-16 flex items-center bg-main-background-1 xs:rounded-b-2xl">
+          <ButtonHighlight
+            loading={loading}
+            callback={fillLanguages}
+            text="Next"
+            className="py-3 text-lg"
+          />
+        </div>
       </div>
     </>
   );

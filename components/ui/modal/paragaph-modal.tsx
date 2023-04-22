@@ -10,7 +10,7 @@ export const ParagraphModal = ({
     <p
       className={cn(
         "text-light-secondary dark:text-light-line-reply",
-        className ?? "text-xl"
+        className ?? "text-base"
       )}
     >
       {text}

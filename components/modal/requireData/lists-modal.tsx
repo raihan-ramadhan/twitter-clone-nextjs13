@@ -38,7 +38,7 @@ export const ListsModal = (props: ComponentModalProps) => {
         iconName="TwitterIcon"
       />
       <div className="pt-[75px] h-full xs:min-h-[inherit] w-full flex flex-col">
-        <div className="h-full max-h-[calc(100%_-_100px)] xs:h-[475px] overflow-y-auto px-5 xs:px-12 scrollbar-w-1 scrollbar-thumb-accent-blue hover:scrollbar-thumb-accent-blue/80 scrollbar-track-main-background-3 scrollbar-thin">
+        <div className="h-full max-h-[calc(100%_-_100px)] xs:h-[475px] overflow-y-auto px-5 xs:px-16 scrollbar-w-1 scrollbar-thumb-accent-blue hover:scrollbar-thumb-accent-blue/80 scrollbar-track-main-background-3 scrollbar-thin">
           <TitleForm title={"What do you want to see in Twitter?"} />
           <ParagraphModal
             text={
@@ -56,7 +56,7 @@ export const ListsModal = (props: ComponentModalProps) => {
             </div>
           </div>
         </div>
-        <div className="h-[100px] px-5 xs:px-12 bg-main-background-1 xs:rounded-b-2xl flex items-center">
+        <div className="h-[100px] px-5 xs:px-16 bg-main-background-1 xs:rounded-b-2xl flex items-center">
           <ButtonHighlight
             callback={fillLists}
             loading={loading}

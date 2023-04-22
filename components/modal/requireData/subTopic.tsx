@@ -153,7 +153,7 @@ const SubTopicsWithScroll = ({
           style={{ opacity: opacityShadowBottom }}
         />
       </div>
-      <div className="h-[100px] px-5 xs:px-12 flex items-center bg-main-background-1 xs:rounded-b-2xl">
+      <div className="h-[100px] px-5 xs:px-16 flex items-center bg-main-background-1 xs:rounded-b-2xl">
         <ButtonHighlight
           disabled={topics.length < 3}
           loading={loading}
