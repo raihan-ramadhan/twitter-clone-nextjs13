@@ -1,22 +1,22 @@
-import cn from "clsx";
 import { motion } from "framer-motion";
-import { Dispatch } from "react";
 
 import { HeroIcon } from "@/components/ui/hero-icon";
 import { TitleForm } from "@/components/ui/modal/title-modal";
-import { useScroll } from "@/lib/hooks/useScroll";
 import { ParagraphModal } from "@/components/ui/modal/paragaph-modal";
 import { ButtonHighlight } from "@/components/ui/modal/buttons-modal";
 import { capitalizeFirstChar } from "@/lib/utils";
+import { ContainerScrollShadows } from "@/components/ui/container-scroll-shadows";
 
 import type { Variants } from "framer-motion";
 import type { TopicsProps, TopicsAndSubUnion } from "./topicsAndSub-modal";
 
 type TopicsComponentProps = {
-  topics: TopicsProps<TopicsAndSubUnion>;
+  myTopics: TopicsProps<TopicsAndSubUnion>;
   isSubSlide: boolean;
   topicsName: Array<TopicsAndSubUnion["topic"]>;
-  setTopics: Dispatch<React.SetStateAction<TopicsProps<TopicsAndSubUnion>>>;
+  setMyTopics: React.Dispatch<
+    React.SetStateAction<TopicsProps<TopicsAndSubUnion>>
+  >;
   setIsSubSlide: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -52,42 +52,29 @@ const variantsSpan: Variants = {
 export const Topics = ({
   isSubSlide,
   topicsName,
-  topics,
-  setTopics,
+  myTopics,
+  setMyTopics,
   setIsSubSlide,
 }: TopicsComponentProps): JSX.Element => {
-  const { scrollProps, scrollTop, clientHeight, scrollHeight, isScrollable } =
-    useScroll();
-
-  const opacityShadowTop =
-    scrollHeight && clientHeight && isScrollable
-      ? scrollTop / (scrollHeight - clientHeight)
-      : 0;
-
-  const opacityShadowBottom =
-    scrollHeight && clientHeight && isScrollable
-      ? 1 - scrollTop / (scrollHeight - clientHeight)
-      : 0;
-
   const topicHandler = (topic: TopicsAndSubUnion["topic"]): void => {
-    const newTopics = [...topics];
+    const newTopics = [...myTopics];
     const index = newTopics.findIndex((item) => item.topic == topic);
 
     if (index >= 0) {
       newTopics.splice(index, 1);
-      setTopics(newTopics);
+      setMyTopics(newTopics);
     } else {
-      setTopics((prev) => [...prev, { topic, sub: [] }]);
+      setMyTopics((prev) => [...prev, { topic, sub: [] }]);
     }
   };
   return (
     <>
       <div className="h-full max-h-[calc(100%_-_100px)] xs:h-[475px] relative z-0">
-        <div
-          {...scrollProps}
-          className={cn(
-            `h-full overflow-y-auto scrollbar-w-1 scrollbar-thumb-accent-blue hover:scrollbar-thumb-accent-blue/80 scrollbar-track-main-background-3 scrollbar-thin px-10 xs:px-16 relative bg-main-background-1`
-          )}
+        <ContainerScrollShadows
+          className="px-10 xs:px-16 relative bg-main-background-1 h-full"
+          classNameContainer="h-full"
+          classnameShadows="!w-[calc(100%_-_.5rem)]"
+          gradient="ellipse"
         >
           <div className="flex flex-col mb-6 z-0">
             <TitleForm title={"What do you want to see in Twitter?"} />
@@ -100,7 +87,7 @@ export const Topics = ({
           </div>
           <div className="grid grid-cols-2 xs:grid-cols-3 gap-3 min-h-[575px] w-full pb-10 px-2">
             {topicsName.map((topic, index) => {
-              const exist = topics.some((item) => item.topic === topic);
+              const exist = myTopics.some((item) => item.topic === topic);
               return (
                 <div
                   key={`topic-${index}`}
@@ -132,28 +119,12 @@ export const Topics = ({
               );
             })}
           </div>
-        </div>
-
-        <div
-          id="shadow-top-topics"
-          className={cn(
-            `z-10 absolute top-0 h-5 bg-gradient-to-b from-black/10 dark:from-white/10 to-transparent pointer-events-none`,
-            isScrollable && "w-[calc(100%_-_.5rem)]"
-          )}
-          style={{ opacity: opacityShadowTop }}
-        />
-        <div
-          id="shadow-bottom-topics"
-          className={cn(
-            `z-10 absolute bottom-0 h-5 bg-gradient-to-t from-black/10 dark:from-white/10 to-transparent pointer-events-none`,
-            isScrollable && "w-[calc(100%_-_.5rem)]"
-          )}
-          style={{ opacity: opacityShadowBottom }}
-        />
+        </ContainerScrollShadows>
       </div>
+
       <div className="h-[100px] px-5 xs:px-16 flex items-center bg-main-background-1 xs:rounded-b-2xl">
         <div className="flex-1 overflow-hidden">
-          {topics.length >= 3 && (
+          {myTopics.length >= 3 && (
             <motion.div
               {...variantsSpan}
               className="font-semibold inline-block"
@@ -161,17 +132,17 @@ export const Topics = ({
               Great work 🎉
             </motion.div>
           )}
-          {topics.length < 3 && (
+          {myTopics.length < 3 && (
             <motion.div
               {...variantsSpan}
               className="font-semibold inline-block"
             >
-              {topics.length} of 3 selected
+              {myTopics.length} of 3 selected
             </motion.div>
           )}
         </div>
         <ButtonHighlight
-          disabled={topics.length < 3}
+          disabled={myTopics.length < 3}
           callback={() => {
             if (!isSubSlide) setIsSubSlide(true);
           }}

@@ -78,6 +78,11 @@ export function ThemeContextProvider({
         `var(--${theme}-background-3)`
       );
 
+      root.style.setProperty(
+        "--main-gradient",
+        `var(--${theme}-main-gradient)`
+      );
+
       // if (user) {
       localStorage.setItem("theme", theme);
       //   return setTimeout(() => void updateUserTheme(user.id, { theme }), 500);

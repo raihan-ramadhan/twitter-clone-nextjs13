@@ -30,7 +30,7 @@ export const languages = [
   "Urdu",
 ] as const;
 
-export const topicsAndSub = [
+export const topics = [
   {
     topic: "arts & culture",
     sub: [
@@ -280,4 +280,4 @@ export const topicsAndSub = [
   },
 ] as const;
 
-export const topics = topicsAndSub.map(({ topic }) => topic);
+export const topicsName = topics.map(({ topic }) => topic);

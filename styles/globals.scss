@@ -2,14 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@mixin main-gradient($direction, $color) {
+  background: radial-gradient(
+    ellipse farthest-corner at #{$direction},
+    rgb(#{$color}) 0%,
+    rgba(255, 255, 255, 0) 75%
+  );
+}
+
 @layer base {
   :root {
-    --main-background-1: var(
-      --dark-background-1
-    ); /* This is temporary color, we change value in context-theme */
+    /* This is temporary color, we change value in context-theme */
+    --main-background-1: var(--dark-background-1);
     --main-background-2: var(--dark-background-2);
     --main-background-3: var(--dark-background-3);
     --main-accent: var(--accent-blue);
+    --main-gradient: var(--dark-main-gradient);
 
     --dark-background-1: 0 0 0;
     --dim-background-1: 22 33 44;
@@ -22,6 +30,10 @@
     --dark-background-3: 22 24 28;
     --dim-background-3: 30 39 50;
     --light-background-3: 247 249 249;
+
+    --dark-main-gradient: 255 255 255;
+    --dim-main-gradient: 255 255 255;
+    --light-main-gradient: 0 0 0;
 
     --accent-yellow: 255 213 0;
     --accent-blue: 29 155 240;
@@ -95,18 +107,19 @@
     @apply text-accent-blue relative after:w-0 hover:after:w-full after:h-[1px] after:absolute after:-bottom-[2px] after:left-0 origin-[0_0] after:bg-accent-blue after:transition-all after:duration-200;
   }
 
-  .ellipse-gradient-background-light {
-    background: radial-gradient(
-      ellipse farthest-corner at 0% 50%,
-      rgba(0, 0, 0, 0.15) 0%,
-      rgba(255, 255, 255, 0) 75%
-    );
+  .bg-gradient-radial-to-b {
+    @include main-gradient(top, var(--main-gradient));
   }
-  .ellipse-gradient-background-dark {
-    background: radial-gradient(
-      ellipse farthest-corner at 0% 50%,
-      rgba(255, 255, 255, 0.15) 0%,
-      rgba(255, 255, 255, 0) 75%
-    );
+
+  .bg-gradient-radial-to-t {
+    @include main-gradient(bottom, var(--main-gradient));
+  }
+
+  .bg-gradient-radial-to-r {
+    @include main-gradient(0% 50%, var(--main-gradient));
+  }
+
+  .bg-gradient-radial-to-l {
+    @include main-gradient(100% 50%, var(--main-gradient));
   }
 }

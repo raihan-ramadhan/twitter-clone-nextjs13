@@ -2,13 +2,13 @@
 import { useState } from "react";
 
 import { Topics } from "./topics";
-import { SubTopics } from "./subTopic";
+import { SubTopics } from "./subTopics";
 import { CustomIcon } from "@/components/ui/custom-icons";
-import { topics as topicsName, topicsAndSub } from "@/lib/data/user";
+import { topicsName, topics } from "@/lib/data/user";
 
 import type { ComponentModalProps } from "./require-data-modal";
 
-export type TopicsAndSub = typeof topicsAndSub;
+export type TopicsAndSub = typeof topics;
 export type TopicsAndSubUnion = TopicsAndSub[number];
 export type SubUnion = TopicsAndSubUnion["sub"][number];
 export type TopicUnion = TopicsAndSubUnion["topic"];
@@ -18,26 +18,8 @@ export type TopicsProps<T extends TopicsAndSubUnion> = Array<{
 
 export const TopicsAndSubModal = (props: ComponentModalProps): JSX.Element => {
   const { nextSlide } = props;
-  const [topics, setTopics] = useState<TopicsProps<TopicsAndSubUnion>>([]);
+  const [myTopics, setMyTopics] = useState<TopicsProps<TopicsAndSubUnion>>([]);
   const [isSubSlide, setIsSubSlide] = useState<boolean>(false);
-
-  function renderComponentBaseOnIsSubSlide() {
-    return !isSubSlide ? (
-      <Topics
-        {...{ topics, setTopics, isSubSlide, setIsSubSlide, topicsName }}
-      />
-    ) : (
-      <SubTopics
-        {...{
-          topics,
-          setTopics,
-          topicsAndSub,
-          nextSlide,
-        }}
-      />
-    );
-  }
-
   return (
     <>
       <CustomIcon
@@ -45,7 +27,26 @@ export const TopicsAndSubModal = (props: ComponentModalProps): JSX.Element => {
         iconName="TwitterIcon"
       />
       <div className="pt-[75px] h-full xs:min-h-[inherit] w-full flex flex-col">
-        {renderComponentBaseOnIsSubSlide()}
+        {!isSubSlide ? (
+          <Topics
+            {...{
+              myTopics,
+              setMyTopics,
+              isSubSlide,
+              setIsSubSlide,
+              topicsName,
+            }}
+          />
+        ) : (
+          <SubTopics
+            {...{
+              myTopics,
+              setMyTopics,
+              topics,
+              nextSlide,
+            }}
+          />
+        )}
       </div>
     </>
   );
