@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, createContext, useContext } from "react";
 
 import { useAuth } from "./auth-context";
@@ -45,6 +46,13 @@ export function ThemeContextProvider({
 
   const { user } = useAuth();
   const { id: userId, theme: userTheme, accent: userAccent } = user ?? {};
+
+  useEffect(() => {
+    if (!user) {
+      setAccent("blue")
+      localStorage.setItem("accent", "blue");
+    }
+  }, [userId])
 
   useEffect(() => {
     if (user && userTheme) setTheme(userTheme);
