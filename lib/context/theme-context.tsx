@@ -1,12 +1,11 @@
 "use client";
-/* eslint-disable react-hooks/exhaustive-deps */
-
-// import { updateUserTheme } from '@lib/firebase/utils';
-// import { useAuth } from './auth-context';
-
 import { useState, useEffect, createContext, useContext } from "react";
-import type { ReactNode, ChangeEvent } from "react";
+
+import { useAuth } from "./auth-context";
+import { updateUserTheme } from "../firebase/utils";
+
 import type { Theme, Accent } from "@/lib/types/theme";
+import type { ReactNode, ChangeEvent } from "react";
 
 type ThemeContext = {
   theme: Theme;
@@ -44,16 +43,16 @@ export function ThemeContextProvider({
   const [theme, setTheme] = useState<Theme>(setInitialTheme);
   const [accent, setAccent] = useState<Accent>(setInitialAccent);
 
-  //   const { user } = useAuth();
-  //   const { id: userId, theme: userTheme, accent: userAccent } = user ?? {};
+  const { user } = useAuth();
+  const { id: userId, theme: userTheme, accent: userAccent } = user ?? {};
 
-  //   useEffect(() => {
-  //     if (user && userTheme) setTheme(userTheme);
-  //   }, [userId, userTheme]);
+  useEffect(() => {
+    if (user && userTheme) setTheme(userTheme);
+  }, [userId, userTheme]);
 
-  //   useEffect(() => {
-  //     if (user && userAccent) setAccent(userAccent);
-  //   }, [userId, userAccent]);
+  useEffect(() => {
+    if (user && userAccent) setAccent(userAccent);
+  }, [userId, userAccent]);
 
   useEffect(() => {
     const flipTheme = (theme: Theme): NodeJS.Timeout | undefined => {
@@ -83,10 +82,10 @@ export function ThemeContextProvider({
         `var(--${theme}-main-gradient)`
       );
 
-      // if (user) {
-      localStorage.setItem("theme", theme);
-      //   return setTimeout(() => void updateUserTheme(user.id, { theme }), 500);
-      // }
+      if (user) {
+        localStorage.setItem("theme", theme);
+        return setTimeout(() => void updateUserTheme(user.id, { theme }), 500);
+      }
 
       return undefined;
     };
@@ -95,7 +94,7 @@ export function ThemeContextProvider({
     return () => clearTimeout(timeoutId);
     // if we unmount page it will make setTimeout still working in
     // 500ms later so we need clear it before unMount page as a cleanup useEffect
-  }, [theme]);
+  }, [userId, theme]);
 
   useEffect(() => {
     const flipAccent = (accent: Accent): NodeJS.Timeout | undefined => {
@@ -103,10 +102,10 @@ export function ThemeContextProvider({
 
       root.style.setProperty("--main-accent", `var(--accent-${accent})`);
 
-      //   if (user) {
-      localStorage.setItem("accent", accent);
-      //     return setTimeout(() => void updateUserTheme(user.id, { accent }), 500);
-      //   }
+      if (user) {
+        localStorage.setItem("accent", accent);
+        return setTimeout(() => void updateUserTheme(user.id, { accent }), 500);
+      }
 
       return undefined;
     };
@@ -115,7 +114,7 @@ export function ThemeContextProvider({
     return () => clearTimeout(timeoutId);
     // if we unmount page it will make setTimeout still working in
     // 500ms later so we need clear it before unMount page as a cleanup useEffect
-  }, [accent]);
+  }, [userId, accent]);
 
   const changeTheme = ({
     target: { value },
