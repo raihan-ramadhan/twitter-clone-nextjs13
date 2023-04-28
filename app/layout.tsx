@@ -28,13 +28,13 @@ export default function RootLayout({
     <html lang="en">
       <RequireDataProvider>
         <AuthContextProvider>
-          <NextThemeContextProvider>
-            <body>
+          <body>
+            <NextThemeContextProvider>
               <WindowContextProvider>
                 {children}
               </WindowContextProvider>
-            </body>
-          </NextThemeContextProvider>
+            </NextThemeContextProvider>
+          </body>
         </AuthContextProvider>
       </RequireDataProvider>
     </html>
