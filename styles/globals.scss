@@ -10,14 +10,16 @@
   );
 }
 
+@mixin setTheme($theme) {
+  --main-background-1: var(--#{$theme}-background-1);
+  --main-background-2: var(--#{$theme}-background-2);
+  --main-background-3: var(--#{$theme}-background-3);
+  --main-gradient: var(--#{$theme}-main-gradient);
+}
+
 @layer base {
   :root {
-    /* This is temporary color, we change value in context-theme */
-    --main-background-1: var(--dark-background-1);
-    --main-background-2: var(--dark-background-2);
-    --main-background-3: var(--dark-background-3);
     --main-accent: var(--accent-blue);
-    --main-gradient: var(--dark-main-gradient);
 
     --dark-background-1: 0 0 0;
     --dim-background-1: 22 33 44;
@@ -41,6 +43,16 @@
     --accent-purple: 120 87 255;
     --accent-orange: 255 122 0;
     --accent-green: 0 184 122;
+
+    &.dark {
+      @include setTheme(dark);
+    }
+    &.dim {
+      @include setTheme(dim);
+    }
+    &.light {
+      @include setTheme(light);
+    }
   }
 
   a,

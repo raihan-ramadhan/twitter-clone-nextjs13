@@ -1,6 +1,7 @@
 "use client";
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, createContext, useContext } from "react";
+import { ThemeProvider as NextThemesProvider, useTheme as useNextTheme } from "next-themes";
 
 import { useAuth } from "./auth-context";
 import { updateUserTheme } from "../firebase/utils";
@@ -21,13 +22,12 @@ type ThemeContextProviderProps = {
   children: ReactNode;
 };
 
-function setInitialTheme(): Theme {
-  if (typeof window === "undefined") return "dark";
+function setInitialTheme(savedTheme : Theme ): Theme {
+  if (typeof window === "undefined") return "light";
 
-  const savedTheme = localStorage.getItem("theme") as Theme | null;
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-  return savedTheme ?? (prefersDark ? "dark" : "light");
+  return savedTheme ?? (prefersDark ? "dark" : "light")
 }
 
 function setInitialAccent(): Accent {
@@ -38,24 +38,24 @@ function setInitialAccent(): Accent {
   return savedAccent ?? "blue";
 }
 
-export function ThemeContextProvider({
+function ThemeContextProvider({
   children,
 }: ThemeContextProviderProps): JSX.Element {
-  const [theme, setTheme] = useState<Theme>(setInitialTheme);
+  
+  const {setTheme : setNextTheme, resolvedTheme} = useNextTheme()
+  const savedTheme = resolvedTheme as Theme
+
+  const [theme, setTheme] = useState<Theme>(() => setInitialTheme(savedTheme));
   const [accent, setAccent] = useState<Accent>(setInitialAccent);
 
   const { user } = useAuth();
   const { id: userId, theme: userTheme, accent: userAccent } = user ?? {};
 
   useEffect(() => {
-    if (!user) {
-      setAccent("blue")
-      localStorage.setItem("accent", "blue");
-    }
-  }, [userId])
-
-  useEffect(() => {
-    if (user && userTheme) setTheme(userTheme);
+    if (user && userTheme) {
+      setTheme(userTheme)
+      setNextTheme(userTheme)
+    };
   }, [userId, userTheme]);
 
   useEffect(() => {
@@ -65,44 +65,30 @@ export function ThemeContextProvider({
   useEffect(() => {
     const flipTheme = (theme: Theme): NodeJS.Timeout | undefined => {
       const root = document.documentElement;
-      const targetTheme = theme === "dim" ? "dark" : theme;
 
-      if (targetTheme === "dark") root.classList.add("dark");
-      else root.classList.remove("dark");
-
-      root.style.setProperty(
-        "--main-background-1",
-        `var(--${theme}-background-1)`
-      );
-
-      root.style.setProperty(
-        "--main-background-2",
-        `var(--${theme}-background-2)`
-      );
-
-      root.style.setProperty(
-        "--main-background-3",
-        `var(--${theme}-background-3)`
-      );
-
-      root.style.setProperty(
-        "--main-gradient",
-        `var(--${theme}-main-gradient)`
-      );
+      if (theme === "dim" || theme === "dark") {
+        root.setAttribute('data-theme', 'dark');
+      } else root.removeAttribute('data-theme');
 
       if (user) {
-        localStorage.setItem("theme", theme);
         return setTimeout(() => void updateUserTheme(user.id, { theme }), 500);
       }
 
       return undefined;
-    };
+    }
 
     const timeoutId = flipTheme(theme);
     return () => clearTimeout(timeoutId);
     // if we unmount page it will make setTimeout still working in
     // 500ms later so we need clear it before unMount page as a cleanup useEffect
   }, [userId, theme]);
+
+  useEffect(() => {
+    if (!user) {
+      setAccent("blue")
+      localStorage.setItem("accent", "blue");
+    }
+  }, [userId])
 
   useEffect(() => {
     const flipAccent = (accent: Accent): NodeJS.Timeout | undefined => {
@@ -126,7 +112,10 @@ export function ThemeContextProvider({
 
   const changeTheme = ({
     target: { value },
-  }: ChangeEvent<HTMLInputElement>): void => setTheme(value as Theme);
+  }: ChangeEvent<HTMLInputElement>): void => {
+    setNextTheme(value as Theme)
+    setTheme(value as Theme)
+  }
 
   const changeAccent = ({
     target: { value },
@@ -142,6 +131,16 @@ export function ThemeContextProvider({
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
+}
+
+export function NextThemeContextProvider({children}:ThemeContextProviderProps): JSX.Element {
+  return (
+    <NextThemesProvider themes={['light', 'dark', 'dim']} attribute="class" defaultTheme="system" enableSystem >
+      <ThemeContextProvider>
+        {children}
+      </ThemeContextProvider>
+    </NextThemesProvider>
+ )
 }
 
 export function useTheme(): ThemeContext {
