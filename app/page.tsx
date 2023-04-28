@@ -21,7 +21,6 @@ export default function RootPage() {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
-              TESTing
             </div>
           </MainContainer>
         </HomeLayout>
