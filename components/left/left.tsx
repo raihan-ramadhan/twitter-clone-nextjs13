@@ -59,7 +59,7 @@ const navLinks: Readonly<NavLink[]> = [
 
 const Left = (): JSX.Element => {
   const { user } = useAuth();
-  const { isMobile } = useWindow();
+  const { isMobile, width: windowWidth } = useWindow();
 
   const widthCN = "xs:w-20 md:w-24 xl:w-full xl:max-w-[275px]";
 
@@ -86,8 +86,8 @@ const Left = (): JSX.Element => {
             <nav className="flex xs:flex-col my-1 flex-row w-full">
               {user && (
                 <>
-                  {navLinks.map(({ ...linkData }) => (
-                    <LeftNavLink {...linkData} key={linkData.href} />
+                  {navLinks.map(({ iconName ,...linkData }) => (
+                    <LeftNavLink iconName={iconName == "HashtagIcon" && windowWidth < 1024 ? "MagnifyingGlassIcon" : iconName} {...linkData} key={linkData.href} />
                   ))}
                   <LeftNavLink
                     href={`/user/raihan`}
