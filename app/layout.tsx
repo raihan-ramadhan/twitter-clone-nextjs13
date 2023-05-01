@@ -6,6 +6,7 @@ import { RequireDataProvider } from "@/lib/context/require-data-context";
 import { NextThemeContextProvider } from "@/lib/context/theme-context";
 
 import type { Metadata } from "next";
+import { ShowModalProvider } from "@/lib/context/show-modal-context";
 
 const WindowContextProvider = dynamic(
   () => import("../lib/context/window-context"),
@@ -31,7 +32,9 @@ export default function RootLayout({
           <body>
             <NextThemeContextProvider>
               <WindowContextProvider>
-                {children}
+                <ShowModalProvider>
+                  {children}
+                </ShowModalProvider>
               </WindowContextProvider>
             </NextThemeContextProvider>
           </body>
