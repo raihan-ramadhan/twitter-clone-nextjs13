@@ -9,29 +9,18 @@ import type { NavLink } from "./left";
 
 type SidebarLinkProps = NavLink & {
   username?: string;
-  showModal?: boolean;
 };
 
 export const LeftNavLink = (props: SidebarLinkProps): JSX.Element => {
-  const {
-    href,
-    iconName,
-    linkName,
-    canBeHidden,
-    disabled = false,
-    showModal,
-  } = props;
-
+  const { href, disabled = false, canBeHidden, iconName, linkName } = props;
   const asPathname = usePathname();
 
   const isActive = href === asPathname;
 
   return (
     <Link href={href} legacyBehavior prefetch={!disabled}>
-      <a
-        className={cn(
-          "group flex-1 py-1 outline-none w-full flex justify-center xl:justify-start",
-          canBeHidden ? "hidden xs:flex" : "flex",
+      <a className={cn("group flex-1 py-1 outline-none w-full flex justify-center xl:justify-start", 
+          canBeHidden ? "hidden xs:flex" : "flex", 
           disabled && "cursor-not-allowed"
         )}
         onClick={disabled ? preventBubbling() : undefined}
@@ -46,22 +35,12 @@ export const LeftNavLink = (props: SidebarLinkProps): JSX.Element => {
               "h-7 w-7",
               isActive &&
                 ["Explore"].includes(linkName) &&
-                !showModal &&
                 "stroke-light-primary dark:stroke-dark-primary"
-              // showmodal here make when modal showup the icon go back to regular, it's suppose to be use asPathname and the modal should use shallow router but due the unstable the shallow in Link next js 13 beta i'm just going use showModalContext for the meantime untill it get better
             )}
             iconName={iconName}
-            solid={isActive && !showModal}
+            solid={isActive}
           />
-          <span
-            className={cn(
-              `hidden xl:inline text-xl`,
-              isActive && !showModal && "font-bold"
-              // showmodal here make when modal showup the text go back to regular, it's suppose to be use asPathname and the modal should use shallow router but due the unstable the shallow in Link next js 13 beta i'm just going use showModalContext for the meantime untill it get better
-            )}
-          >
-            {linkName}
-          </span>
+          <span className="hidden xl:inline text-xl">{linkName}</span>
         </div>
       </a>
     </Link>

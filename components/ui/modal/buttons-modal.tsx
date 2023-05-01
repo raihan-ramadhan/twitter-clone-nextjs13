@@ -3,7 +3,7 @@ import { Button } from "../button";
 import { CustomIcon } from "../custom-icons";
 
 type ButtonFormProps = {
-  text: string | JSX.Element;
+  text: string;
   callback?: (() => Promise<void>) | (() => void);
   className?: string;
   loading?: boolean | undefined;
@@ -34,9 +34,7 @@ export const ButtonProvider = ({
           )}
         >
           <CustomIcon iconName="GoogleIcon" className="h-5 w-5 shrink-0" />
-          <span className="truncate w-40 text-start">
-            <>{text}</>
-          </span>
+          <span className="truncate w-40 text-start">{text}</span>
         </Button>
       ) : (
         <Button
@@ -48,9 +46,7 @@ export const ButtonProvider = ({
           )}
         >
           <CustomIcon iconName="AppleIcon" className="h-5 w-5 shrink-0" />
-          <span className="truncate w-40 text-start">
-            <>{text}</>
-          </span>
+          <span className="truncate w-40 text-start">{text}</span>
         </Button>
       )}
     </>
@@ -78,7 +74,7 @@ export const ButtonHighlight = ({
           className ?? "py-1"
         )}
       >
-        <>{text}</>
+        {text}
       </Button>
     </>
   );
@@ -102,7 +98,7 @@ export const ButtonSecondary = ({
           className ?? "py-1"
         )}
       >
-        <>{text}</>
+        {text}
       </Button>
     </>
   );
