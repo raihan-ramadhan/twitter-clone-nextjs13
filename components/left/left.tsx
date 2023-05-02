@@ -7,7 +7,7 @@ import { useAuth } from "@/lib/context/auth-context";
 import { LeftMore } from "./left-more";
 import { IconName } from "../ui/hero-icon";
 import { useWindow } from "@/lib/context/window-context";
-import { LeftProfil } from "./left-profil";
+import { LeftProfile } from "./left-profile";
 import { CustomIcon } from "../ui/custom-icons";
 import { LeftNavLink } from "./left-nav-link";
 import { useShowModal } from "@/lib/context/show-modal-context";
@@ -146,7 +146,7 @@ const Left = (): JSX.Element => {
               )}
             </section>
           </div>
-          {user && <LeftProfil />}
+          {user && <LeftProfile />}
         </div>
       </header>
     </>

@@ -1,8 +1,11 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { Disclosure } from "@headlessui/react";
-import { HeroIcon } from "../ui/hero-icon";
 import cn from "clsx";
 import Link from "next/link";
+import { Disclosure } from "@headlessui/react";
+import { motion, AnimatePresence } from "framer-motion";
+
+import { HeroIcon } from "../ui/hero-icon";
+import { preventBubbling } from "@/lib/utils";
+
 import type { IconName } from "../ui/hero-icon";
 import type { Variants } from "framer-motion";
 
@@ -132,14 +135,20 @@ export const DisclosureItem: React.FC<Props> = ({
                         return (
                           <Link
                             key={i}
-                            className={cn(
-                              panelCN,
-                              disabled && "cursor-not-allowed"
-                            )}
-                            href={disabled ? "javascript:;" : href!}
+                            href={href!}
+                            legacyBehavior
+                            prefetch={disabled ? false : undefined}
                           >
-                            <HeroIcon className=" w-5 h-5" iconName={icon} />
-                            {text}
+                            <a
+                              className={cn(
+                                panelCN,
+                                disabled && "cursor-not-allowed"
+                              )}
+                              onClick={disabled ? preventBubbling() : undefined}
+                            >
+                              <HeroIcon className=" w-5 h-5" iconName={icon} />
+                              {text}
+                            </a>
                           </Link>
                         );
                       }

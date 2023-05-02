@@ -21,12 +21,14 @@ export function UserAvatar({
 
   return (
     <Link
-      href={`/user/${username}`}
+      href={username ? `/user/${username}` : "#"}
       className={cn(
         "blur-picture flex self-start",
         !username && "pointer-events-none",
         className
       )}
+      prefetch={!username ? false : undefined}
+      tabIndex={username ? 0 : -1}
     >
       <NextImage
         useSkeleton

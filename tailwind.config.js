@@ -57,5 +57,8 @@ module.exports = {
     require("tailwind-scrollbar"),
     require("@tailwindcss/aspect-ratio"),
     require("tailwind-scrollbar-hide"),
+    ({ addVariant }) => {
+      addVariant("inner", "& > *");
+    },
   ],
 };

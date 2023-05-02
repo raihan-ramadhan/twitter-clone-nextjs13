@@ -1,19 +1,22 @@
-import { motion, AnimatePresence } from "framer-motion";
-import { SignoutModal } from "../modal/signout-modal";
-import { UserUsername } from "../user/user-username";
-import { CustomIcon } from "../ui/custom-icons";
-import { UserAvatar } from "../user/user-avatar";
-import { UserName } from "../user/user-name";
-import { HeroIcon } from "../ui/hero-icon";
-import { useModal } from "@/lib/hooks/useModal";
-import { Overlay } from "../ui/overlay";
-import { useAuth } from "@/lib/context/auth-context";
-import { Button } from "../ui/button";
-import { Modal } from "../modal/modal";
-import { Menu } from "@headlessui/react";
 import cn from "clsx";
+import { Menu } from "@headlessui/react";
+import { motion, AnimatePresence } from "framer-motion";
+
+import { Modal } from "../modal/modal";
+import { Button } from "../ui/button";
+import { useAuth } from "@/lib/context/auth-context";
+import { Overlay } from "../ui/overlay";
+import { useModal } from "@/lib/hooks/useModal";
+import { HeroIcon } from "../ui/hero-icon";
+import { UserName } from "../user/user-name";
+import { UserAvatar } from "../user/user-avatar";
+import { CustomIcon } from "../ui/custom-icons";
+import { UserUsername } from "../user/user-username";
+import { SignoutModal } from "../modal/signout-modal";
+import { useShowModal } from "@/lib/context/show-modal-context";
 
 import type { Variants } from "framer-motion";
+import { User } from "@/lib/types/user";
 
 export const variants: Variants = {
   initial: { opacity: 0 },
@@ -24,17 +27,26 @@ export const variants: Variants = {
   exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
-export const LeftProfil = () => {
-  const { signOut } = useAuth();
+export const LeftProfile = () => {
+  const { user, signOut } = useAuth();
+  const { setShowModal } = useShowModal();
   const { open, openModal, closeModal } = useModal();
+
+  const { name, username, verified, photoURL } = user as User;
+
+  const handleCloseModal = () => {
+    closeModal();
+    setShowModal(false);
+  };
+
   return (
     <>
       <Modal
         modalClassName="bg-main-background-1 w-full max-w-xs p-8 rounded-2xl hover-animation"
         open={open}
-        closeModal={closeModal}
+        closeModal={handleCloseModal}
       >
-        <SignoutModal signOut={signOut} closeModal={closeModal} />
+        <SignoutModal signOut={signOut} closeModal={handleCloseModal} />
       </Modal>
       <Menu
         className="relative hidden xs:block z-0 ml-[4px] md:ml-[12px] xl:ml-0"
@@ -50,10 +62,10 @@ export const LeftProfil = () => {
               )}
             >
               <div className="flex truncate gap-3 w-full">
-                <UserAvatar src={"/assets/test.jpg"} alt={"logo"} size={40} />
+                <UserAvatar src={photoURL} alt={"logo"} size={40} />
                 <div className="hidden truncate text-start leading-5 xl:block flex-1">
-                  <UserName name={"han"} className="start" verified={true} />
-                  <UserUsername username={"raihan_22"} disableLink />
+                  <UserName name={name} className="start" verified={verified} />
+                  <UserUsername username={username} disableLink />
                 </div>
               </div>
               <HeroIcon
@@ -64,7 +76,7 @@ export const LeftProfil = () => {
             <AnimatePresence>
               {open && (
                 <Menu.Items
-                  className="py-3 z-30 absolute w-[275px] xl:w-[300px] left-0 xl:left-1/2 xl:-translate-x-1/2 -top-48 menu-container"
+                  className="py-3 z-30 absolute w-[275px] lg:w-[300px] left-0 xl:left-1/2 xl:-translate-x-1/2 -top-48 menu-container"
                   as={motion.div}
                   {...variants}
                   static
@@ -76,10 +88,10 @@ export const LeftProfil = () => {
                     disabled
                   >
                     <div className="flex items-center gap-3 truncate">
-                      <UserAvatar src={"/assets/test.jpg"} alt={"photo"} />
+                      <UserAvatar src={photoURL} alt={"photo"} />
                       <div className="truncate flex flex-col flex-1">
-                        <UserName name={"raihan"} verified={true} />
-                        <UserUsername username={"han"} disableLink />
+                        <UserName name={name} verified={verified} />
+                        <UserUsername username={username} disableLink />
                       </div>
                     </div>
                     <i>
@@ -93,11 +105,11 @@ export const LeftProfil = () => {
                     {({ active }): JSX.Element => (
                       <Button
                         className={cn(
-                          "flex w-full gap-3 px-4 py-3 font-semibold",
-                          active && "bg-black/5"
+                          "flex w-full gap-3 px-4 py-3 font-semibold cursor-not-allowed rounded-none",
+                          active && "bg-main-background-3"
                         )}
                         onClick={() => {
-                          console.log("TEST");
+                          console.log("Coming Soon");
                         }}
                       >
                         Add an Existing Account
@@ -108,12 +120,15 @@ export const LeftProfil = () => {
                     {({ active }): JSX.Element => (
                       <Button
                         className={cn(
-                          "flex w-full gap-3 px-4 py-3 font-semibold",
-                          active && "bg-black/5"
+                          "flex w-full gap-3 px-4 py-3 font-semibold rounded-none",
+                          active && "bg-main-background-3 "
                         )}
-                        onClick={openModal}
+                        onClick={() => {
+                          openModal();
+                          setShowModal(true);
+                        }}
                       >
-                        Log out @{"han"}
+                        Log out @{username}
                       </Button>
                     )}
                   </Menu.Item>

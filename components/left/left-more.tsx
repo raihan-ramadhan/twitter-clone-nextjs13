@@ -2,14 +2,19 @@
 import cn from "clsx";
 import { Menu } from "@headlessui/react";
 import { Modal } from "../modal/modal";
+import { useAuth } from "@/lib/context/auth-context";
 import { Overlay } from "../ui/overlay";
 import { HeroIcon } from "../ui/hero-icon";
 import { MenuLink } from "./menu-link";
 import { useModal } from "@/lib/hooks/useModal";
+import { useShowModal } from "@/lib/context/show-modal-context";
 import { DisplayModal } from "../modal/display-modal";
 import { DisclosureItem } from "./disclosure";
 import { motion, AnimatePresence } from "framer-motion";
+
 import type { Variants } from "framer-motion";
+import { User } from "@/lib/types/user";
+import { useState } from "react";
 
 export const variants: Variants = {
   initial: { opacity: 0, y: 50 },
@@ -25,17 +30,53 @@ export const variants: Variants = {
   },
 };
 
+type ModalLeftMore =
+  | "display"
+  | "professional"
+  | "verifiedOrgs"
+  | "circle"
+  | "keyboard"
+  | null;
+
 export const LeftMore = (): JSX.Element => {
   const { open, openModal, closeModal } = useModal();
+  const { setShowModal } = useShowModal();
+  const { user } = useAuth();
+  const { username } = user as User;
+
+  const [currentModal, setCurrentModal] = useState<ModalLeftMore>(null);
+
+  const handleCloseModal = () => {
+    setCurrentModal(null);
+    setShowModal(false);
+    closeModal();
+  };
+
+  function renderComponentBasedOnCase(caseValue: ModalLeftMore): JSX.Element {
+    switch (caseValue) {
+      case "display":
+        return <DisplayModal closeModal={handleCloseModal} />;
+      case "professional":
+        return <div>Twitter for Professional Coming Soon</div>;
+      case "circle":
+        return <div>Twitter Circle Coming Soon</div>;
+      case "keyboard":
+        return <div>Keyboard Shortcut Coming Soon</div>;
+      case "verifiedOrgs":
+        return <div>Verified Orgs Coming Soon</div>;
+      default:
+        return <div className="text-red-400">Invalid case value</div>;
+    }
+  }
 
   return (
     <>
       <Modal
         modalClassName="max-w-xl bg-main-background-1 w-full p-8 rounded-2xl hover-animation"
         open={open}
-        closeModal={closeModal}
+        closeModal={handleCloseModal}
       >
-        <DisplayModal closeModal={closeModal} />
+        {renderComponentBasedOnCase(currentModal)}
       </Modal>
       <Menu className="relative hidden xs:block w-full outline-none" as="div">
         {({ open, close }): JSX.Element => (
@@ -67,12 +108,13 @@ export const LeftMore = (): JSX.Element => {
                     <Menu.Item>
                       {({ active }): JSX.Element => (
                         <MenuLink
-                          classLink={cn(
+                          className={cn(
                             "flex w-full gap-5 duration-200 relative",
                             active &&
                               "bg-main-background-3 after:w-full after:h-full after:absolute after:inset-0 after:border-2 after:border-main-accent after:contrast-75 after:brightness-125 after:rounded-t-xl"
                           )}
-                          href="/raihan/topics"
+                          href={`/${username}/topics`}
+                          disabledMenu
                         >
                           <HeroIcon iconName="ChatBubbleOvalLeftEllipsisIcon" />
                           Topics
@@ -82,12 +124,13 @@ export const LeftMore = (): JSX.Element => {
                     <Menu.Item>
                       {({ active }): JSX.Element => (
                         <MenuLink
-                          classLink={cn(
+                          className={cn(
                             "relative",
                             active &&
                               "bg-main-background-3 after:w-full after:h-full after:absolute after:inset-0 after:border-2 after:border-main-accent after:contrast-75 after:brightness-125"
                           )}
-                          href="/raihan/lists"
+                          href={`/${username}/lists`}
+                          disabledMenu
                         >
                           <HeroIcon iconName="QueueListIcon" />
                           Lists
@@ -96,17 +139,22 @@ export const LeftMore = (): JSX.Element => {
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }): JSX.Element => (
-                        <MenuLink
-                          classLink={cn(
-                            "relative",
+                        <div
+                          className={cn(
+                            "relative duration-200 p-4 flex w-full gap-5 cursor-pointer",
                             active &&
                               "bg-main-background-3 after:w-full after:h-full after:absolute after:inset-0 after:border-2 after:border-main-accent after:contrast-75 after:brightness-125"
                           )}
-                          href="/i/circles"
+                          onClick={() => {
+                            close();
+                            openModal();
+                            setShowModal(true);
+                            setCurrentModal("circle");
+                          }}
                         >
                           <HeroIcon iconName="UsersIcon" />
                           Twitter Circle
-                        </MenuLink>
+                        </div>
                       )}
                     </Menu.Item>
                     <Menu.Item>
@@ -144,7 +192,10 @@ export const LeftMore = (): JSX.Element => {
                               text: "Twitter for Professional",
                               icon: "RocketLaunchIcon",
                               func: () => {
-                                console.log("TEST");
+                                close();
+                                openModal();
+                                setShowModal(true);
+                                setCurrentModal("professional");
                               },
                             },
                             {
@@ -158,7 +209,6 @@ export const LeftMore = (): JSX.Element => {
                               text: "Monetization",
                               href: "/settings/monetization",
                               icon: "BanknotesIcon",
-                              disabled: true,
                             },
                           ]}
                         />
@@ -178,9 +228,8 @@ export const LeftMore = (): JSX.Element => {
                             {
                               elem: "link",
                               text: "Settings and privacy",
-                              href: "/settings",
+                              href: "/settings/account",
                               icon: "Cog8ToothIcon",
-                              disabled: true,
                             },
                             {
                               elem: "a",
@@ -192,8 +241,10 @@ export const LeftMore = (): JSX.Element => {
                               elem: "button",
                               text: "Display",
                               func: () => {
-                                openModal();
                                 close();
+                                openModal();
+                                setShowModal(true);
+                                setCurrentModal("display");
                               },
                               icon: "PaintBrushIcon",
                             },

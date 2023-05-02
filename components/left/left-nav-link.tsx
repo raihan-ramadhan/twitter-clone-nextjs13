@@ -27,7 +27,7 @@ export const LeftNavLink = (props: SidebarLinkProps): JSX.Element => {
   const isActive = href === asPathname;
 
   return (
-    <Link href={href} legacyBehavior prefetch={!disabled}>
+    <Link href={href} legacyBehavior prefetch={disabled ? false : undefined}>
       <a
         className={cn(
           "group flex-1 py-1 outline-none w-full flex justify-center xl:justify-start",

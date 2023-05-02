@@ -1,29 +1,37 @@
-import { forwardRef } from "react";
-import Link from "next/link";
-import type { ComponentPropsWithRef } from "react";
 import cn from "clsx";
+import Link from "next/link";
+import { forwardRef } from "react";
+
+import { preventBubbling } from "@/lib/utils";
+
+import type { ComponentPropsWithRef } from "react";
 
 type MenuLinkProps = ComponentPropsWithRef<"a"> & {
   href: string;
-  disabled?: boolean;
-  classLink: string;
+  disabledMenu?: boolean;
 };
 
 // eslint-disable-next-line react/display-name
 export const MenuLink = forwardRef<HTMLAnchorElement, MenuLinkProps>(
-  ({ children, classLink, disabled = false, href, ...rest }, ref) => (
+  ({ children, className, disabledMenu = false, href, ...rest }, ref) => (
     <Link
-      className={cn(
-        "duration-200 p-4 flex w-full gap-5",
-        classLink,
-        disabled && "cursor-not-allowed"
-      )}
       href={href}
-      ref={ref}
-      role={"link"}
-      {...rest}
+      legacyBehavior
+      prefetch={disabledMenu ? false : undefined}
     >
-      {children}
+      <a
+        className={cn(
+          "duration-200 p-4 flex w-full gap-5",
+          disabledMenu && "cursor-not-allowed",
+          className
+        )}
+        ref={ref}
+        role={"link"}
+        {...rest}
+        onClick={disabledMenu ? preventBubbling() : undefined}
+      >
+        {children}
+      </a>
     </Link>
   )
 );

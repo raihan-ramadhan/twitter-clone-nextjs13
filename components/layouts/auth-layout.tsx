@@ -1,5 +1,8 @@
 "use client";
 import cn from "clsx";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+
 import { Modal } from "../modal/modal";
 import { Button } from "../ui/button";
 import { useAuth } from "@/lib/context/auth-context";
@@ -8,10 +11,9 @@ import { useWindow } from "@/lib/context/window-context";
 import { LoginModal } from "../modal/login-modal";
 import { Placeholder } from "../common/placeholder";
 import { SignupModal } from "../modal/signup-modal";
+import { useShowModal } from "@/lib/context/show-modal-context";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { RequireDataModal } from "../modal/requireData/require-data-modal";
-import { useEffect, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
 
 import type { Variants } from "framer-motion";
 import type { LayoutProps } from "./common-layout";
@@ -21,6 +23,7 @@ const initialOpenSign = { signIn: false, signUp: false };
 
 export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
   const [openSign, setOpenSign] = useState<OpenState>(initialOpenSign);
+  const { setShowModal } = useShowModal();
   const { user, loading } = useAuth();
   const { isMobile } = useWindow();
   const {
@@ -62,6 +65,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
 
   const closeModalSign = (): void => {
     setOpenSign(initialOpenSign);
+    setShowModal(false);
   };
 
   const switchSign: () => void = () => {
@@ -127,6 +131,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
                 <Button
                   type="button"
                   onClick={() => {
+                    setShowModal(true);
                     setOpenSign(() => ({ signUp: false, signIn: true }));
                   }}
                   className="py-1 px-4 border-[.5px] border-white/40 hover:bg-white/20 shrink-0 flex-1 md:flex-none truncate"
@@ -136,6 +141,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
                 <Button
                   type="button"
                   onClick={() => {
+                    setShowModal(true);
                     setOpenSign(() => ({ signIn: false, signUp: true }));
                   }}
                   className="py-1 px-4 bg-white text-black transition-all hover:brightness-90 active:brightness-85 shrink-0 flex-1 md:flex-none truncate"
