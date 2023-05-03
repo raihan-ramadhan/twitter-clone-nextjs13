@@ -58,16 +58,22 @@ const Left = (): JSX.Element => {
   const { showModal } = useShowModal();
 
   const { user } = useAuth();
-  const { isMobile, width: windowWidth } = useWindow();
+  const { isMobile, width: windowWidth, height: windowHeight } = useWindow();
+
+  const allNavLinks: NavLink[] =
+    windowHeight > 600
+      ? navLinks.slice()
+      : navLinks.filter((link) => link.linkName !== "Bookmarks");
 
   return (
     <>
       <header
         className={cn(
-          "flex flex-col justify-between shrink-0 w-0 z-40 ",
+          "flex flex-col justify-between shrink-0 w-0 z-40",
           widthCN
         )}
       >
+        {/* i want use overflow-y-auto here to make scrollable vertical nav but somehow the popover menu will make this scrollable horizontal too which we don't want*/}
         <div
           className={cn(
             "fixed flex flex-col justify-between xs:top-0 xs:bottom-0 left-0 xs:left-[unset] right-0 xs:right-[unset] bottom-0 px-2",
@@ -87,7 +93,7 @@ const Left = (): JSX.Element => {
               <nav className="flex xs:flex-col my-1 flex-row w-full">
                 {user && (
                   <>
-                    {navLinks.map(({ iconName, ...linkData }) => (
+                    {allNavLinks.map(({ iconName, ...linkData }) => (
                       <LeftNavLink
                         iconName={
                           iconName == "HashtagIcon" && windowWidth < 1024
@@ -130,19 +136,26 @@ const Left = (): JSX.Element => {
                 )}
               </nav>
               {user && (
-                <Button
-                  type="button"
-                  className="text-white bg-main-accent xs:hover:bg-main-accent/90 xs:active:bg-main-accent/75 absolute xs:static right-4 -translate-y-[88px] xs:translate-y-0 hover:brightness-95 active:brightness-85 p-4 xs:p-3 mt-4 text-lg font-bold xl:w-11/12 !ring-0 after:absolute after:inset-0 after:[box-shadow:#00000014_0px_8px_28px] after:focus-visible:!ring-2 after:focus-visible:!ring-main-accent after:focus-visible:!contrast-75 after:focus-visible:!brightness-125 after:rounded-full after:transition-shadow after:focus-visible:animate-translateY1px"
-                  onClick={() => {
-                    console.log("TEST");
-                  }}
+                <div
+                  className={cn(
+                    "w-full flex justify-center",
+                    windowHeight > 700 && "pt-4"
+                  )}
                 >
-                  <CustomIcon
-                    className="block h-6 w-6 xl:hidden"
-                    iconName="FeatherIcon"
-                  />
-                  <span className="hidden xl:inline">Tweet</span>
-                </Button>
+                  <Button
+                    type="button"
+                    className="text-white bg-main-accent xs:hover:bg-main-accent/90 xs:active:bg-main-accent/75 absolute xs:static right-4 -translate-y-[88px] xs:translate-y-0 hover:brightness-95 active:brightness-85 p-4 xs:p-3  text-lg font-bold xl:w-11/12 !ring-0 after:absolute after:inset-0 after:[box-shadow:#00000014_0px_8px_28px] after:focus-visible:!ring-2 after:focus-visible:!ring-main-accent after:focus-visible:!contrast-75 after:focus-visible:!brightness-125 after:rounded-full after:transition-shadow after:focus-visible:animate-translateY1px"
+                    onClick={() => {
+                      console.log("TEST");
+                    }}
+                  >
+                    <CustomIcon
+                      className="block h-6 w-6 xl:hidden"
+                      iconName="FeatherIcon"
+                    />
+                    <span className="hidden xl:inline">Tweet</span>
+                  </Button>
+                </div>
               )}
             </section>
           </div>

@@ -23,12 +23,13 @@ export function UserName({
 
   return (
     <Link
-      href={`/user/${username}`}
+      href={username ? `/user/${username}` : "#"}
       className={cn(
         "flex items-center gap-1 truncate font-bold",
         username ? "custom-underline" : "pointer-events-none",
         className
       )}
+      tabIndex={username ? 0 : -1}
     >
       <CustomTag className="truncate">{name}</CustomTag>
       {verified && (

@@ -6,6 +6,7 @@ import { HeroIcon } from "../ui/hero-icon";
 import { preventBubbling } from "@/lib/utils";
 
 import type { NavLink } from "./left";
+import { useWindow } from "@/lib/context/window-context";
 
 type SidebarLinkProps = NavLink & {
   username?: string;
@@ -26,13 +27,16 @@ export const LeftNavLink = (props: SidebarLinkProps): JSX.Element => {
 
   const isActive = href === asPathname;
 
+  const { height: windowHeight } = useWindow();
+
   return (
     <Link href={href} legacyBehavior prefetch={disabled ? false : undefined}>
       <a
         className={cn(
-          "group flex-1 py-1 outline-none w-full flex justify-center xl:justify-start",
+          "group flex-1 outline-none w-full flex justify-center xl:justify-start",
           canBeHidden ? "hidden xs:flex" : "flex",
-          disabled && "cursor-not-allowed"
+          disabled && "cursor-not-allowed",
+          windowHeight > 700 && "py-1"
         )}
         onClick={disabled ? preventBubbling() : undefined}
       >

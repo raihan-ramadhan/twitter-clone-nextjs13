@@ -1,6 +1,9 @@
 "use client";
 import cn from "clsx";
 import { Menu } from "@headlessui/react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
 import { Modal } from "../modal/modal";
 import { useAuth } from "@/lib/context/auth-context";
 import { Overlay } from "../ui/overlay";
@@ -10,11 +13,9 @@ import { useModal } from "@/lib/hooks/useModal";
 import { useShowModal } from "@/lib/context/show-modal-context";
 import { DisplayModal } from "../modal/display-modal";
 import { DisclosureItem } from "./disclosure";
-import { motion, AnimatePresence } from "framer-motion";
 
+import type { User } from "@/lib/types/user";
 import type { Variants } from "framer-motion";
-import { User } from "@/lib/types/user";
-import { useState } from "react";
 
 export const variants: Variants = {
   initial: { opacity: 0, y: 50 },

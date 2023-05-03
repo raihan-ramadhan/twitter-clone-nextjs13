@@ -10,7 +10,7 @@ import { TwitterBlueModal } from "../modal/twitter-blue-modal";
 import type { Variants } from "framer-motion";
 
 export const LeftTwitterBlue = (): JSX.Element => {
-  const { isMobile } = useWindow();
+  const { isMobile, height: windowHeight } = useWindow();
   const { setShowModal } = useShowModal();
   const { open, openModal, closeModal } = useModal();
 
@@ -55,7 +55,10 @@ export const LeftTwitterBlue = (): JSX.Element => {
         <TwitterBlueModal closeModal={handleClose} />
       </Modal>
       <button
-        className="group flex-1 py-1 outline-none w-full justify-center xl:justify-start hidden xs:flex"
+        className={cn(
+          "group flex-1 outline-none w-full justify-center xl:justify-start hidden xs:flex",
+          windowHeight > 700 && "py-1"
+        )}
         type="button"
         onClick={handleOpen}
       >
