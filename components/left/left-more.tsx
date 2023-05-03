@@ -5,6 +5,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { Modal } from "../modal/modal";
+import { ToolTip } from "../ui/tooltip";
 import { useAuth } from "@/lib/context/auth-context";
 import { Overlay } from "../ui/overlay";
 import { HeroIcon } from "../ui/hero-icon";
@@ -79,15 +80,22 @@ export const LeftMore = (): JSX.Element => {
       >
         {renderComponentBasedOnCase(currentModal)}
       </Modal>
-      <Menu className="relative hidden xs:block w-full outline-none" as="div">
+      <Menu
+        className="relative hidden xs:block w-full outline-none py-1"
+        as="div"
+      >
         {({ open, close }): JSX.Element => (
           <>
-            <Menu.Button className="group outline-none flex z-0 w-full py-1 justify-center xl:justify-start">
+            <Menu.Button className="group outline-none flex z-0 w-full justify-center xl:justify-start">
               <div
                 className={cn(`flex gap-5 text-xl rounded-full custom-button custom-button xl:pr-6 group-hover:bg-light-primary/10 group-focus-visible:ring-2 
                 group-focus-visible:ring-[#878a8c] dark:group-hover:bg-dark-primary/10 
                 dark:group-focus-visible:ring-white`)}
               >
+                <ToolTip
+                  tip="More"
+                  className="inline xl:hidden translate-y-[200%] mt-1 !opacity-75"
+                />
                 <HeroIcon
                   className="h-7 w-7"
                   iconName="EllipsisHorizontalCircleIcon"
@@ -158,6 +166,7 @@ export const LeftMore = (): JSX.Element => {
                         </div>
                       )}
                     </Menu.Item>
+                    <hr className="border-t-light-border dark:border-t-dark-border mx-3" />
                     <Menu.Item>
                       {({ active }): JSX.Element => (
                         <DisclosureItem

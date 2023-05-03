@@ -2,6 +2,7 @@ import cn from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { ToolTip } from "../ui/tooltip";
 import { HeroIcon } from "../ui/hero-icon";
 import { preventBubbling } from "@/lib/utils";
 
@@ -41,10 +42,14 @@ export const LeftNavLink = (props: SidebarLinkProps): JSX.Element => {
         onClick={disabled ? preventBubbling() : undefined}
       >
         <div
-          className="flex items-center gap-5 custom-button xl:pr-6 group-hover:bg-light-primary/10 group-focus-visible:ring-2 
+          className="flex relative items-center gap-5 custom-button p-2 xs:p-3 xl:pr-6 group-hover:bg-light-primary/10 group-focus-visible:ring-2 
              group-focus-visible:ring-[#878a8c] dark:group-hover:bg-dark-primary/10 
              dark:group-focus-visible:ring-white"
         >
+          <ToolTip
+            tip={linkName}
+            className="inline xl:hidden !opacity-75 -translate-y-[200%] xs:translate-y-[200%]"
+          />
           <HeroIcon
             className={cn(
               "h-7 w-7",
