@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import { Modal } from "../modal/modal";
 import { Button } from "../ui/button";
-import { ToolTip } from "../ui/tooltip";
 import { useAuth } from "@/lib/context/auth-context";
 import { Overlay } from "../ui/overlay";
 import { useModal } from "@/lib/hooks/useModal";
@@ -50,7 +49,7 @@ export const LeftProfile = () => {
         <SignoutModal signOut={signOut} closeModal={handleCloseModal} />
       </Modal>
       <Menu
-        className="relative hidden xs:block z-10 ml-[4px] md:ml-[12px] xl:ml-0"
+        className="relative hidden xs:block z-0 ml-[4px] md:ml-[12px] xl:ml-0"
         as="section"
       >
         {({ open }): JSX.Element => (
@@ -58,13 +57,10 @@ export const LeftProfile = () => {
             <Overlay open={open} />
             <Menu.Button
               className={cn(
-                `relative group xl:flex p-2 z-20 my-4 xl:w-full bg-main-primary-1 rounded-full items-center justify-between hover:bg-light-primary/10 focus-visible:bg-light-primary/10 active:bg-light-primary/20 dark:hover:bg-dark-primary/10 dark:active:bg-dark-primary/20 dark:focus-visible::bg-dark-primary/20 hover-animation`
+                `relative xl:flex p-2 z-10 my-4 xl:w-full bg-main-primary-1 rounded-full items-center justify-between hover:bg-light-primary/10 active:bg-light-primary/20
+                 dark:hover:bg-dark-primary/10 dark:active:bg-dark-primary/20 hover-animation`
               )}
             >
-              <ToolTip
-                tip={"Accounts"}
-                className="inline xl:hidden -translate-y-[150%] !opacity-75"
-              />
               <div className="flex truncate gap-3 w-full">
                 <UserAvatar src={photoURL} alt={"logo"} size={40} />
                 <div className="hidden truncate text-start leading-5 xl:block flex-1">
@@ -80,14 +76,14 @@ export const LeftProfile = () => {
             <AnimatePresence>
               {open && (
                 <Menu.Items
-                  className="py-3 z-40 absolute w-[275px] lg:w-[300px] left-0 xl:left-1/2 xl:-translate-x-1/2 -top-48 menu-container"
+                  className="py-3 z-30 absolute w-[275px] lg:w-[300px] left-0 xl:left-1/2 xl:-translate-x-1/2 -top-48 menu-container"
                   as={motion.div}
                   {...variants}
                   static
                 >
                   <Menu.Item
                     className="flex items-center justify-between gap-4 border-b
-                 border-light-border dark:border-dark-border px-4 py-3"
+                 border-light-border px-4 py-3 dark:border-dark-border"
                     as="div"
                     disabled
                   >

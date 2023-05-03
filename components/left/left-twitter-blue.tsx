@@ -1,7 +1,6 @@
 import cn from "clsx";
 
 import { Modal } from "../modal/modal";
-import { ToolTip } from "../ui/tooltip";
 import { useModal } from "@/lib/hooks/useModal";
 import { useWindow } from "@/lib/context/window-context";
 import { CustomIcon } from "../ui/custom-icons";
@@ -64,10 +63,6 @@ export const LeftTwitterBlue = (): JSX.Element => {
         onClick={handleOpen}
       >
         <div className="flex items-center gap-5 custom-button xl:pr-6 group-hover:bg-light-primary/10 group-focus-visible:ring-2 group-focus-visible:ring-[#878a8c] dark:group-hover:bg-dark-primary/10 dark:group-focus-visible:ring-white justify-center">
-          <ToolTip
-            tip="Twitter Blue"
-            className="inline xl:hidden translate-y-[200%] !opacity-75"
-          />
           <CustomIcon
             className="w-7 h-7"
             iconName="TwitterBlueIcon"
