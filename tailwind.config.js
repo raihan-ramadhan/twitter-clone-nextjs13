@@ -30,7 +30,7 @@ module.exports = {
         'dark-secondary': '#71767B',
         'light-primary': '#0F1419',
         'light-secondary': '#536471',
-        'dark-border': '#2F3336',
+        'dark-border': '#38444d',
         'light-border': '#EFF3F4',
         'dark-line-reply': '#333639',
         'light-line-reply': '#CFD9DE',
