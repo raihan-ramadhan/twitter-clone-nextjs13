@@ -118,7 +118,7 @@ const Left = (): JSX.Element => {
                     />
                   </>
                 )}
-                {user && !isMobile && <LeftMore />}
+                {user && <LeftMore />}
                 {!user && !isMobile && (
                   <>
                     <LeftNavLink

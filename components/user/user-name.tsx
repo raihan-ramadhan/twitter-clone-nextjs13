@@ -1,6 +1,6 @@
 import cn from "clsx";
 import Link from "next/link";
-import { HeroIcon } from "../ui/hero-icon";
+import { CustomIcon } from "../ui/custom-icons";
 
 type UserNameProps = {
   tag?: keyof JSX.IntrinsicElements;
@@ -34,9 +34,9 @@ export function UserName({
       <CustomTag className="truncate">{name}</CustomTag>
       {verified && (
         <i>
-          <HeroIcon
-            className={cn("fill-accent-blue", iconClassName ?? "h-5 w-5")}
-            iconName="CheckBadgeIcon"
+          <CustomIcon
+            className={cn("!fill-accent-blue", iconClassName ?? "h-5 w-5")}
+            iconName="VerificationBadge"
             solid
           />
         </i>

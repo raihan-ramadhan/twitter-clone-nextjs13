@@ -4,14 +4,14 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { Modal } from "./modal";
-import { XModal } from "../ui/modal/x-modal";
-import { HeroIcon } from "../ui/hero-icon";
+import { Modal } from "../modal";
+import { XModal } from "../../ui/modal/x-modal";
+import { HeroIcon } from "../../ui/hero-icon";
 import { useWindow } from "@/lib/context/window-context";
-import { ButtonHighlight } from "../ui/modal/buttons-modal";
+import { ButtonHighlight } from "../../ui/modal/buttons-modal";
 
 import type { Variants } from "framer-motion";
-import type { IconName } from "../ui/hero-icon";
+import type { IconName } from "../../ui/hero-icon";
 
 type OnChange = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => void;
 

@@ -1,10 +1,10 @@
-import { InputAccentRadio } from "@/components/input/input-accent-radio";
-import { InputThemeRadio } from "../input/input-theme-radio";
-import { UserAvatar } from "@/components/user/user-avatar";
-import { UserName } from "@/components/user/user-name";
 import { Button } from "@/components/ui/button";
-import type { Theme, Accent } from "@/lib/types/theme";
+import { UserName } from "@/components/user/user-name";
+import { UserAvatar } from "@/components/user/user-avatar";
+import { InputThemeRadio } from "../../input/input-theme-radio";
+import { InputAccentRadio } from "@/components/input/input-accent-radio";
 
+import type { Theme, Accent } from "@/lib/types/theme";
 type DisplayModalProps = {
   closeModal: () => void;
 };
@@ -26,7 +26,7 @@ const accentsColor: Readonly<Accent[]> = [
 
 export function DisplayModal({ closeModal }: DisplayModalProps): JSX.Element {
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-6 p-8">
       <div className="flex flex-col gap-3 text-center">
         <h2 className="text-2xl font-bold">Customize your view</h2>
         <p className="text-light-secondary dark:text-dark-secondary">

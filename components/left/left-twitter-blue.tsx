@@ -6,7 +6,7 @@ import { useModal } from "@/lib/hooks/useModal";
 import { useWindow } from "@/lib/context/window-context";
 import { CustomIcon } from "../ui/custom-icons";
 import { useShowModal } from "@/lib/context/show-modal-context";
-import { TwitterBlueModal } from "../modal/twitter-blue-modal";
+import { TwitterBlueModal } from "../modal/left/twitter-blue-modal";
 
 import type { Variants } from "framer-motion";
 

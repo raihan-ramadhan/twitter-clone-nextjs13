@@ -50,15 +50,15 @@ export const LeftProfile = () => {
         <SignoutModal signOut={signOut} closeModal={handleCloseModal} />
       </Modal>
       <Menu
-        className="relative hidden xs:block z-10 ml-[4px] md:ml-[12px] xl:ml-0"
+        className="relative hidden xs:block ml-[4px] md:ml-[12px] xl:ml-0"
         as="section"
       >
         {({ open }): JSX.Element => (
-          <>
+          <div className="-z-10">
             <Overlay open={open} />
             <Menu.Button
               className={cn(
-                `relative group xl:flex p-2 z-20 my-4 xl:w-full bg-main-primary-1 rounded-full items-center justify-between hover:bg-light-primary/10 focus-visible:bg-light-primary/10 active:bg-light-primary/20 dark:hover:bg-dark-primary/10 dark:active:bg-dark-primary/20 dark:focus-visible::bg-dark-primary/20 hover-animation`
+                `relative group xl:flex p-2 my-4 xl:w-full bg-main-primary-1 rounded-full items-center justify-between hover:bg-light-primary/10 focus-visible:bg-light-primary/10 active:bg-light-primary/20 dark:hover:bg-dark-primary/10 dark:active:bg-dark-primary/20 dark:focus-visible::bg-dark-primary/20 hover-animation`
               )}
             >
               <ToolTip
@@ -80,7 +80,7 @@ export const LeftProfile = () => {
             <AnimatePresence>
               {open && (
                 <Menu.Items
-                  className="py-3 z-40 absolute w-[275px] lg:w-[300px] left-0 xl:left-1/2 xl:-translate-x-1/2 -top-48 menu-container"
+                  className="py-3 z-50 absolute w-[275px] lg:w-[300px] left-0 xl:left-1/2 xl:-translate-x-1/2 -top-48 menu-container"
                   as={motion.div}
                   {...variants}
                   static
@@ -151,7 +151,7 @@ export const LeftProfile = () => {
                 </Menu.Items>
               )}
             </AnimatePresence>
-          </>
+          </div>
         )}
       </Menu>
     </>

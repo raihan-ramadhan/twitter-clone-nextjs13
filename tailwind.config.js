@@ -27,7 +27,7 @@ module.exports = {
         'accent-green': 'rgb(var(--accent-green) / <alpha-value>)',
         'accent-red': '#F4212E',
         'dark-primary': '#E7E9EA',
-        'dark-secondary': '#71767B',
+        'dark-secondary': '#8b98a5',
         'light-primary': '#0F1419',
         'light-secondary': '#536471',
         'dark-border': '#38444d',
