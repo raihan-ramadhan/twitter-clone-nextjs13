@@ -15,8 +15,8 @@ import { useShowModal } from "@/lib/context/show-modal-context";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { RequireDataModal } from "../modal/requireData/require-data-modal";
 
-import type { Variants } from "framer-motion";
 import type { LayoutProps } from "./common-layout";
+import useModalVariant from "@/lib/hooks/useModalVariant";
 type OpenState = { signIn: boolean; signUp: boolean };
 
 const initialOpenSign = { signIn: false, signUp: false };
@@ -44,24 +44,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
   if ((loading && !isLogging) || (user && asPathname === "/"))
     return <Placeholder />;
 
-  const variants: Variants = isMobile
-    ? {
-        initial: { opacity: 0 },
-        animate: {
-          opacity: 1,
-          transition: { duration: 0.2 },
-        },
-        exit: { opacity: 0, transition: { duration: 0.15 } },
-      }
-    : {
-        initial: { opacity: 0, scale: 0.8 },
-        animate: {
-          opacity: 1,
-          scale: 1,
-          transition: { type: "spring", duration: 0.5, bounce: 0.4 },
-        },
-        exit: { opacity: 0, scale: 0.8, transition: { duration: 0.15 } },
-      };
+  const variant = useModalVariant();
 
   const closeModalSign = (): void => {
     setOpenSign(initialOpenSign);
@@ -112,7 +95,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
             )}
             open={openSign.signIn || openSign.signUp}
             closeModal={() => {}}
-            modalAnimation={variants}
+            modalAnimation={variant}
           >
             {renderComponentBasedOnCondition()}
           </Modal>

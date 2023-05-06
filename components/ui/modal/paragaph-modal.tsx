@@ -2,15 +2,18 @@ import cn from "clsx";
 export const ParagraphModal = ({
   text,
   className,
+  secondary = false,
 }: {
   text: string;
   className?: string;
+  secondary?: boolean;
 }): JSX.Element => {
   return (
     <p
       className={cn(
-        "text-light-secondary dark:text-light-line-reply",
-        className ?? "text-base"
+        "text-light-secondary",
+        className ?? "text-base",
+        secondary ? "dark:text-dark-secondary" : "dark:text-light-line-reply"
       )}
     >
       {text}

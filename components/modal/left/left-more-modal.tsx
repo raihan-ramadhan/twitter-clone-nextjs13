@@ -4,6 +4,9 @@ import { Modal } from "../modal";
 import { useWindow } from "@/lib/context/window-context";
 import { CircleModal } from "./circle-modal";
 import { DisplayModal } from "./display-modal";
+import { VerifiedOrgsModal } from "./verifiedOrgs-modals";
+
+import useModalVariant from "@/lib/hooks/useModalVariant";
 
 import type { ModalLeftMore } from "@/components/left/left-more";
 type LeftMoreModalProps = {
@@ -12,12 +15,15 @@ type LeftMoreModalProps = {
   open: boolean;
 };
 
+export type LeftMoreModalContent = { closeModal: () => void };
+
 export const LeftMoreModal = ({
   currentModal,
   handleCloseModal,
   open,
 }: LeftMoreModalProps): JSX.Element => {
   const { isMobile } = useWindow();
+  const variant = useModalVariant();
 
   function renderComponentBasedOnCase(caseValue: ModalLeftMore): JSX.Element {
     switch (caseValue) {
@@ -30,7 +36,7 @@ export const LeftMoreModal = ({
       case "keyboard":
         return <div>Keyboard Shortcut Coming Soon</div>;
       case "verifiedOrgs":
-        return <div>Verified Orgs Coming Soon</div>;
+        return <VerifiedOrgsModal closeModal={handleCloseModal} />;
       default:
         return <div className="text-red-400">Invalid case value</div>;
     }
@@ -41,6 +47,7 @@ export const LeftMoreModal = ({
       open={open}
       closeModal={handleCloseModal}
       className={cn("flex items-center justify-center", isMobile && "!p-0")}
+      modalAnimation={variant}
     >
       <div className="overflow-y-auto h-[inherit] xs:h-[inherit] xs:max-h-[inherit] xs:min-h-[inherit] w-[inherit]">
         {renderComponentBasedOnCase(currentModal)}

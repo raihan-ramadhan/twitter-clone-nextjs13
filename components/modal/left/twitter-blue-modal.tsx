@@ -237,11 +237,15 @@ export const TwitterBlueModal = ({
           </div>
           <div className="bg-main-background-1 w-full inset-x-0 z-10 flex flex-col gap-2 justify-center px-5 xs:px-16 py-4 sticky bottom-0 [filter:drop-shadow(#cfd9de_0px_-2px_2px)] dark:[filter:drop-shadow(#333639_0px_-2px_2px)]">
             <ButtonHighlight text={text({ twitterBlue })} className="py-2" />
-            <p className="text-xs leading-4 text-light-primary dark:text-dark-primary">
+            <p className="small-description">
               By subscribing, you agree to our{" "}
-              <span className="span-link cursor-pointer">
+              <a
+                href="https://legal.twitter.com/en/purchaser-terms.html"
+                target="_blank"
+                className="span-link cursor-pointer"
+              >
                 Purchaser Terms of Service
-              </span>
+              </a>
               . Subscriptions auto-renew until canceled, as described in the
               Terms. Cancel anytime. A verified phone number is required to
               subscribe. If you&#39;ve subscribed on another platform, manage

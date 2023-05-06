@@ -5,9 +5,7 @@ import { InputThemeRadio } from "../../input/input-theme-radio";
 import { InputAccentRadio } from "@/components/input/input-accent-radio";
 
 import type { Theme, Accent } from "@/lib/types/theme";
-type DisplayModalProps = {
-  closeModal: () => void;
-};
+import type { LeftMoreModalContent } from "./left-more-modal";
 
 const themes: Readonly<[Theme, string][]> = [
   ["light", "Default"],
@@ -24,7 +22,9 @@ const accentsColor: Readonly<Accent[]> = [
   "green",
 ];
 
-export function DisplayModal({ closeModal }: DisplayModalProps): JSX.Element {
+export function DisplayModal({
+  closeModal,
+}: LeftMoreModalContent): JSX.Element {
   return (
     <div className="flex flex-col items-center gap-6 p-8">
       <div className="flex flex-col gap-3 text-center">

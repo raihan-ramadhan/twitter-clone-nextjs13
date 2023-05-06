@@ -21,9 +21,9 @@ export const SubTitleModal = ({
 }): JSX.Element => {
   return (
     <>
-      <h2 className={cn("font-semibold", className ?? "text-xl py-2")}>
+      <h3 className={cn("font-semibold", className ?? "text-xl py-2")}>
         {title}
-      </h2>
+      </h3>
     </>
   );
 };

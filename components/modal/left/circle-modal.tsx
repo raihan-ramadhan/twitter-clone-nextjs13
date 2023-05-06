@@ -6,11 +6,11 @@ import { XModal } from "@/components/ui/modal/x-modal";
 import { SearchBar } from "@/components/ui/search-bar";
 import { TitleForm } from "@/components/ui/modal/title-modal";
 
-type CircleModalProps = {
-  closeModal: () => void;
-};
+import type { LeftMoreModalContent } from "./left-more-modal";
 
-export const CircleModal = ({ closeModal }: CircleModalProps): JSX.Element => {
+export const CircleModal = ({
+  closeModal,
+}: LeftMoreModalContent): JSX.Element => {
   const [currentTab, setCurrentTab] = useState<0 | 1>(0);
 
   return (
