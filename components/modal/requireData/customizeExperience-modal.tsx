@@ -9,7 +9,7 @@ import { ParagraphModal } from "@/components/ui/modal/paragaph-modal";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { ButtonHighlight } from "@/components/ui/modal/buttons-modal";
 import { ComponentModalProps } from "./require-data-modal";
-import { SubTitleModal, TitleForm } from "@/components/ui/modal/title-modal";
+import { SubTitleModal, TitleModal } from "@/components/ui/modal/title-modal";
 import { updateUserCustomizeExperience } from "@/lib/firebase/utils";
 
 export const CustomizeExperienceModal = (
@@ -45,7 +45,7 @@ export const CustomizeExperienceModal = (
       />
       <div className="pt-[75px] h-full xs:min-h-[inherit] w-full flex flex-col">
         <div className="h-[calc(100%_-_100px)] xs:h-[475px] w-full relative z-0 space-y-6 px-5 xs:px-16">
-          <TitleForm
+          <TitleModal
             title={"Customize your experience"}
             className="py-0 text-3xl"
           />

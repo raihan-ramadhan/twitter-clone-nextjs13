@@ -2,7 +2,7 @@ import { useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 
 import { auth } from "@/lib/firebase/app";
-import { TitleForm } from "@/components/ui/modal/title-modal";
+import { TitleModal } from "@/components/ui/modal/title-modal";
 import { SubCarousel } from "./subTopic-carousel";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { ParagraphModal } from "@/components/ui/modal/paragaph-modal";
@@ -78,7 +78,7 @@ export const SubTopics = ({
           gradient="ellipse"
         >
           <div className="flex flex-col mb-3 z-0">
-            <TitleForm title={"What do you want to see in Twitter?"} />
+            <TitleModal title={"What do you want to see in Twitter?"} />
             <ParagraphModal
               text={
                 "Interests are used to personalized your experience and will be visible on your profile."

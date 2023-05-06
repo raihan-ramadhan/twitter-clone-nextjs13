@@ -1,7 +1,7 @@
 import cn from "clsx";
 import { auth } from "@/lib/firebase/app";
 import { useState } from "react";
-import { TitleForm } from "@/components/ui/modal/title-modal";
+import { TitleModal } from "@/components/ui/modal/title-modal";
 import { languages } from "@/lib/data/user";
 import { CustomIcon } from "@/components/ui/custom-icons";
 import { InputCheckbox } from "@/components/ui/input";
@@ -72,7 +72,7 @@ export const LanguagesModal = (props: ComponentModalProps): JSX.Element => {
       <div className="pt-[75px] h-full xs:min-h-[inherit] w-full flex flex-col">
         <div className="h-[calc(100%_-_100px)] xs:h-[475px] w-full relative z-0 space-y-3 px-5 xs:px-16 overflow-hidden flex flex-col">
           <div>
-            <TitleForm title={"Which languages do you speak?"} />
+            <TitleModal title={"Which languages do you speak?"} />
             <ParagraphModal
               className="text-base"
               text={

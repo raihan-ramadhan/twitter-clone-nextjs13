@@ -1,6 +1,6 @@
 import { XModal } from "../ui/modal/x-modal";
 import { useAuth } from "@/lib/context/auth-context";
-import { TitleForm } from "../ui/modal/title-modal";
+import { TitleModal } from "../ui/modal/title-modal";
 import { CustomIcon } from "../ui/custom-icons";
 import { OrLineModal } from "../ui/modal/or-line-modal";
 import { SwitchModal } from "../ui/modal/switch-modal";
@@ -22,7 +22,7 @@ export const SignupModal = ({
       />
       <XModal closeModal={closeModal} />
       <div className="w-full max-w-xs mx-auto min-h-[500px] space-y-6">
-        <TitleForm title="Join Twitter today" />
+        <TitleModal title="Join Twitter today" />
         <ButtonProvider
           callback={signInWithGoogle}
           text="Sign up with Google"

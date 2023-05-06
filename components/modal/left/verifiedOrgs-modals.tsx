@@ -1,10 +1,9 @@
-import React from "react";
 import Image from "next/image";
 
 import { XModal } from "@/components/ui/modal/x-modal";
 import { ParagraphModal } from "@/components/ui/modal/paragaph-modal";
 import { ButtonHighlight } from "@/components/ui/modal/buttons-modal";
-import { SubTitleModal, TitleForm } from "@/components/ui/modal/title-modal";
+import { SubTitleModal, TitleModal } from "@/components/ui/modal/title-modal";
 
 import type { LeftMoreModalContent } from "./left-more-modal";
 
@@ -58,14 +57,14 @@ export const VerifiedOrgsModal = ({ closeModal }: LeftMoreModalContent) => {
             alt="illustration-magnified-earth"
             src={"/assets/illustration-magnified-earth.png"}
           />
-          <TitleForm className="text-3xl" title="Verified Organizations" />
+          <TitleModal className="text-3xl" title="Verified Organizations" />
           <SubTitleModal
             className="text-lg"
             title="Verified Organizations is for organizations of all types–businesses, non-profits, and government institutions–to manage their verification, affiliate and verify any related account, and unlock new features."
           />
-          {verifiedDetails.map(({ paragraph, subtitle }) => {
+          {verifiedDetails.map(({ paragraph, subtitle }, index) => {
             return (
-              <div>
+              <div key={`details_verified_${index}`}>
                 <SubTitleModal className="text-lg" title={subtitle} />
                 <ParagraphModal secondary text={paragraph} />
               </div>

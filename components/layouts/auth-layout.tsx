@@ -3,6 +3,7 @@ import cn from "clsx";
 import { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
+import useModalVariant from "@/lib/hooks/useModalVariant";
 import { Modal } from "../modal/modal";
 import { Button } from "../ui/button";
 import { useAuth } from "@/lib/context/auth-context";
@@ -16,7 +17,6 @@ import { useRequireData } from "@/lib/context/require-data-context";
 import { RequireDataModal } from "../modal/requireData/require-data-modal";
 
 import type { LayoutProps } from "./common-layout";
-import useModalVariant from "@/lib/hooks/useModalVariant";
 type OpenState = { signIn: boolean; signUp: boolean };
 
 const initialOpenSign = { signIn: false, signUp: false };
@@ -25,7 +25,9 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
   const [openSign, setOpenSign] = useState<OpenState>(initialOpenSign);
   const { setShowModal } = useShowModal();
   const { user, loading } = useAuth();
+  const variant = useModalVariant();
   const { isMobile } = useWindow();
+
   const {
     loading: loadingRequireData,
     requireData,
@@ -43,8 +45,6 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
 
   if ((loading && !isLogging) || (user && asPathname === "/"))
     return <Placeholder />;
-
-  const variant = useModalVariant();
 
   const closeModalSign = (): void => {
     setOpenSign(initialOpenSign);

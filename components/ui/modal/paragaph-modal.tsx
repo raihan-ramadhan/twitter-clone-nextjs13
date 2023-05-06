@@ -4,7 +4,7 @@ export const ParagraphModal = ({
   className,
   secondary = false,
 }: {
-  text: string;
+  text: string | JSX.Element;
   className?: string;
   secondary?: boolean;
 }): JSX.Element => {
@@ -16,7 +16,7 @@ export const ParagraphModal = ({
         secondary ? "dark:text-dark-secondary" : "dark:text-light-line-reply"
       )}
     >
-      {text}
+      <>{text}</>
     </p>
   );
 };

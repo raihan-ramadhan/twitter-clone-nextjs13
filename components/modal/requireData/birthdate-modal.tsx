@@ -4,7 +4,7 @@ import { onAuthStateChanged } from "firebase/auth";
 
 import { auth } from "@/lib/firebase/app";
 import { Select } from "../../ui/modal/select-modal";
-import { TitleForm } from "../../ui/modal/title-modal";
+import { TitleModal } from "../../ui/modal/title-modal";
 import { CustomIcon } from "@/components/ui/custom-icons";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { ParagraphModal } from "../../ui/modal/paragaph-modal";
@@ -70,7 +70,7 @@ export const BirthdateModal = (props: ComponentModalProps): JSX.Element => {
       <div className="pt-[75px] h-full xs:min-h-[inherit] w-full flex flex-col">
         <div className="h-[calc(100%_-_100px)] xs:h-[475px] w-full relative z-0 space-y-6 px-5 xs:px-16">
           <div>
-            <TitleForm title={"What's your birth date"} />
+            <TitleModal title={"What's your birth date"} />
             <ParagraphModal text={"This wont be public"} />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 ">

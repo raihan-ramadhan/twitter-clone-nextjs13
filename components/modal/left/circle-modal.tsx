@@ -4,13 +4,12 @@ import { useState } from "react";
 
 import { XModal } from "@/components/ui/modal/x-modal";
 import { SearchBar } from "@/components/ui/search-bar";
-import { TitleForm } from "@/components/ui/modal/title-modal";
+import { TitleModal } from "@/components/ui/modal/title-modal";
 
 import type { LeftMoreModalContent } from "./left-more-modal";
 
-export const CircleModal = ({
-  closeModal,
-}: LeftMoreModalContent): JSX.Element => {
+export const CircleModal = (props: LeftMoreModalContent): JSX.Element => {
+  const { closeModal } = props;
   const [currentTab, setCurrentTab] = useState<0 | 1>(0);
 
   return (
@@ -20,7 +19,7 @@ export const CircleModal = ({
           <div>
             <XModal closeModal={closeModal} />
           </div>
-          <TitleForm
+          <TitleModal
             title="Edit your Twitter Circle"
             className="text-lg xs:text-2xl py-2 pl-20"
           />

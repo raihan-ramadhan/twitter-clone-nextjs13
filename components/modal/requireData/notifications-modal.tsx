@@ -1,7 +1,7 @@
 import { auth } from "@/lib/firebase/app";
 import { useState } from "react";
 import { HeroIcon } from "@/components/ui/hero-icon";
-import { TitleForm } from "@/components/ui/modal/title-modal";
+import { TitleModal } from "@/components/ui/modal/title-modal";
 import { ParagraphModal } from "@/components/ui/modal/paragaph-modal";
 import { useRequireData } from "@/lib/context/require-data-context";
 import { onAuthStateChanged } from "firebase/auth";
@@ -43,7 +43,7 @@ export const NotificationsModal = (props: ComponentModalProps): JSX.Element => {
             className="h-10 w-10 text-accent-blue absolute top-0 left-1/2 -translate-x-1/2"
           />
           <div>
-            <TitleForm title="Turn on notifications" />
+            <TitleModal title="Turn on notifications" />
             <ParagraphModal
               text="Get the most out of the twitter by staying up to date with what's happening"
               className="text-base"

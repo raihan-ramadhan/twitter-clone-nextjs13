@@ -55,11 +55,11 @@ const variants: Variants[] = [
 
 const [variantHeight, variantOpacity] = variants;
 
-export const TwitterBlueModal = ({
-  closeModal,
-}: {
+export const TwitterBlueModal = (props: {
   closeModal: () => void;
 }): JSX.Element => {
+  const { closeModal } = props;
+
   const [showMore, setShowMore] = useState<boolean>(false);
   const [twitterBlue, setTwitterBlue] = useState<"0" | "1">("0");
 

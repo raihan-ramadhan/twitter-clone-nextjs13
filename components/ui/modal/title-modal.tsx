@@ -1,5 +1,5 @@
 import cn from "clsx";
-export const TitleForm = ({
+export const TitleModal = ({
   title,
   className,
 }: {

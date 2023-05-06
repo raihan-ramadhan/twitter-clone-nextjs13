@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 
 import { HeroIcon } from "@/components/ui/hero-icon";
-import { TitleForm } from "@/components/ui/modal/title-modal";
+import { TitleModal } from "@/components/ui/modal/title-modal";
 import { ParagraphModal } from "@/components/ui/modal/paragaph-modal";
 import { ButtonHighlight } from "@/components/ui/modal/buttons-modal";
 import { capitalizeFirstChar } from "@/lib/utils";
@@ -77,7 +77,7 @@ export const Topics = ({
           gradient="ellipse"
         >
           <div className="flex flex-col mb-6 z-0">
-            <TitleForm title={"What do you want to see in Twitter?"} />
+            <TitleModal title={"What do you want to see in Twitter?"} />
             <ParagraphModal
               text={
                 "Select at least 3 interest to pesonalize you Twitter experience. They will be visible on your profile."

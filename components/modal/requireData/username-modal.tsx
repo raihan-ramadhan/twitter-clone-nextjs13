@@ -6,7 +6,7 @@ import { Loading } from "@/components/ui/loading";
 import { HeroIcon } from "@/components/ui/hero-icon";
 import { debounce } from "lodash";
 import { InputText } from "@/components/ui/input";
-import { TitleForm } from "@/components/ui/modal/title-modal";
+import { TitleModal } from "@/components/ui/modal/title-modal";
 import { CustomIcon } from "@/components/ui/custom-icons";
 import { doc, getDoc } from "firebase/firestore";
 import { getRandomInt } from "@/lib/random";
@@ -206,7 +206,7 @@ export const UsernameModal = (props: ComponentModalProps): JSX.Element => {
       <div className="pt-[75px] h-full xs:min-h-[inherit] w-full flex flex-col">
         <div className="h-[calc(100%_-_100px)] xs:h-[475px] w-full relative z-0 space-y-6 px-5 xs:px-16">
           <div>
-            <TitleForm title={"What should we call you?"} />
+            <TitleModal title={"What should we call you?"} />
             <ParagraphModal
               text={"Your @username is unique. You can always change it later."}
               className="text-base"

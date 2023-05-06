@@ -8,7 +8,7 @@ import { useRequireData } from "@/lib/context/require-data-context";
 import { ParagraphModal } from "@/components/ui/modal/paragaph-modal";
 import { ButtonHighlight } from "@/components/ui/modal/buttons-modal";
 import { ComponentModalProps } from "./require-data-modal";
-import { SubTitleModal, TitleForm } from "@/components/ui/modal/title-modal";
+import { SubTitleModal, TitleModal } from "@/components/ui/modal/title-modal";
 
 export const ListsModal = (props: ComponentModalProps) => {
   const { nextSlide } = props;
@@ -39,7 +39,7 @@ export const ListsModal = (props: ComponentModalProps) => {
       />
       <div className="pt-[75px] h-full xs:min-h-[inherit] w-full flex flex-col">
         <div className="h-full max-h-[calc(100%_-_100px)] xs:h-[475px] overflow-y-auto px-5 xs:px-16 scrollbar-w-1 scrollbar-thumb-accent-blue hover:scrollbar-thumb-accent-blue/80 scrollbar-track-main-background-3 scrollbar-thin">
-          <TitleForm title={"What do you want to see in Twitter?"} />
+          <TitleModal title={"What do you want to see in Twitter?"} />
           <ParagraphModal
             text={
               "By following a lists, you will see tweets from that lists in a separate timeline."
