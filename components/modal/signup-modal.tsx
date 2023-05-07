@@ -15,7 +15,7 @@ export const SignupModal = ({
 }): JSX.Element => {
   const { signInWithGoogle } = useAuth();
   return (
-    <>
+    <div className="w-full xs:max-w-xl relative h-[inherit] min-h-[inherit] flex justify-center items-center">
       <CustomIcon
         className="w-8 h-8 text-accent-blue mx-auto absolute top-5 left-1/2 -translate-x-1/2 "
         iconName="TwitterIcon"
@@ -64,6 +64,6 @@ export const SignupModal = ({
           textButton="Log In"
         />
       </div>
-    </>
+    </div>
   );
 };

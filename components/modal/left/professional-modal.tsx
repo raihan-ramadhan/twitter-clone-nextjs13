@@ -27,7 +27,7 @@ export const ProfessionalModal = (props: LeftMoreModalContent): JSX.Element => {
             className="object-contain object-top"
           />
         </div>
-        <div className="px-8 xs:px-20 flex flex-col flex-1 mt-8 xs:mt-3">
+        <div className="px-8 sm:px-20 flex flex-col flex-1 mt-8 xs:mt-3">
           <div className="space-y-5 xs:space-y-3 flex-1">
             <TitleModal
               title="Twitter for Professionals"

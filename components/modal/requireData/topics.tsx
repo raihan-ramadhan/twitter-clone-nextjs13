@@ -69,7 +69,7 @@ export const Topics = ({
   };
   return (
     <>
-      <div className="h-full max-h-[calc(100%_-_100px)] xs:h-[475px] relative z-0">
+      <div className="h-full max-h-[calc(100%_-_100px)] sm:h-[475px] relative z-0">
         <ContainerScrollShadows
           className="px-10 xs:px-16 relative bg-main-background-1 h-full"
           classNameContainer="h-full"
@@ -85,7 +85,7 @@ export const Topics = ({
               className="text-base"
             />
           </div>
-          <div className="grid grid-cols-2 xs:grid-cols-3 gap-3 min-h-[575px] w-full pb-10 px-2">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 min-h-[575px] w-full pb-10 px-2">
             {topicsName.map((topic, index) => {
               const exist = myTopics.some((item) => item.topic === topic);
               return (
@@ -122,7 +122,7 @@ export const Topics = ({
         </ContainerScrollShadows>
       </div>
 
-      <div className="h-[100px] px-5 xs:px-16 flex items-center bg-main-background-1 xs:rounded-b-2xl">
+      <div className="h-[100px] px-5 xs:px-16 flex items-center bg-main-background-1 sm:rounded-b-2xl">
         <div className="flex-1 overflow-hidden">
           {myTopics.length >= 3 && (
             <motion.div

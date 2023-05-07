@@ -14,15 +14,15 @@ export const KeyboardModal = (props: LeftMoreModalContent) => {
         <div className="sm:flex items-center pl-16 pr-16 sm:pr-4 gap-2 pt-3 sm:pt-0">
           <TitleModal title="Keyboard shortcuts" className="text-xl" />
           <span className="text-red-500 text-xs flex-1 text-right gap-5">
-            **the shortcut keys hasn't been added yet, I just want to make this
-            first
+            **the shortcut keys hasn&#39;t been added yet, I just want to make
+            this first
           </span>
         </div>
       </div>
       <div className="px-4 py-3 space-y-5 sm:space-y-0 sm:flex w-full justify-around items-start gap-5">
         {keysTables.map(({ title, rows }, index) => {
           return (
-            <table className="w-full">
+            <table className="w-full" key={`table_${index}`}>
               <thead>
                 <SubTitleModal
                   title={title}
@@ -33,7 +33,7 @@ export const KeyboardModal = (props: LeftMoreModalContent) => {
                 <tbody className="flex flex-col gap-1">
                   {rows.map(({ subtitle, keys }, index) => {
                     return (
-                      <tr className="flex justify-between">
+                      <tr className="flex justify-between" key={`tr_${index}`}>
                         <td className="flex-1">
                           <span>{subtitle}</span>
                         </td>
@@ -41,7 +41,10 @@ export const KeyboardModal = (props: LeftMoreModalContent) => {
                           {keys.map((key, index) => {
                             return (
                               <>
-                                <span className="inline-block rounded-md bg-main-background-3 dark:bg-main-background-3 px-2 [box-shadow:0_1px_2px_rgba(0,0,0,0.15)] dark:[box-shadow:0_1px_2px_rgba(255,255,255,0.15)]">
+                                <span
+                                  key={`key${index}`}
+                                  className="inline-block rounded-md bg-main-background-3 dark:bg-main-background-3 px-2 [box-shadow:0_1px_2px_rgba(0,0,0,0.15)] dark:[box-shadow:0_1px_2px_rgba(255,255,255,0.15)]"
+                                >
                                   <code>{key}</code>
                                 </span>
                                 {index !== keys.length - 1 && <span>+</span>}

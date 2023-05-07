@@ -203,8 +203,8 @@ export const UsernameModal = (props: ComponentModalProps): JSX.Element => {
         className="w-8 h-8 text-accent-blue mx-auto absolute top-5 left-1/2 -translate-x-1/2 "
         iconName="TwitterIcon"
       />
-      <div className="pt-[75px] h-full xs:min-h-[inherit] w-full flex flex-col">
-        <div className="h-[calc(100%_-_100px)] xs:h-[475px] w-full relative z-0 space-y-6 px-5 xs:px-16">
+      <div className="pt-[75px] h-full sm:min-h-[inherit] w-full flex flex-col">
+        <div className="h-[calc(100%_-_100px)] sm:h-[475px] w-full relative z-0 space-y-6 px-5 xs:px-16">
           <div>
             <TitleModal title={"What should we call you?"} />
             <ParagraphModal
@@ -311,7 +311,7 @@ export const UsernameModal = (props: ComponentModalProps): JSX.Element => {
             </a>
           </div>
         </div>
-        <div className="h-[100px] px-5 xs:px-16 flex items-center bg-main-background-1 xs:rounded-b-2xl">
+        <div className="h-[100px] px-5 xs:px-16 flex items-center bg-main-background-1 sm:rounded-b-2xl">
           <ButtonHighlight
             disabled={availability}
             loading={loading || loadInitial}

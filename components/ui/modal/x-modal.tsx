@@ -4,6 +4,7 @@ import { Button } from "../button";
 import { HeroIcon } from "../hero-icon";
 
 import type { ComponentPropsWithRef } from "react";
+import { useWindow } from "@/lib/context/window-context";
 
 type ButtonProps = ComponentPropsWithRef<"button"> & {
   closeModal: () => void;
@@ -15,6 +16,8 @@ export const XModal = ({
   className,
   ...rest
 }: ButtonProps): JSX.Element => {
+  const { isBigMobile } = useWindow();
+
   return (
     <>
       <Button
@@ -25,7 +28,10 @@ export const XModal = ({
           className
         )}
       >
-        <HeroIcon iconName="XMarkIcon" className="h-5 w-5" />
+        <HeroIcon
+          iconName={isBigMobile ? "ArrowLeftIcon" : "XMarkIcon"}
+          className="h-5 w-5"
+        />
       </Button>
     </>
   );

@@ -26,7 +26,7 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
   const { setShowModal } = useShowModal();
   const { user, loading } = useAuth();
   const variant = useModalVariant();
-  const { isMobile } = useWindow();
+  const { isBigMobile } = useWindow();
 
   const {
     loading: loadingRequireData,
@@ -88,10 +88,10 @@ export const AuthLayout = ({ children }: LayoutProps): JSX.Element => {
       {!user && (
         <>
           <Modal
-            modalClassName="bg-main-background-1 w-full xs:max-w-xl xs:rounded-2xl hover-animation h-full xs:h-[unset] xs:min-h-[650px] relative flex justify-center items-center"
+            modalClassName="bg-main-background-1 w-full sm:max-w-xl sm:rounded-2xl hover-animation h-full sm:h-[unset] sm:min-h-[650px] relative flex justify-center items-center"
             className={cn(
               "flex items-center justify-center",
-              isMobile && "!p-0"
+              isBigMobile && "!p-0"
             )}
             open={openSign.signIn || openSign.signUp}
             closeModal={() => {}}

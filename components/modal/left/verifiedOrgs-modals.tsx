@@ -49,7 +49,7 @@ export const VerifiedOrgsModal = ({ closeModal }: LeftMoreModalContent) => {
             <XModal closeModal={closeModal} />
           </div>
         </div>
-        <div className="z-0 space-y-5 px-16 pb-12">
+        <div className="z-0 space-y-5 px-12 sm:px-16 pb-12">
           <Image
             className="mx-auto"
             height={140}

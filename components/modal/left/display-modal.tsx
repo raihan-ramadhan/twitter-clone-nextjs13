@@ -3,6 +3,7 @@ import { UserName } from "@/components/user/user-name";
 import { UserAvatar } from "@/components/user/user-avatar";
 import { InputThemeRadio } from "../../input/input-theme-radio";
 import { InputAccentRadio } from "@/components/input/input-accent-radio";
+import { XModal } from "@/components/ui/modal/x-modal";
 
 import type { Theme, Accent } from "@/lib/types/theme";
 import type { LeftMoreModalContent } from "./left-more-modal";
@@ -27,13 +28,14 @@ export function DisplayModal({
 }: LeftMoreModalContent): JSX.Element {
   return (
     <div className="flex flex-col items-center gap-6 p-8">
+      <XModal closeModal={closeModal} className="sm:hidden" />
       <div className="flex flex-col gap-3 text-center">
         <h2 className="text-2xl font-bold">Customize your view</h2>
         <p className="text-light-secondary dark:text-dark-secondary">
           These settings affect all the Twitter accounts on this browser.
         </p>
       </div>
-      <article className="hover-animation mx-8 rounded-2xl border border-light-border px-4 py-3 dark:border-dark-border">
+      <article className="hover-animation sm:mx-8 rounded-2xl border border-light-border px-4 py-3 dark:border-dark-border">
         <div className="grid grid-cols-[auto,1fr] gap-3">
           <UserAvatar src="/assets/twitter-avatar.jpg" alt="Twitter" />
           <div>

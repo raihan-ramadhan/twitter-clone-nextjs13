@@ -34,15 +34,17 @@ const variants: Variants[] = [
 
 export const [backdrop, modal] = variants;
 
-export function Modal({
-  open,
-  children,
-  className,
-  modalAnimation,
-  modalClassName,
-  closePanelOnClick,
-  closeModal,
-}: ModalProps): JSX.Element {
+export function Modal(props: ModalProps): JSX.Element {
+  const {
+    open,
+    children,
+    className,
+    modalAnimation,
+    modalClassName,
+    closePanelOnClick,
+    closeModal,
+  } = props;
+
   return (
     <AnimatePresence>
       {open && (

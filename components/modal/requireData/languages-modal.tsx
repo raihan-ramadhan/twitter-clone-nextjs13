@@ -69,8 +69,8 @@ export const LanguagesModal = (props: ComponentModalProps): JSX.Element => {
         className="w-8 h-8 text-accent-blue mx-auto absolute top-5 left-1/2 -translate-x-1/2 "
         iconName="TwitterIcon"
       />
-      <div className="pt-[75px] h-full xs:min-h-[inherit] w-full flex flex-col">
-        <div className="h-[calc(100%_-_100px)] xs:h-[475px] w-full relative z-0 space-y-3 px-5 xs:px-16 overflow-hidden flex flex-col">
+      <div className="pt-[75px] h-full sm:min-h-[inherit] w-full flex flex-col">
+        <div className="h-[calc(100%_-_100px)] sm:h-[475px] w-full relative z-0 space-y-3 px-5 xs:px-16 overflow-hidden flex flex-col">
           <div>
             <TitleModal title={"Which languages do you speak?"} />
             <ParagraphModal
@@ -111,7 +111,7 @@ export const LanguagesModal = (props: ComponentModalProps): JSX.Element => {
             </button>
           </div>
         </div>
-        <div className="h-[100px] px-5 xs:px-16 flex items-center bg-main-background-1 xs:rounded-b-2xl">
+        <div className="h-[100px] px-5 xs:px-16 flex items-center bg-main-background-1 sm:rounded-b-2xl">
           <ButtonHighlight
             loading={loading}
             callback={fillLanguages}

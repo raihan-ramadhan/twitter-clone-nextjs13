@@ -63,7 +63,7 @@ export const TwitterBlueModal = (props: {
   const [showMore, setShowMore] = useState<boolean>(false);
   const [twitterBlue, setTwitterBlue] = useState<"0" | "1">("0");
 
-  const { isMobile } = useWindow();
+  const { isBigMobile } = useWindow();
 
   const onChange: OnChange = (event) => {
     const value = event.target.value as "0" | "1";
@@ -72,10 +72,13 @@ export const TwitterBlueModal = (props: {
 
   return (
     <>
-      {isMobile && (
+      {isBigMobile && (
         <Modal
-          modalClassName="bg-main-background-1 w-full xs:h-[unset] relative rounded-t-[30px]"
-          className={cn("flex items-end overflow-y-hidden", isMobile && "!p-0")}
+          modalClassName="bg-main-background-1 w-full sm:h-[unset] relative rounded-t-[30px]"
+          className={cn(
+            "flex items-end overflow-y-hidden",
+            isBigMobile && "!p-0"
+          )}
           open={showMore}
           modalAnimation={variantHeight}
           closeModal={() => setShowMore(false)}
@@ -83,9 +86,9 @@ export const TwitterBlueModal = (props: {
           <LearnMoreModal />
         </Modal>
       )}
-      <div className="h-full xs:min-h-[inherit] w-full flex flex-col rounded-2xl overflow-hidden relative">
+      <div className="h-full sm:min-h-[inherit] w-full flex flex-col rounded-2xl overflow-hidden relative">
         <XModal closeModal={closeModal} className="z-30" tabIndex={0} />
-        <div className="xs:min-h-[inherit] xs:max-h-[calc(100vh_-_100px)] h-full overflow-y-auto w-full relative z-0 flex flex-col">
+        <div className="sm:min-h-[inherit] sm:max-h-[calc(100vh_-_100px)] h-full overflow-y-auto w-full relative z-0 flex flex-col">
           <div className="text-light-primary dark:text-dark-primary bg-main-background-1/70 w-full inset-x-0 h-14 flex justify-center items-center shrink-0 sticky top-0 backdrop-blur-lg">
             <svg viewBox="0 0 76 24" className="h-6 fill-current">
               <g>
@@ -174,7 +177,7 @@ export const TwitterBlueModal = (props: {
                 <li>
                   All the existing Blue features, including Edit Tweet, Bookmark
                   Folders and early access to new features
-                  {isMobile && (
+                  {isBigMobile && (
                     <span
                       onClick={() => setShowMore(true)}
                       className="text-main-accent"
@@ -185,7 +188,7 @@ export const TwitterBlueModal = (props: {
                   )}
                 </li>
               </ul>
-              {!isMobile && (
+              {!isBigMobile && (
                 <div>
                   <div
                     onClick={() => setShowMore(!showMore)}

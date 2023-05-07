@@ -7,12 +7,13 @@ import { useWindow } from "@/lib/context/window-context";
 import { CustomIcon } from "../ui/custom-icons";
 import { useShowModal } from "@/lib/context/show-modal-context";
 import { TwitterBlueModal } from "../modal/left/twitter-blue-modal";
-
-import type { Variants } from "framer-motion";
+import useModalVariant from "@/lib/hooks/useModalVariant";
 
 export const LeftTwitterBlue = (): JSX.Element => {
-  const { isMobile, height: windowHeight } = useWindow();
+  const { isBigMobile, height: windowHeight } = useWindow();
   const { setShowModal } = useShowModal();
+
+  const variant = useModalVariant();
   const { open, openModal, closeModal } = useModal();
 
   const handleOpen = () => {
@@ -25,33 +26,17 @@ export const LeftTwitterBlue = (): JSX.Element => {
     closeModal();
   };
 
-  const variants: Variants = isMobile
-    ? {
-        initial: { opacity: 0 },
-        animate: {
-          opacity: 1,
-          transition: { duration: 0.2 },
-        },
-        exit: { opacity: 0, transition: { duration: 0.15 } },
-      }
-    : {
-        initial: { opacity: 0, scale: 0.8 },
-        animate: {
-          opacity: 1,
-          scale: 1,
-          transition: { type: "spring", duration: 0.5, bounce: 0.4 },
-        },
-        exit: { opacity: 0, scale: 0.8, transition: { duration: 0.15 } },
-      };
-
   return (
     <>
       <Modal
-        modalClassName="bg-main-background-1 w-full xs:max-w-xl xs:rounded-2xl hover-animation h-full xs:h-[unset] xs:min-h-[650px] relative flex justify-center items-center"
-        className={cn("flex items-center justify-center", isMobile && "!p-0")}
+        modalClassName="bg-main-background-1 w-full sm:max-w-xl sm:rounded-2xl hover-animation h-full sm:h-[unset] sm:min-h-[650px] relative flex justify-center items-center"
+        className={cn(
+          "flex items-center justify-center",
+          isBigMobile && "!p-0"
+        )}
         open={open}
         closeModal={handleClose}
-        modalAnimation={variants}
+        modalAnimation={variant}
       >
         <TwitterBlueModal closeModal={handleClose} />
       </Modal>

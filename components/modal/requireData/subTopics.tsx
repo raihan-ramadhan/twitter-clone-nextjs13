@@ -71,7 +71,7 @@ export const SubTopics = ({
 
   return (
     <>
-      <div className="h-[calc(100%_-_100px)] xs:h-[475px] w-full relative z-0">
+      <div className="h-[calc(100%_-_100px)] sm:h-[475px] w-full relative z-0">
         <ContainerScrollShadows
           classNameContainer="h-full"
           className={`h-full w-full overflow-y-auto overflow-x-hidden scrollbar-thumb-accent-blue scrollbar-track-main-background-3 scrollbar-thin px-10 xs:px-16`}
@@ -99,7 +99,7 @@ export const SubTopics = ({
           </div>
         </ContainerScrollShadows>
       </div>
-      <div className="h-[100px] px-5 xs:px-16 flex items-center bg-main-background-1 xs:rounded-b-2xl">
+      <div className="h-[100px] px-5 xs:px-16 flex items-center bg-main-background-1 sm:rounded-b-2xl">
         <ButtonHighlight
           disabled={myTopics.length < 3}
           loading={loading}

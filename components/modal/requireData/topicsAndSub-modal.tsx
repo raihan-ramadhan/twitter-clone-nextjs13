@@ -26,7 +26,7 @@ export const TopicsAndSubModal = (props: ComponentModalProps): JSX.Element => {
         className="w-8 h-8 text-accent-blue mx-auto absolute top-5 left-1/2 -translate-x-1/2 "
         iconName="TwitterIcon"
       />
-      <div className="pt-[75px] h-full xs:min-h-[inherit] w-full flex flex-col">
+      <div className="pt-[75px] h-full sm:min-h-[inherit] w-full flex flex-col">
         {!isSubSlide ? (
           <Topics
             {...{
