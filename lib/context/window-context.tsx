@@ -15,6 +15,7 @@ type WindowSize = {
 
 type WindowContext = WindowSize & {
   isMobile: boolean;
+  isBigMobile: boolean;
 };
 
 export const WindowContext = createContext<WindowContext | null>(null);
@@ -51,6 +52,7 @@ export default function WindowContextProvider({
   const value: WindowContext = {
     ...windowSize,
     isMobile: windowSize.width < 500,
+    isBigMobile: windowSize.width < 640,
   };
 
   return (

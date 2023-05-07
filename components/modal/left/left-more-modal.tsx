@@ -4,6 +4,7 @@ import { Modal } from "../modal";
 import { useWindow } from "@/lib/context/window-context";
 import { CircleModal } from "./circle-modal";
 import { DisplayModal } from "./display-modal";
+import { KeyboardModal } from "./keyboard-modal";
 import { ProfessionalModal } from "./professional-modal";
 import { VerifiedOrgsModal } from "./verifiedOrgs-modals";
 
@@ -23,7 +24,7 @@ export const LeftMoreModal = ({
   handleCloseModal,
   open,
 }: LeftMoreModalProps): JSX.Element => {
-  const { isMobile } = useWindow();
+  const { isBigMobile } = useWindow();
   const variant = useModalVariant();
 
   function renderComponentBasedOnCase(caseValue: ModalLeftMore): JSX.Element {
@@ -37,20 +38,23 @@ export const LeftMoreModal = ({
       case "display":
         return <DisplayModal closeModal={handleCloseModal} />;
       case "keyboard":
-        return <div>Keyboard Shortcut Coming Soon</div>;
+        return <KeyboardModal closeModal={handleCloseModal} />;
       default:
         return <div className="text-red-400">Invalid case value</div>;
     }
   }
   return (
     <Modal
-      modalClassName="w-full max-w-xl bg-main-background-1 xs:rounded-2xl hover-animation overflow-hidden h-full xs:h-[unset] xs:max-h-[calc(100vh_-_100px)] xs:min-h-[650px]"
+      modalClassName={cn(
+        "w-full bg-main-background-1 sm:rounded-2xl hover-animation overflow-hidden h-full sm:h-[unset] sm:max-h-[calc(100vh_-_100px)] sm:min-h-[650px]",
+        currentModal === "keyboard" ? "sm:max-w-4xl" : "sm:max-w-xl"
+      )}
       open={open}
       closeModal={handleCloseModal}
-      className={cn("flex items-center justify-center", isMobile && "!p-0")}
+      className={cn("flex items-center justify-center", isBigMobile && "!p-0")}
       modalAnimation={variant}
     >
-      <div className="overflow-y-auto h-[inherit] xs:h-[inherit] xs:max-h-[inherit] xs:min-h-[inherit] w-[inherit] relative">
+      <div className="overflow-y-auto h-[inherit] sm:h-[inherit] sm:max-h-[inherit] sm:min-h-[inherit] w-[inherit] relative">
         {renderComponentBasedOnCase(currentModal)}
       </div>
     </Modal>

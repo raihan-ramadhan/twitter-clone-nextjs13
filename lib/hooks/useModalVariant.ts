@@ -2,9 +2,9 @@ import { Variants } from "framer-motion";
 import { useWindow } from "../context/window-context";
 
 export default function useModalVariant() {
-  const { isMobile } = useWindow();
+  const { isBigMobile } = useWindow();
 
-  const variant: Variants = isMobile
+  const variant: Variants = isBigMobile
     ? {
         initial: { opacity: 0 },
         animate: {
