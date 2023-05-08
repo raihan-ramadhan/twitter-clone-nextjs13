@@ -44,7 +44,7 @@ export const VerifiedOrgsModal = ({ closeModal }: LeftMoreModalContent) => {
   return (
     <div className="relative min-h-[inherit]">
       <div>
-        <div className="sticky top-0 h-12 bg-main-background-1/70 backdrop-blur-lg z-10">
+        <div className="sticky top-0 h-12 blur-background z-10">
           <div>
             <XModal closeModal={closeModal} />
           </div>

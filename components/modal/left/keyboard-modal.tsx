@@ -9,7 +9,7 @@ export const KeyboardModal = (props: LeftMoreModalContent) => {
 
   return (
     <div className="relative min-h-[inherit] ">
-      <div className="sticky top-0 bg-main-background-1/70 backdrop-blur-lg z-10 min-h-[52px] flex flex-col justify-center">
+      <div className="sticky top-0 blur-background z-10 min-h-[52px] flex flex-col justify-center">
         <XModal closeModal={closeModal} />
         <div className="sm:flex items-center pl-16 pr-16 sm:pr-4 gap-2 pt-3 sm:pt-0">
           <TitleModal title="Keyboard shortcuts" className="text-xl" />

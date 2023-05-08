@@ -77,7 +77,7 @@ const Left = (): JSX.Element => {
         {/* i want use overflow-y-auto here to make scrollable vertical nav but somehow the popover menu will make this scrollable horizontal too which we don't want*/}
         <div
           className={cn(
-            "fixed flex flex-col justify-between xs:top-0 xs:bottom-0 left-0 xs:left-[unset] right-0 xs:right-[unset] bottom-0 px-2 border-t xs:border-t-0 border-light-border dark:border-dark-border ",
+            "bg-main-background-1 fixed flex flex-col justify-between xs:top-0 xs:bottom-0 left-0 xs:left-[unset] right-0 xs:right-[unset] bottom-0 px-2 border-t xs:border-t-0 border-light-border dark:border-dark-border ",
             widthCN
           )}
         >

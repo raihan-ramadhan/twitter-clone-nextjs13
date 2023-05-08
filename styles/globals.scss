@@ -123,6 +123,10 @@
     @apply text-xs leading-4 text-light-secondary dark:text-dark-secondary;
   }
 
+  .blur-background {
+    @apply bg-main-background-1/70 backdrop-blur-lg;
+  }
+
   .bg-gradient-radial-to-b {
     @include main-gradient(top, var(--main-gradient));
   }

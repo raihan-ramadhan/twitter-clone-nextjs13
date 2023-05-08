@@ -12,6 +12,8 @@ type SearchBarProps = {
   placeholder: string;
   className?: string;
   centerPlaceHolder?: boolean;
+  autoFocus?: boolean;
+  smallOnMobile?: boolean;
 };
 
 const XVariant: Variants = {
@@ -32,6 +34,8 @@ export function SearchBar({
   placeholder,
   className,
   centerPlaceHolder = false,
+  autoFocus = false,
+  smallOnMobile,
 }: SearchBarProps): JSX.Element {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -43,7 +47,8 @@ export function SearchBar({
   const handleBlur = () => setIsFocused(false);
 
   useEffect(() => {
-    if (inputRef.current) inputRef.current.focus();
+    if (inputRef.current && autoFocus) inputRef.current.focus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -71,12 +76,20 @@ export function SearchBar({
   return (
     <label
       className={cn(
-        "group flex items-center justify-between gap-4 rounded-full px-4 py-2 transition relative focus-within:ring-2 focus-within:ring-main-accent dark:focus-within:ring-main-accent",
-        className ?? "bg-main-background-2 focus-within:bg-main-background-1"
+        "group flex items-center justify-between gap-4 rounded-full px-4 transition relative focus-within:ring-main-accent dark:focus-within:ring-main-accent w-full",
+        className ?? "bg-main-background-2 focus-within:bg-main-background-1",
+        smallOnMobile
+          ? "py-1 xs:py-2 focus-within:ring-1 xs:focus-within:ring-2 "
+          : "py-2 focus-within:ring-2"
       )}
     >
       {!isFocused && inputValue.length == 0 && centerPlaceHolder && (
-        <span className="pointer-events-none w-full text-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 flex justify-center items-center gap-2 text-light-secondary dark:text-dark-secondary">
+        <span
+          className={cn(
+            "pointer-events-none w-full text-center absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 flex justify-center items-center gap-2 text-light-secondary dark:text-dark-secondary",
+            smallOnMobile && "text-sm xs:text-base"
+          )}
+        >
           <i>
             <HeroIcon
               className="h-4 w-4 text-light-secondary transition-colors dark:text-dark-secondary"
@@ -89,14 +102,19 @@ export function SearchBar({
       {(isFocused || inputValue.length != 0 || !centerPlaceHolder) && (
         <i>
           <HeroIcon
-            className="h-5 w-5 text-light-secondary transition-colors 
-                       group-focus-within:text-main-accent dark:text-dark-secondary"
+            className={cn(
+              "text-light-secondary transition-colors group-focus-within:text-main-accent dark:text-dark-secondary",
+              smallOnMobile ? "h-4 w-4 xs:h-5 xs:w-5" : "h-5 w-5"
+            )}
             iconName="MagnifyingGlassIcon"
           />
         </i>
       )}
       <input
-        className="peer flex-1 bg-transparent outline-none placeholder:text-light-secondary dark:placeholder:text-dark-secondary"
+        className={cn(
+          "peer flex-1 bg-transparent outline-none placeholder:text-light-secondary dark:placeholder:text-dark-secondary",
+          smallOnMobile && "text-sm xs:text-base"
+        )}
         type="text"
         placeholder={centerPlaceHolder ? "" : placeholder}
         ref={inputRef}
@@ -110,13 +128,14 @@ export function SearchBar({
         {showXMark && inputValue.length && (
           <motion.div {...XVariant}>
             <Button
-              className={cn(
-                "accent-tab bg-main-accent p-1 transition hover:brightness-90"
-              )}
+              className="accent-tab bg-main-accent transition hover:brightness-90 flex justify-center items-center p-1"
               onClick={() => clearInputValue()}
             >
               <HeroIcon
-                className="h-3 w-3 stroke-white pointer-events-none"
+                className={cn(
+                  "stroke-white stroke-[5px] xs:stroke-2 pointer-events-none z-10 text-red-500 fill-red-600 relative",
+                  smallOnMobile ? "h-2 w-2 xs:h-3 xs:w-3" : "h-3 w-3"
+                )}
                 iconName="XMarkIcon"
               />
             </Button>

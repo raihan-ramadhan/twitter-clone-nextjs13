@@ -13,6 +13,7 @@ type ModalProps = {
   modalClassName?: string;
   closePanelOnClick?: boolean;
   closeModal: () => void;
+  backdropClassName?: string;
 };
 
 const variants: Variants[] = [
@@ -42,6 +43,7 @@ export function Modal(props: ModalProps): JSX.Element {
     modalAnimation,
     modalClassName,
     closePanelOnClick,
+    backdropClassName,
     closeModal,
   } = props;
 
@@ -55,7 +57,10 @@ export function Modal(props: ModalProps): JSX.Element {
           static
         >
           <motion.div
-            className="hover-animation fixed inset-0 bg-black/40 dark:bg-[#5B7083]/40"
+            className={cn(
+              "hover-animation fixed inset-0 ",
+              backdropClassName ?? "bg-black/40 dark:bg-[#5B7083]/40"
+            )}
             aria-hidden="true"
             {...backdrop}
           />

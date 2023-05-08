@@ -15,7 +15,7 @@ export const CircleModal = (props: LeftMoreModalContent): JSX.Element => {
   return (
     <div className="relative min-h-[inherit]">
       <div>
-        <div className="sticky top-0 bg-main-background-1/70 backdrop-blur-lg z-10">
+        <div className="sticky top-0 blur-background z-10">
           <div>
             <XModal closeModal={closeModal} />
           </div>
@@ -83,6 +83,7 @@ export const CircleModal = (props: LeftMoreModalContent): JSX.Element => {
             <>
               <div className="px-5">
                 <SearchBar
+                  autoFocus
                   placeholder={"Search People"}
                   className={
                     "bg-main-background-1 ring-1 ring-light-line-reply dark:ring-light-secondary"
