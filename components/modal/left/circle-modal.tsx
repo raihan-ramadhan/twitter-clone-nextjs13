@@ -2,6 +2,7 @@
 import cn from "clsx";
 import { useState } from "react";
 
+import { HrLine } from "@/components/ui/hr-line";
 import { XModal } from "@/components/ui/modal/x-modal";
 import { SearchBar } from "@/components/ui/search-bar";
 import { TitleModal } from "@/components/ui/modal/title-modal";
@@ -53,7 +54,7 @@ export const CircleModal = (props: LeftMoreModalContent): JSX.Element => {
               </div>
             </div>
           </div>
-          <hr className="border-t-light-border dark:border-t-dark-border" />
+          <HrLine />
         </div>
         <div className="space-y-4 mt-4 z-0">
           {currentTab === 0 ? (

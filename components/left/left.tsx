@@ -46,7 +46,7 @@ const navLinks: Readonly<NavLink[]> = [
     disabled: true,
   },
   {
-    href: "/bookmarks",
+    href: "/i/bookmarks",
     linkName: "Bookmarks",
     iconName: "BookmarkIcon",
     canBeHidden: true,
@@ -108,8 +108,8 @@ const Left = (): JSX.Element => {
                     ))}
                     <LeftTwitterBlue />
                     <LeftNavLink
-                      href={`/user/raihan`}
-                      username="raihan"
+                      href={`/user/${user.username}`}
+                      username={user.username}
                       linkName="Profile"
                       iconName="UserIcon"
                       canBeHidden={true}

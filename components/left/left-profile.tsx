@@ -40,6 +40,11 @@ export const LeftProfile = () => {
     setShowModal(false);
   };
 
+  const handleSignout = async () => {
+    handleCloseModal();
+    signOut();
+  };
+
   return (
     <>
       <Modal
@@ -47,7 +52,7 @@ export const LeftProfile = () => {
         open={open}
         closeModal={handleCloseModal}
       >
-        <SignoutModal signOut={signOut} closeModal={handleCloseModal} />
+        <SignoutModal signOut={handleSignout} closeModal={handleCloseModal} />
       </Modal>
       <Menu
         className="relative hidden xs:block ml-[4px] md:ml-[12px] xl:ml-0"

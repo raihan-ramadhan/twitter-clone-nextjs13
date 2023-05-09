@@ -10,6 +10,7 @@ import {
   ButtonProvider,
   ButtonSecondary,
 } from "../ui/modal/buttons-modal";
+import { useShowModal } from "@/lib/context/show-modal-context";
 
 export const LoginModal = ({
   closeModal,
@@ -19,6 +20,15 @@ export const LoginModal = ({
   switchSign: () => void;
 }): JSX.Element => {
   const { signInWithGoogle } = useAuth();
+  const { setShowModal } = useShowModal();
+
+  const handleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+    } finally {
+      setShowModal(false);
+    }
+  };
 
   return (
     <div className="w-full xs:max-w-xl relative h-[inherit] min-h-[inherit] flex justify-center items-center">
@@ -30,7 +40,7 @@ export const LoginModal = ({
       <div className="w-full max-w-xs mx-auto min-h-[500px] space-y-6">
         <TitleModal title={"Sign in to Twitter"} />
         <ButtonProvider
-          callback={signInWithGoogle}
+          callback={handleSignIn}
           text="Sign in with Google"
           provider={"google"}
         />

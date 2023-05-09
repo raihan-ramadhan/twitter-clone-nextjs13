@@ -4,6 +4,7 @@ import { Menu } from "@headlessui/react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { HrLine } from "../ui/hr-line";
 import { ToolTip } from "../ui/tooltip";
 import { useAuth } from "@/lib/context/auth-context";
 import { HeroIcon } from "../ui/hero-icon";
@@ -167,7 +168,7 @@ export const LeftMore = (): JSX.Element => {
                       </div>
                     )}
                   </Menu.Item>
-                  <hr className="border-t-light-border dark:border-t-dark-border mx-3" />
+                  <HrLine className="mx-3" />
                   <Menu.Item>
                     {({ active }): JSX.Element => (
                       <DisclosureItem

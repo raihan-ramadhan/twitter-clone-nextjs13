@@ -5,6 +5,7 @@ import { CustomIcon } from "../ui/custom-icons";
 import { OrLineModal } from "../ui/modal/or-line-modal";
 import { SwitchModal } from "../ui/modal/switch-modal";
 import { ButtonHighlight, ButtonProvider } from "../ui/modal/buttons-modal";
+import { useShowModal } from "@/lib/context/show-modal-context";
 
 export const SignupModal = ({
   closeModal,
@@ -14,6 +15,16 @@ export const SignupModal = ({
   switchSign: () => void;
 }): JSX.Element => {
   const { signInWithGoogle } = useAuth();
+  const { setShowModal } = useShowModal();
+
+  const handleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+    } finally {
+      setShowModal(false);
+    }
+  };
+
   return (
     <div className="w-full xs:max-w-xl relative h-[inherit] min-h-[inherit] flex justify-center items-center">
       <CustomIcon
@@ -24,7 +35,7 @@ export const SignupModal = ({
       <div className="w-full max-w-xs mx-auto min-h-[500px] space-y-6">
         <TitleModal title="Join Twitter today" />
         <ButtonProvider
-          callback={signInWithGoogle}
+          callback={handleSignIn}
           text="Sign up with Google"
           provider={"google"}
         />
