@@ -7,11 +7,40 @@ import { HrLine } from "@/components/ui/hr-line";
 import { HeroIcon } from "@/components/ui/hero-icon";
 import { UserName } from "@/components/user/user-name";
 import { MenuLink } from "@/components/left/menu-link";
-import { UserAvatar } from "@/components/user/user-avatar";
 import { CustomIcon } from "@/components/ui/custom-icons";
+import { UserAvatar } from "@/components/user/user-avatar";
 import { MainHeader } from "@/components/main/main-header";
 import { UserUsername } from "@/components/user/user-username";
-import { MobileLeftModals, MobileSidebarModalProps } from "./mobile-left-modal";
+import { DisclosureItem } from "@/components/left/disclosure";
+
+import type { DisclosureLink } from "@/components/left/disclosure";
+import type { IconName as HeroIconName } from "@/components/ui/hero-icon";
+import type { IconName as CustomIconName } from "@/components/ui/custom-icons";
+import type {
+  MobileLeftModals,
+  MobileSidebarModalProps,
+} from "./mobile-left-modal";
+import { Button } from "@/components/ui/button";
+
+type Stats = [string, string, number];
+
+type SlideModalProps = Omit<MobileSidebarModalProps, "handleOpenSlideLeft"> & {
+  handleOpenModal: (prop: MobileLeftModals) => void;
+};
+
+type SlidesNavProps = {
+  elem: "menu" | "button";
+  title: string;
+  icon: HeroIconName | CustomIconName;
+  href?: string;
+  func?: () => void;
+  disabled?: boolean;
+};
+
+type SlidesDisclosureProps = {
+  title: string;
+  panels: DisclosureLink[];
+};
 
 const leftToRightVariant: Variants = {
   initial: { x: "-100%" },
@@ -20,11 +49,6 @@ const leftToRightVariant: Variants = {
     transition: { type: "spring", duration: 0.8 },
   },
   exit: { x: "-100%", transition: { duration: 0.4 } },
-};
-
-type Stats = [string, string, number];
-type SlideModalProps = Omit<MobileSidebarModalProps, "handleOpenSlideLeft"> & {
-  handleOpenModal: (prop: MobileLeftModals) => void;
 };
 
 export const SlideModal = ({
@@ -41,6 +65,128 @@ export const SlideModal = ({
   const allStats: Readonly<Stats[]> = [
     ["following", "Following", following.length],
     ["followers", "Followers", followers.length],
+  ];
+
+  const slidesNav: SlidesNavProps[] = [
+    {
+      elem: "menu",
+      title: "Profile",
+      icon: "UserIcon",
+      href: `user/${username}`,
+      disabled: true,
+    },
+    {
+      elem: "button",
+      title: "Twitter Blue",
+      icon: "TwitterBlueIcon",
+      func: () => handleOpenModal("twitterBlue"),
+    },
+    {
+      elem: "menu",
+      title: "Lists",
+      icon: "QueueListIcon",
+      href: `${username}/lists`,
+      disabled: true,
+    },
+    {
+      elem: "menu",
+      title: "Bookmarks",
+      icon: "BookmarkIcon",
+      href: `i/bookmarks`,
+      disabled: true,
+    },
+    {
+      elem: "button",
+      title: "Verified Orgs",
+      icon: "VerificationBadge",
+      func: () => handleOpenModal("verifiedOrgs"),
+    },
+  ];
+
+  const slidesDisclosure: SlidesDisclosureProps[] = [
+    {
+      title: "Creator Studio",
+      panels: [
+        {
+          elem: "a",
+          text: "Analytics",
+          href: "https://analytics.twitter.com/",
+          icon: "ChartBarSquareIcon",
+        },
+      ],
+    },
+    {
+      title: "Professional Tools",
+      panels: [
+        {
+          elem: "button",
+          text: "Twitter for Professional",
+          icon: "RocketLaunchIcon",
+          func: () => {
+            handleOpenModal("professional");
+          },
+        },
+        {
+          elem: "a",
+          text: "Twitter Ads",
+          href: "https://ads.twitter.com/?ref=gl-tw-tw-twitter-ads-rweb",
+          icon: "ArrowTopRightOnSquareIcon",
+        },
+        {
+          elem: "link",
+          text: "Monetization",
+          href: "/settings/monetization",
+          icon: "BanknotesIcon",
+        },
+      ],
+    },
+    {
+      title: "Settings and Support",
+      panels: [
+        {
+          elem: "link",
+          text: "Settings and privacy",
+          href: "/settings/account",
+          icon: "Cog8ToothIcon",
+        },
+        {
+          elem: "a",
+          text: "Help Center",
+          href: "https://help.twitter.com",
+          icon: "QuestionMarkCircleIcon",
+        },
+        {
+          elem: "link",
+          text: "Data Saver",
+          href: "/settings/data",
+          icon: "ArrowDownCircleIcon",
+        },
+        {
+          elem: "button",
+          text: "Display",
+          func: () => {
+            handleOpenModal("display");
+          },
+          icon: "PaintBrushIcon",
+        },
+        {
+          elem: "button",
+          text: "Keyboard shortcuts",
+          func: () => {
+            handleOpenModal("keyboard");
+          },
+          icon: "AdjustmentsHorizontalIcon",
+        },
+        {
+          elem: "button",
+          text: "Logout",
+          func: () => {
+            handleOpenModal("logout");
+          },
+          icon: "ArrowLeftOnRectangleIcon",
+        },
+      ],
+    },
   ];
 
   return (
@@ -70,19 +216,18 @@ export const SlideModal = ({
               src={photoURL}
               alt={name}
               size={40}
+              tabIndex="-1"
             />
-            <div className="p-1">
-              <div className="border flex justify-center items-center border-light-border dark:border-dark-border w-7 h-7 rounded-full bg-main-background-1 brightness-100 hover:brightness-75 cursor-pointer transition-[filter] duration-200">
-                <HeroIcon
-                  iconName="PlusIcon"
-                  className="h-4 w-4 fill-light-primary dark:fill-dark-primary"
-                />
-              </div>
-            </div>
+            <Button className="border border-light-border dark:border-dark-border flex justify-center items-center p-0 mx-1 h-7 w-7 dark-bg-tab hover:bg-light-primary/10 active:bg-light-primary/20 dark:hover:bg-dark-primary/10 dark:active:bg-dark-primary/20">
+              <HeroIcon
+                iconName="PlusIcon"
+                className="h-4 w-4 fill-light-primary dark:fill-dark-primary"
+              />
+            </Button>
           </div>
           <div>
             <UserName name={name} username={username} verified={verified} />
-            <UserUsername username={username} />
+            <UserUsername username={username} tabIndex="-1" />
           </div>
           <div className="flex w-full gap-5">
             {allStats.map(([id, label, stat]) => (
@@ -102,63 +247,64 @@ export const SlideModal = ({
           </div>
         </div>
         <div className="flex flex-col justify-center">
-          <MenuLink
-            className={cn(
-              "flex items-center w-full gap-5 duration-200 relative hover:bg-main-background-3 text-xl"
-            )}
-            href={`user/${username}`}
-            disabledMenu
-          >
-            <HeroIcon iconName="UserIcon" />
-            <span className="font-semibold select-none">Profile</span>
-          </MenuLink>
-          <div
-            className={cn(
-              "relative duration-200 p-4 flex w-full gap-5 cursor-pointer hover:bg-main-background-3 text-xl"
-            )}
-            onClick={() => {
-              handleOpenModal("twitterBlue");
-            }}
-          >
-            <CustomIcon
-              iconName="TwitterBlueIcon"
-              className="h-6 w-6 fill-accent-blue"
-              solid
-            />
-            <span className="font-semibold select-none">Twitter Blue</span>
-          </div>
-          <MenuLink
-            className={cn(
-              "flex items-center w-full gap-5 duration-200 relative hover:bg-main-background-3 text-xl"
-            )}
-            href={`${username}/lists`}
-            disabledMenu
-          >
-            <HeroIcon iconName="QueueListIcon" />
-            <span className="font-semibold select-none">Lists</span>
-          </MenuLink>
-          <MenuLink
-            className={cn(
-              "flex items-center w-full gap-5 duration-200 relative hover:bg-main-background-3 text-xl"
-            )}
-            href={`i/bookmarks`}
-            disabledMenu
-          >
-            <HeroIcon iconName="BookmarkIcon" />
-            <span className="font-semibold select-none">Bookmarks</span>
-          </MenuLink>
-          <div
-            className={cn(
-              "relative duration-200 p-4 flex w-full gap-5 cursor-pointer hover:bg-main-background-3 text-xl"
-            )}
-            onClick={() => {
-              handleOpenModal("verifiedOrgs");
-            }}
-          >
-            <CustomIcon iconName="VerificationBadge" />
-            <span className="font-semibold select-none">Verified Orgs</span>
-          </div>
+          {slidesNav.map((slide, index) => {
+            if (slide.elem == "menu") {
+              const iconName = slide.icon as HeroIconName;
+
+              return (
+                <MenuLink
+                  key={`slide_nav_${index}`}
+                  className={cn(
+                    "flex items-center w-full gap-5 duration-200 relative hover:bg-main-background-3 outline-none text-xl after:absolute after:inset-0 after:h-full after:w-full focus-visible:after:border-2 focus-visible:after:border-main-accent"
+                  )}
+                  href={slide.href!}
+                  disabledMenu={slide.disabled!}
+                >
+                  <HeroIcon iconName={iconName} />
+                  <span className="font-semibold select-none">
+                    {slide.title}
+                  </span>
+                </MenuLink>
+              );
+            } else if (slide.elem == "button") {
+              const iconName = slide.icon as CustomIconName;
+
+              return (
+                <button
+                  key={`slide_nav_${index}`}
+                  type="button"
+                  className={cn(
+                    "relative duration-200 p-4 flex w-full gap-5 cursor-pointer hover:bg-main-background-3 text-xl outline-none after:absolute after:inset-0 after:h-full after:w-full focus-visible:after:border-2 focus-visible:after:border-main-accent"
+                  )}
+                  onClick={slide.func}
+                >
+                  <CustomIcon
+                    iconName={iconName}
+                    className="h-6 w-6 fill-accent-blue"
+                    solid={iconName == "VerificationBadge" ? false : true}
+                  />
+                  <span className="font-semibold select-none">
+                    {slide.title}
+                  </span>
+                </button>
+              );
+            }
+          })}
+
           <HrLine className="mx-4" />
+
+          {slidesDisclosure.map(({ panels, title }, index) => {
+            return (
+              <DisclosureItem
+                key={`slide_disclosure${index}`}
+                classDisc={cn(
+                  "hover:bg-main-background-3 font-semibold outline-none after:absolute after:inset-0 after:h-full after:w-full focus-visible:after:border-2 focus-visible:after:border-main-accent"
+                )}
+                textButton={title}
+                linksPanel={panels}
+              />
+            );
+          })}
         </div>
       </section>
     </Modal>

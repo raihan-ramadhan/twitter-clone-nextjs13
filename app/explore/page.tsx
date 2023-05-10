@@ -13,7 +13,7 @@ const ExplorePage = (): JSX.Element => {
         <SearchBar
           smallOnMobile
           placeholder="Search Twitter"
-          className="bg-main-background-2 focus-within:bg-main-background-1"
+          className="bg-main-background-2 focus-within:bg-main-background-1 focus-within:!ring-1"
         />
       </MainHeader>
 

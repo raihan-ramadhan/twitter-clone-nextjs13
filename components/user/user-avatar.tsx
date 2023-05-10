@@ -8,6 +8,7 @@ type UserAvatarProps = {
   size?: number;
   username?: string;
   className?: string;
+  tabIndex?: "0" | "-1";
 };
 
 export function UserAvatar({
@@ -16,6 +17,7 @@ export function UserAvatar({
   size,
   username,
   className,
+  tabIndex = "0",
 }: UserAvatarProps): JSX.Element {
   const pictureSize = size ?? 48;
 
@@ -28,7 +30,7 @@ export function UserAvatar({
         className
       )}
       prefetch={!username ? false : undefined}
-      tabIndex={username ? 0 : -1}
+      tabIndex={!username || tabIndex == "-1" ? -1 : 0}
     >
       <NextImage
         useSkeleton

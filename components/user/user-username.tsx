@@ -5,12 +5,14 @@ type UserUsernameProps = {
   username: string;
   className?: string;
   disableLink?: boolean;
+  tabIndex?: "0" | "-1";
 };
 
 export function UserUsername({
   username,
   className,
   disableLink,
+  tabIndex = "0",
 }: UserUsernameProps): JSX.Element {
   return (
     <Link
@@ -20,7 +22,7 @@ export function UserUsername({
         className,
         disableLink && "pointer-events-none"
       )}
-      tabIndex={disableLink ? -1 : 0}
+      tabIndex={disableLink || tabIndex == "-1" ? -1 : 0}
     >
       @{username}
     </Link>
