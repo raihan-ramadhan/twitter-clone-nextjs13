@@ -43,7 +43,7 @@ export function MainHeader({
   const { isMobile } = useWindow();
 
   return (
-    <header
+    <div
       className={cn(
         "hover-animation z-10 px-4 py-2 min-h-[50px]",
         position == "sticky" && "sticky top-0",
@@ -76,6 +76,6 @@ export function MainHeader({
       )}
       {children}
       {useExploreSettingsButton && <ExploreSettingsModal />}
-    </header>
+    </div>
   );
 }

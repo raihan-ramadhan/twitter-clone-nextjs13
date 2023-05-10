@@ -41,3 +41,11 @@ export const generateStringAndNumber = (
 export const capitalizeFirstChar = (string: string): string => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
+
+export const isTouchDevice = (): boolean => {
+  return (
+    "ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    (navigator as any).msMaxTouchPoints > 0
+  );
+};

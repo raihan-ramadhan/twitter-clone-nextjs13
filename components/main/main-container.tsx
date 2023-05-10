@@ -13,7 +13,7 @@ export function MainContainer({
   return (
     <main
       className={cn(
-        `flex min-h-screen w-full max-w-xl flex-col border-x-0 xs:border-x border-light-border dark:border-dark-border relative`,
+        `flex min-h-screen w-full max-w-xl flex-col border-x-0 xs:border-x border-light-border dark:border-dark-border relative z-0`,
         className
       )}
     >
@@ -29,7 +29,7 @@ export function DoubleContainer({
   return (
     <main
       className={cn(
-        `flex min-h-screen w-full max-w-xl lg:max-w-[926px] flex-col border-x-0 xs:border-x border-light-border dark:border-dark-border relative`,
+        `flex min-h-screen w-full max-w-xl lg:max-w-[926px] flex-col border-x-0 xs:border-x border-light-border dark:border-dark-border relative z-0`,
         className
       )}
     >

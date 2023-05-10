@@ -4,10 +4,10 @@ import { usePathname } from "next/navigation";
 
 import { ToolTip } from "../ui/tooltip";
 import { HeroIcon } from "../ui/hero-icon";
-import { preventBubbling } from "@/lib/utils";
+import { useWindow } from "@/lib/context/window-context";
+import { preventBubbling, isTouchDevice } from "@/lib/utils";
 
 import type { NavLink } from "./left";
-import { useWindow } from "@/lib/context/window-context";
 
 type SidebarLinkProps = NavLink & {
   username?: string;
@@ -25,10 +25,11 @@ export const LeftNavLink = (props: SidebarLinkProps): JSX.Element => {
   } = props;
 
   const asPathname = usePathname();
+  const touchDevice = isTouchDevice();
 
   const isActive = href === asPathname;
 
-  const { height: windowHeight } = useWindow();
+  const { height: windowHeight, isMobile } = useWindow();
 
   return (
     <Link href={href} legacyBehavior prefetch={disabled ? false : undefined}>
@@ -46,10 +47,12 @@ export const LeftNavLink = (props: SidebarLinkProps): JSX.Element => {
              group-focus-visible:ring-[#878a8c] dark:group-hover:bg-dark-primary/10 
              dark:group-focus-visible:ring-white"
         >
-          <ToolTip
-            tip={linkName}
-            className="inline xl:hidden !opacity-75 -translate-y-[200%] xs:translate-y-[200%] group-hover:z-50"
-          />
+          {(!touchDevice || !isMobile) && (
+            <ToolTip
+              tip={linkName}
+              className="inline xl:hidden !opacity-75 -translate-y-[200%] xs:translate-y-[200%] group-hover:z-50"
+            />
+          )}
           <HeroIcon
             className={cn(
               "h-7 w-7",
