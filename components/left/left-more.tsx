@@ -171,99 +171,105 @@ export const LeftMore = (): JSX.Element => {
                   <HrLine className="mx-3" />
                   <Menu.Item>
                     {({ active }): JSX.Element => (
-                      <DisclosureItem
-                        classDisc={cn(
-                          "hover:bg-main-background-3 hover:after:w-full hover:after:h-full hover:after:absolute hover:after:inset-0 hover:after:border-2 hover:after:border-main-accent hover:after:contrast-75 hover:after:brightness-125 after:h-full after:absolute after:inset-0",
-                          active &&
-                            "bg-main-background-3 after:border-2 after:border-main-accent after:contrast-75 after:brightness-125"
-                        )}
-                        textButton="Creator Studio"
-                        linksPanel={[
-                          {
-                            elem: "a",
-                            text: "Analytics",
-                            href: "https://analytics.twitter.com/",
-                            icon: "ChartBarSquareIcon",
-                          },
-                        ]}
-                      />
+                      <>
+                        <DisclosureItem
+                          classDisc={cn(
+                            "hover:bg-main-background-3 hover:after:w-full hover:after:h-full hover:after:absolute hover:after:inset-0 hover:after:border-2 hover:after:border-main-accent hover:after:contrast-75 hover:after:brightness-125 after:h-full after:absolute after:inset-0",
+                            active &&
+                              "bg-main-background-3 after:border-2 after:border-main-accent after:contrast-75 after:brightness-125"
+                          )}
+                          textButton="Creator Studio"
+                          linksPanel={[
+                            {
+                              elem: "a",
+                              text: "Analytics",
+                              href: "https://analytics.twitter.com/",
+                              icon: "ChartBarSquareIcon",
+                            },
+                          ]}
+                        />
+                      </>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }): JSX.Element => (
-                      <DisclosureItem
-                        classDisc={cn(
-                          "hover:bg-main-background-3 hover:after:w-full hover:after:h-full hover:after:absolute hover:after:inset-0 hover:after:border-2 hover:after:border-main-accent hover:after:contrast-75 hover:after:brightness-125 after:h-full after:absolute after:inset-0",
-                          active &&
-                            "bg-main-background-3 after:border-2 after:border-main-accent after:contrast-75 after:brightness-125"
-                        )}
-                        textButton="Professional Tools"
-                        linksPanel={[
-                          {
-                            elem: "button",
-                            text: "Twitter for Professional",
-                            icon: "RocketLaunchIcon",
-                            func: () => {
-                              handleOpenModal("professional", close);
+                      <>
+                        <DisclosureItem
+                          classDisc={cn(
+                            "hover:bg-main-background-3 hover:after:w-full hover:after:h-full hover:after:absolute hover:after:inset-0 hover:after:border-2 hover:after:border-main-accent hover:after:contrast-75 hover:after:brightness-125 after:h-full after:absolute after:inset-0",
+                            active &&
+                              "bg-main-background-3 after:border-2 after:border-main-accent after:contrast-75 after:brightness-125"
+                          )}
+                          textButton="Professional Tools"
+                          linksPanel={[
+                            {
+                              elem: "button",
+                              text: "Twitter for Professional",
+                              icon: "RocketLaunchIcon",
+                              func: () => {
+                                handleOpenModal("professional", close);
+                              },
                             },
-                          },
-                          {
-                            elem: "a",
-                            text: "Twitter Ads",
-                            href: "https://ads.twitter.com/?ref=gl-tw-tw-twitter-ads-rweb",
-                            icon: "ArrowTopRightOnSquareIcon",
-                          },
-                          {
-                            elem: "link",
-                            text: "Monetization",
-                            href: "/settings/monetization",
-                            icon: "BanknotesIcon",
-                          },
-                        ]}
-                      />
+                            {
+                              elem: "a",
+                              text: "Twitter Ads",
+                              href: "https://ads.twitter.com/?ref=gl-tw-tw-twitter-ads-rweb",
+                              icon: "ArrowTopRightOnSquareIcon",
+                            },
+                            {
+                              elem: "link",
+                              text: "Monetization",
+                              href: "/settings/monetization",
+                              icon: "BanknotesIcon",
+                            },
+                          ]}
+                        />
+                      </>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }): JSX.Element => (
-                      <DisclosureItem
-                        classDisc={cn(
-                          "hover:bg-main-background-3 hover:after:w-full hover:after:h-full hover:after:absolute hover:after:inset-0 hover:after:border-2 hover:after:border-main-accent hover:after:contrast-75 hover:after:brightness-125 after:w-full after:h-full after:absolute after:inset-0 ",
-                          active &&
-                            "bg-main-background-3 after:border-2 after:border-main-accent after:contrast-75 after:brightness-125",
-                          !active && "after:rounded-b-xl"
-                        )}
-                        textButton="Settings and Support"
-                        linksPanel={[
-                          {
-                            elem: "link",
-                            text: "Settings and privacy",
-                            href: "/settings/account",
-                            icon: "Cog8ToothIcon",
-                          },
-                          {
-                            elem: "a",
-                            text: "Help Center",
-                            href: "https://help.twitter.com",
-                            icon: "QuestionMarkCircleIcon",
-                          },
-                          {
-                            elem: "button",
-                            text: "Display",
-                            func: () => {
-                              handleOpenModal("display", close);
+                      <>
+                        <DisclosureItem
+                          classDisc={cn(
+                            "hover:bg-main-background-3 hover:after:w-full hover:after:h-full hover:after:absolute hover:after:inset-0 hover:after:border-2 hover:after:border-main-accent hover:after:contrast-75 hover:after:brightness-125 after:w-full after:h-full after:absolute after:inset-0 ",
+                            active &&
+                              "bg-main-background-3 after:border-2 after:border-main-accent after:contrast-75 after:brightness-125",
+                            !active && "after:rounded-b-xl"
+                          )}
+                          textButton="Settings and Support"
+                          linksPanel={[
+                            {
+                              elem: "link",
+                              text: "Settings and privacy",
+                              href: "/settings/account",
+                              icon: "Cog8ToothIcon",
                             },
-                            icon: "PaintBrushIcon",
-                          },
-                          {
-                            elem: "button",
-                            text: "Keyboard shortcuts",
-                            func: () => {
-                              handleOpenModal("keyboard", close);
+                            {
+                              elem: "a",
+                              text: "Help Center",
+                              href: "https://help.twitter.com",
+                              icon: "QuestionMarkCircleIcon",
                             },
-                            icon: "AdjustmentsHorizontalIcon",
-                          },
-                        ]}
-                      />
+                            {
+                              elem: "button",
+                              text: "Display",
+                              func: () => {
+                                handleOpenModal("display", close);
+                              },
+                              icon: "PaintBrushIcon",
+                            },
+                            {
+                              elem: "button",
+                              text: "Keyboard shortcuts",
+                              func: () => {
+                                handleOpenModal("keyboard", close);
+                              },
+                              icon: "AdjustmentsHorizontalIcon",
+                            },
+                          ]}
+                        />
+                      </>
                     )}
                   </Menu.Item>
                 </Menu.Items>

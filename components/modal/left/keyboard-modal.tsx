@@ -22,42 +22,42 @@ export const KeyboardModal = (props: LeftMoreModalContent) => {
       <div className="px-4 py-3 space-y-5 sm:space-y-0 sm:flex w-full justify-around items-start gap-5">
         {keysTables.map(({ title, rows }, index) => {
           return (
-            <table className="w-full" key={`table_${index}`}>
-              <thead>
-                <SubTitleModal
-                  title={title}
-                  className="text-xl !font-bold text-left"
-                />
-              </thead>
+            <div className="w-full" key={`table_${index}`}>
+              <SubTitleModal
+                title={title}
+                className="text-xl !font-bold text-left"
+              />
               <div className="pr-5 border-r border-r-light-border dark:border-r-dark-border">
-                <tbody className="flex flex-col gap-1">
-                  {rows.map(({ subtitle, keys }, index) => {
-                    return (
-                      <tr className="flex justify-between" key={`tr_${index}`}>
-                        <td className="flex-1">
-                          <span>{subtitle}</span>
-                        </td>
-                        <td className="">
-                          {keys.map((key, index) => {
-                            return (
-                              <>
-                                <span
-                                  key={`key${index}`}
-                                  className="inline-block rounded-md bg-main-background-3 dark:bg-main-background-3 px-2 [box-shadow:0_1px_2px_rgba(0,0,0,0.15)] dark:[box-shadow:0_1px_2px_rgba(255,255,255,0.15)]"
-                                >
-                                  <code>{key}</code>
+                <table className="flex flex-col gap-1">
+                  <tbody>
+                    {rows.map(({ subtitle, keys }, index) => {
+                      return (
+                        <tr
+                          className="flex justify-between"
+                          key={`tr_${index}`}
+                        >
+                          <td className="flex-1">
+                            <span>{subtitle}</span>
+                          </td>
+                          <td>
+                            {keys.map((key, index) => {
+                              return (
+                                <span key={`key${index}`}>
+                                  <span className="inline-block rounded-md bg-main-background-3 dark:bg-main-background-3 px-2 [box-shadow:0_1px_2px_rgba(0,0,0,0.15)] dark:[box-shadow:0_1px_2px_rgba(255,255,255,0.15)]">
+                                    <code>{key}</code>
+                                  </span>
+                                  {index !== keys.length - 1 && <span>+</span>}
                                 </span>
-                                {index !== keys.length - 1 && <span>+</span>}
-                              </>
-                            );
-                          })}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
+                              );
+                            })}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
               </div>
-            </table>
+            </div>
           );
         })}
       </div>
