@@ -12,6 +12,7 @@ export const TitleModal = ({
     </>
   );
 };
+
 export const SubTitleModal = ({
   title,
   className,

@@ -33,7 +33,7 @@ export const SignupModal = ({
       />
       <XModal closeModal={closeModal} />
       <div className="w-full max-w-xs mx-auto min-h-[500px] space-y-6">
-        <TitleModal title="Join Twitter today" />
+        <TitleModal title="Join Twitter today" className="text-3xl py-1" />
         <ButtonProvider
           callback={handleSignIn}
           text="Sign up with Google"
@@ -42,26 +42,17 @@ export const SignupModal = ({
         <ButtonProvider text="Sign up with Apple" provider={"apple"} />
         <OrLineModal />
         <ButtonHighlight text="Create account" />
-        <p className="text-sm">
+        <p className="text-sm [&>a]:span-link-accent">
           By signing up, you agree to the{" "}
-          <a
-            className="span-link"
-            href="https://twitter.com/en/tos"
-            target={"_blank"}
-          >
+          <a href="https://twitter.com/en/tos" target={"_blank"}>
             Terms of Service
           </a>{" "}
           and{" "}
-          <a
-            className="span-link"
-            href="https://twitter.com/en/privacy"
-            target={"_blank"}
-          >
+          <a href="https://twitter.com/en/privacy" target={"_blank"}>
             Privacy Policy
           </a>
           , including{" "}
           <a
-            className="span-link"
             href="https://help.twitter.com/en/rules-and-policies/twitter-cookies"
             target={"_blank"}
           >

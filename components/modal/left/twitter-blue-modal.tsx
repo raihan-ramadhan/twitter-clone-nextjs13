@@ -245,7 +245,7 @@ export const TwitterBlueModal = (props: {
               <a
                 href="https://legal.twitter.com/en/purchaser-terms.html"
                 target="_blank"
-                className="span-link cursor-pointer"
+                className="span-link-accent cursor-pointer"
               >
                 Purchaser Terms of Service
               </a>

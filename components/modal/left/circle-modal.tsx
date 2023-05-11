@@ -65,7 +65,7 @@ export const CircleModal = (props: LeftMoreModalContent): JSX.Element => {
                 Tweets.{" "}
                 <a
                   href="https://help.twitter.com/en/using-twitter/twitter-circle"
-                  className="span-link !text-current font-bold hyphens-manual"
+                  className="span-link-accent !text-current font-bold hyphens-manual"
                   target="_blank"
                 >
                   How it works
@@ -98,7 +98,7 @@ export const CircleModal = (props: LeftMoreModalContent): JSX.Element => {
                 Tweets.{" "}
                 <a
                   href="https://help.twitter.com/en/using-twitter/twitter-circle"
-                  className="span-link !text-current font-bold hyphens-manual"
+                  className="span-link-accent !text-current font-bold hyphens-manual"
                   target="_blank"
                 >
                   How it works

@@ -1,6 +1,8 @@
 "use client";
-import { useRequireAuth } from "@/lib/hooks/useRequireAuth";
+import { Right } from "../right/right";
 import { Placeholder } from "../common/placeholder";
+import { useRequireAuth } from "@/lib/hooks/useRequireAuth";
+
 import type { ReactNode } from "react";
 
 export type LayoutProps = {
@@ -19,7 +21,9 @@ export function HomeLayout({ children }: LayoutProps): JSX.Element {
   return (
     <>
       {children}
-      <div className="hidden lg:block w-[350px]">RIGHT</div>
+      <div className="hidden w-[350px] lg:block p-3">
+        <Right />
+      </div>
     </>
   );
 }

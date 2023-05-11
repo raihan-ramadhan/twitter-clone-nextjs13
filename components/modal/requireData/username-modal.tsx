@@ -283,7 +283,7 @@ export const UsernameModal = (props: ComponentModalProps): JSX.Element => {
                   return (
                     <span
                       key={username}
-                      className="span-link cursor-pointer"
+                      className="span-link-accent cursor-pointer"
                       onClick={() => {
                         setUsername(username);
                         setUsernames((prev) => {
@@ -303,7 +303,7 @@ export const UsernameModal = (props: ComponentModalProps): JSX.Element => {
             )}
 
             <a
-              className="span-link inline"
+              className="span-link-accent inline"
               target="_blank"
               href="https://help.twitter.com/en/managing-your-account/help-with-common-username-issues"
             >

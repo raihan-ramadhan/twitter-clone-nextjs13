@@ -45,7 +45,7 @@ export const ProfessionalModal = (props: LeftMoreModalContent): JSX.Element => {
                   <a
                     href="https://help.twitter.com/en/rules-and-policies/professional-account-policy"
                     target="_blank"
-                    className="span-link"
+                    className="span-link-accent"
                   >
                     Professional Account policy.
                   </a>

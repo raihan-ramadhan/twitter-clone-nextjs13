@@ -21,7 +21,7 @@ export const ButtonProvider = ({
   className,
 }: ProviderProps): JSX.Element => {
   const sameCN =
-    "w-full font-semibold py-1 flex items-center justify-center gap-3 border border-light-line-reply dark:border-light-secondary";
+    "w-full font-semibold py-2 flex items-center justify-center gap-3 border border-light-line-reply dark:border-light-secondary";
   return (
     <>
       {provider == "google" ? (
@@ -43,7 +43,7 @@ export const ButtonProvider = ({
           onClick={callback}
           className={cn(
             sameCN,
-            "hover:bg-light-line-reply/20 dark:hover:bg-light-secondary/20",
+            "hover:bg-light-primary/10 active:bg-light-primary/20 dark:hover:bg-light-secondary/20",
             className
           )}
         >
@@ -75,7 +75,7 @@ export const ButtonHighlight = ({
         className={cn(
           "truncate w-full font-semibold border border-light-line-reply dark:border-light-secondary text-center bg-black dark:bg-white  transition-opacity duration-200 text-white dark:text-black",
           !disabled && !loading && "hover:opacity-80 active:opacity-100",
-          className ?? "py-1"
+          className ?? "py-2"
         )}
       >
         <>{text}</>
@@ -98,8 +98,8 @@ export const ButtonSecondary = ({
           if (typeof callback === "function") callback();
         }}
         className={cn(
-          "truncate w-full hover:bg-main-background-3/50 active:bg-transparent font-semibold border border-light-line-reply dark:border-light-secondary text-center",
-          className ?? "py-1"
+          "truncate w-full hover:bg-light-primary/10 active:bg-transparent font-semibold border border-light-line-reply dark:border-light-secondary text-center",
+          className ?? "py-2"
         )}
       >
         <>{text}</>

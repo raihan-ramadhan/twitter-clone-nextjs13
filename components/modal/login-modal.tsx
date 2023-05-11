@@ -38,7 +38,7 @@ export const LoginModal = ({
       />
       <XModal closeModal={closeModal} />
       <div className="w-full max-w-xs mx-auto min-h-[500px] space-y-6">
-        <TitleModal title={"Sign in to Twitter"} />
+        <TitleModal title={"Sign in to Twitter"} className="text-3xl py-1" />
         <ButtonProvider
           callback={handleSignIn}
           text="Sign in with Google"

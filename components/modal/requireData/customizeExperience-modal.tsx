@@ -73,7 +73,7 @@ export const CustomizeExperienceModal = (
             <a
               href="https://help.twitter.com/en/safety-and-security/email-and-phone-discoverability-settings"
               target="_blank"
-              className="span-link"
+              className="span-link-accent"
             >
               here
             </a>
@@ -81,7 +81,7 @@ export const CustomizeExperienceModal = (
             <a
               href="https://help.twitter.com/en"
               target="_blank"
-              className="span-link"
+              className="span-link-accent"
             >
               Help Center
             </a>
@@ -91,7 +91,7 @@ export const CustomizeExperienceModal = (
             <a
               href="https://twitter.com/en/privacy/previous/version_17"
               target="_blank"
-              className="span-link"
+              className="span-link-accent"
             >
               Learn more
             </a>

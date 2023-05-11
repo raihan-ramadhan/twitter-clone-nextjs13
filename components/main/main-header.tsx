@@ -1,13 +1,16 @@
 "use client";
 import cn from "clsx";
+import { useRef, useEffect, useState } from "react";
+
 import { Button } from "@/components/ui/button";
-import { HeroIcon } from "@/components/ui/hero-icon";
 import { ToolTip } from "@/components/ui/tooltip";
+import { HeroIcon } from "@/components/ui/hero-icon";
+import { useWindow } from "@/lib/context/window-context";
+import { MobileLeft } from "../left/mobile-left";
+import { ExploreSettingsModal } from "../modal/left/explore-settings";
+
 import type { ReactNode } from "react";
 import type { IconName } from "@/components/ui/hero-icon";
-import { MobileLeft } from "../left/mobile-left";
-import { useWindow } from "@/lib/context/window-context";
-import { ExploreSettingsModal } from "../modal/left/explore-settings";
 
 type HomeHeaderProps = {
   tip?: string;
@@ -16,13 +19,14 @@ type HomeHeaderProps = {
   children?: ReactNode;
   iconName?: IconName;
   className?: string;
-  position?: "sticky" | "notStickyOnMobile" | "notSticky";
+  position?: "sticky" | "notSticky";
   useActionButton?: boolean;
   useMobileSidebar?: boolean;
   action?: () => void;
   disabledBlurBG?: boolean;
   useExploreSettingsButton?: boolean;
   titleClassName?: string;
+  hideOnScrollDown?: boolean;
 };
 
 export function MainHeader({
@@ -39,18 +43,48 @@ export function MainHeader({
   disabledBlurBG,
   useExploreSettingsButton,
   titleClassName,
+  hideOnScrollDown,
 }: HomeHeaderProps): JSX.Element {
+  const [hideMainHeader, setHideMainHeader] = useState<boolean>(false);
+
+  const divRef = useRef<HTMLDivElement>(null);
+  const lastScrollTop = useRef(0);
+
   const { isMobile } = useWindow();
+
+  const handleScroll = () => {
+    const st = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (st > lastScrollTop.current) {
+      // downscroll code
+      setHideMainHeader(true);
+    } else if (st < lastScrollTop.current) {
+      // upscroll code
+      setHideMainHeader(false);
+    } // else was horizontal scroll
+
+    lastScrollTop.current = st <= 0 ? 0 : st;
+  };
+
+  useEffect(() => {
+    if (hideOnScrollDown) window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      if (hideOnScrollDown) window.removeEventListener("scroll", handleScroll);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div
+      ref={divRef}
       className={cn(
-        "hover-animation z-10 px-4 py-2 min-h-[50px]",
+        "hover-animation z-10 px-4 py-2 min-h-[50px] transition-transform duration-500",
         position == "sticky" && "sticky top-0",
-        position == "notStickyOnMobile" && "xs:sticky xs:top-0",
         position == "notSticky" && "relative",
         disabledBlurBG ? "bg-main-background-1" : "blur-background",
-        className ?? "flex items-center gap-6"
+        className ?? "flex items-center gap-6",
+        hideMainHeader && hideOnScrollDown && isMobile && "-translate-y-full"
       )}
     >
       {useActionButton && (

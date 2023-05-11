@@ -7,7 +7,8 @@ export default function Home() {
       <MainHeader
         title={"Home"}
         useMobileSidebar
-        position="notStickyOnMobile"
+        hideOnScrollDown
+        position="sticky"
         className="flex items-center"
         changeTitleOnMobile={
           <span>

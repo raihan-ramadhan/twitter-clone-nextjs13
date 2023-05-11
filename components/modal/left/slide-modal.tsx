@@ -280,7 +280,10 @@ export const SlideModal = ({
                 >
                   <CustomIcon
                     iconName={iconName}
-                    className="h-6 w-6 fill-accent-blue"
+                    className={cn(
+                      "h-6 w-6",
+                      iconName == "TwitterBlueIcon" && "!fill-accent-blue"
+                    )}
                     solid={iconName == "VerificationBadge" ? false : true}
                   />
                   <span className="font-semibold select-none">

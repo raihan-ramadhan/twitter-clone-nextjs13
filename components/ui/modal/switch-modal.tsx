@@ -17,7 +17,7 @@ export const SwitchModal = ({
           type="button"
           role="button"
           onClick={switchSign}
-          className="span-link cursor-pointer inline-block"
+          className="span-link-accent cursor-pointer inline-block"
         >
           {textButton}
         </button>

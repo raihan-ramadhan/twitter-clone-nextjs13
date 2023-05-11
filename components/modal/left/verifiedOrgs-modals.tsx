@@ -79,7 +79,7 @@ export const VerifiedOrgsModal = ({ closeModal }: LeftMoreModalContent) => {
             <a
               href="https://help.twitter.com/en/using-twitter/verified-organizations"
               target="_blank"
-              className="span-link text-current font-bold"
+              className="span-link-primary font-bold"
             >
               Learn More
             </a>
@@ -95,7 +95,7 @@ export const VerifiedOrgsModal = ({ closeModal }: LeftMoreModalContent) => {
             unless required by law. See more{" "}
             <a
               href="https://legal.twitter.com/en/purchaser-terms.html"
-              className="span-link"
+              className="span-link-accent"
               target="_blank"
             >
               here

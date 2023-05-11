@@ -116,7 +116,19 @@
   }
 
   .span-link {
-    @apply text-main-accent transition-[background-size] duration-200 ease-in border-b-0 bg-no-repeat bg-right-bottom hover:bg-left-bottom bg-[length:0%_1px] hover:bg-[length:100%_1px] bg-gradient-to-r from-main-accent to-main-accent;
+    @apply transition-[background-size] duration-200 ease-in border-b-0 bg-no-repeat bg-right-bottom bg-[length:0%_1px] hover:bg-left-bottom hover:bg-[length:100%_1px] focus-visible:bg-left-bottom focus-visible:bg-[length:100%_1px] bg-gradient-to-r outline-none;
+  }
+
+  .span-link-accent {
+    @apply span-link text-main-accent from-main-accent to-main-accent;
+  }
+
+  .span-link-primary {
+    @apply span-link text-light-primary dark:text-dark-primary from-light-primary dark:from-dark-primary to-light-primary dark:to-dark-primary;
+  }
+
+  .span-link-secondary {
+    @apply span-link text-light-secondary dark:text-dark-secondary from-light-secondary dark:from-dark-secondary to-light-secondary dark:to-dark-secondary;
   }
 
   .small-description {
