@@ -13,7 +13,7 @@ export type Birthdate = {
   year: number;
 };
 
-export type Languages = typeof languages[number];
+export type Languages = (typeof languages)[number];
 
 export type User = {
   id: string;

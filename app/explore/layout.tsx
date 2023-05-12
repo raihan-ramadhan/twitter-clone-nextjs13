@@ -1,5 +1,5 @@
 import { MainLayout } from "@/components/layouts/main-layout";
-import { HomeLayout } from "@/components/layouts/common-layout";
+import { RightLayout } from "@/components/layouts/common-layout";
 import { MainContainer } from "@/components/main/main-container";
 import { AuthLayout } from "@/components/layouts/auth-layout";
 
@@ -8,7 +8,7 @@ export const metadata = {
   description: "Twitter Clone NextJS-13",
 };
 
-export default function HomeLayouts({
+export default function ExploreLayouts({
   children,
 }: {
   children: React.ReactNode;
@@ -16,9 +16,9 @@ export default function HomeLayouts({
   return (
     <AuthLayout>
       <MainLayout>
-        <HomeLayout>
+        <RightLayout followRec>
           <MainContainer>{children}</MainContainer>
-        </HomeLayout>
+        </RightLayout>
       </MainLayout>
     </AuthLayout>
   );

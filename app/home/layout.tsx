@@ -1,6 +1,6 @@
 import { MainLayout } from "@/components/layouts/main-layout";
 import {
-  HomeLayout,
+  RightLayout,
   ProtectedLayout,
 } from "@/components/layouts/common-layout";
 import { MainContainer } from "@/components/main/main-container";
@@ -18,9 +18,9 @@ export default function HomeLayouts({
   return (
     <ProtectedLayout>
       <MainLayout>
-        <HomeLayout>
+        <RightLayout searchbar trends followRec>
           <MainContainer>{children}</MainContainer>
-        </HomeLayout>
+        </RightLayout>
       </MainLayout>
     </ProtectedLayout>
   );

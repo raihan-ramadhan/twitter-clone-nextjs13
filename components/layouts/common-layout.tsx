@@ -9,6 +9,16 @@ export type LayoutProps = {
   children: ReactNode;
 };
 
+export type RightProps = {
+  searchbar?: boolean;
+  trends?: boolean;
+  followRec?: boolean;
+  mightLike?: boolean;
+  photos?: boolean;
+};
+
+export type RightLayoutProps = LayoutProps & RightProps;
+
 export function ProtectedLayout({ children }: LayoutProps): JSX.Element {
   const { user } = useRequireAuth();
 
@@ -17,12 +27,15 @@ export function ProtectedLayout({ children }: LayoutProps): JSX.Element {
   return <>{children}</>;
 }
 
-export function HomeLayout({ children }: LayoutProps): JSX.Element {
+export function RightLayout({
+  children,
+  ...rest
+}: RightLayoutProps): JSX.Element {
   return (
     <>
       {children}
-      <div className="hidden w-[350px] lg:block p-3">
-        <Right />
+      <div className="hidden w-[350px] lg:flex lg:flex-col gap-3 p-3 ">
+        <Right {...{ ...rest }} />
       </div>
     </>
   );

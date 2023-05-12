@@ -7,7 +7,7 @@ export const metadata = {
   description: "Twitter Clone NextJS-13",
 };
 
-export default function HomeLayouts({
+export default function SettingsLayouts({
   children,
 }: {
   children: React.ReactNode;

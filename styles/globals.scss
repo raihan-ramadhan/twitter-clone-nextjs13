@@ -53,6 +53,10 @@
     &.light {
       @include setTheme(light);
     }
+
+    & {
+      overflow-y: scroll;
+    }
   }
 
   a,

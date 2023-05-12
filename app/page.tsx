@@ -1,6 +1,6 @@
 import { AuthLayout } from "@/components/layouts/auth-layout";
 import { MainLayout } from "@/components/layouts/main-layout";
-import { HomeLayout } from "@/components/layouts/common-layout";
+import { RightLayout } from "@/components/layouts/common-layout";
 import { MainContainer } from "@/components/main/main-container";
 
 export default function RootPage() {
@@ -8,8 +8,8 @@ export default function RootPage() {
   return (
     <AuthLayout> {/*Where we place signIn/signUp and redirect to /home*/}
       <MainLayout> {/*Where we place the left*/}
-        <HomeLayout> {/*Where we place the right*/}
-          <MainContainer> {/*Where we place the right*/}
+        <RightLayout> {/*Where we place the right*/}
+          <MainContainer> {/*Container main*/}
             <div className="p-4">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
@@ -23,7 +23,7 @@ export default function RootPage() {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta, optio porro veniam dolorem in magni soluta recusandae inventore? Repellat, architecto?
             </div>
           </MainContainer>
-        </HomeLayout>
+        </RightLayout>
       </MainLayout>
     </AuthLayout>
   );
