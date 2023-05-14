@@ -39,7 +39,7 @@ export const RightFollowRec = () => {
     <aside
       role="complementary"
       aria-label="Who to follow"
-      className="bg-main-background-3 rounded-2xl"
+      className="bg-main-background-3 rounded-2xl m-3"
     >
       {adminLoading || followRecommendationLoading ? (
         <Loading className="flex h-52 items-center justify-center p-4" />

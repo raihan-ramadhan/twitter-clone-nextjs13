@@ -1,3 +1,4 @@
+import { round } from "lodash";
 import type { SyntheticEvent } from "react";
 import type { Birthdate } from "./types/user";
 
@@ -48,4 +49,29 @@ export const isTouchDevice = (): boolean => {
     navigator.maxTouchPoints > 0 ||
     (navigator as any).msMaxTouchPoints > 0
   );
+};
+
+export const numberToAbbreviation = (number: number): string => {
+  const abbreviations = ["K", "M", "B", "T"];
+
+  // Check if the number is within the range that needs abbreviation
+  if (number >= 1000) {
+    // Calculate the logarithm of the number with base 1000
+    const logValue = Math.floor(Math.log10(number) / Math.log10(1000));
+
+    // Get the abbreviation based on the logarithm value
+    const abbreviation = abbreviations[logValue - 1];
+
+    // Calculate the abbreviated value
+    const abbreviatedNumber = number / Math.pow(1000, logValue);
+
+    // Format the abbreviated number with up to 2 decimal places
+    const formattedNumber = round(abbreviatedNumber, 2).toString();
+
+    // Concatenate the abbreviated number and the abbreviation
+    return `${formattedNumber}${abbreviation}`;
+  }
+
+  // Return the original number as a string if no abbreviation is needed
+  return number.toString();
 };

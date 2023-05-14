@@ -34,7 +34,7 @@ export function RightLayout({
   return (
     <>
       {children}
-      <div className="hidden w-[350px] lg:flex lg:flex-col gap-3 p-3 ">
+      <div tabIndex={0} className="hidden w-[350px] lg:flex lg:flex-col">
         <Right {...{ ...rest }} />
       </div>
     </>
